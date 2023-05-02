@@ -3,10 +3,10 @@ import { get, update } from "@/module/shared/Domain/repository.ts"
 
 const name = "goal-type"
 
-export function persistGoals(goalTypes: GoalTypeInterface[]): void {
+export function persistGoalTypes(goalTypes: GoalTypeInterface[]): void {
   update(name, goalTypes)
 }
 
-export function getGoals(): GoalTypeInterface[] | null {
-  return get<GoalTypeInterface[]>(name)
+export function getGoalTypes(): GoalTypeInterface[] {
+  return get<GoalTypeInterface[]>(name) ?? []
 }
