@@ -1,11 +1,14 @@
 import GoalTypeInterface from "@/module/GoalType/Domain/GoalTypeInterface.ts"
 import { GoalTypeComponent } from "@/module/GoalType/Component/GoalTypeComponent.tsx"
-import { createGoalType } from "@/module/GoalType/Domain/CreateGoalType.ts"
-import { addGoalType } from "@/module/GoalType/Domain/GoalTypeManager.ts"
+import { createGoalType } from "@/module/GoalType/Domain/createGoalType.ts"
+import {
+  addGoalType,
+  removeGoalType,
+} from "@/module/GoalType/Domain/GoalTypeManager.ts"
 import { useState } from "react"
 
 export interface GoalTypeListComponentPropsInterface {
-  goalTypeList: GoalTypeInterface[]
+  goalTypes: GoalTypeInterface[]
   updateGoalType: (goalTypes: GoalTypeInterface[]) => void
 }
 
@@ -14,16 +17,22 @@ export function GoalTypeListComponent(props: GoalTypeListComponentPropsInterface
   const addGoalTypeHandler = () => {
     const newGoalType = createGoalType()
     newGoalType.name = newGoalTypeName
-    addGoalType(newGoalType, props.goalTypeList)
-    props.updateGoalType(props.goalTypeList)
+    addGoalType(newGoalType, props.goalTypes)
+    props.updateGoalType(props.goalTypes)
+  }
+
+  const removeGoalTypeHandler = (goalType: GoalTypeInterface) => {
+    removeGoalType(goalType, props.goalTypes)
+    props.updateGoalType(props.goalTypes)
   }
 
   return (
     <>
       <div>Hello GoalTypeListComponent</div>
       <div>
-        {props.goalTypeList.map((goalType) => (
+        {props.goalTypes.map((goalType) => (
           <GoalTypeComponent
+            removeHandler={removeGoalTypeHandler}
             key={goalType.id}
             goalType={goalType}
           ></GoalTypeComponent>

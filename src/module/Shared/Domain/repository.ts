@@ -1,4 +1,4 @@
-export function update(key: string, payload: any): void {
+export function update(key: string, payload: unknown): void {
   localStorage.setItem(key, JSON.stringify(payload))
 }
 

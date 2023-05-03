@@ -1,5 +1,5 @@
 import GoalTypeInterface from "@/module/GoalType/Domain/GoalTypeInterface.ts"
-import { get, update } from "@/module/shared/Domain/repository.ts"
+import { get, update } from "@/module/Shared/Domain/repository.ts"
 
 const name = "goal-type"
 

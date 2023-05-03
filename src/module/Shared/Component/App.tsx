@@ -1,21 +1,30 @@
 import "./App.css"
-import { DayListComponent } from "@/module/Day/Component/DayListComponent.tsx"
 import { GoalTypeListComponent } from "@/module/GoalType/Component/GoalTypeListComponent.tsx"
 import { useGoalTypeStore } from "@/module/GoalType/Application/GoalTypeStore.ts"
+import { useDayStore } from "@/module/Day/Application/DayStore.ts"
+import { getDayByDate } from "@/module/Day/Domain/DayManager.ts"
+import createDay from "@/module/Day/Domain/createDay.ts"
+import { DayComponent } from "@/module/Day/Component/DayComponent.tsx"
 
 function App() {
   const goalTypesStore = useGoalTypeStore()
+  const dayStore = useDayStore()
+
+  dayStore.currentDay = getDayByDate(new Date(), dayStore.days) ?? createDay()
 
   return (
     <>
       <div className="App grid grid-cols-2 gap-4">
         <div className={""}>
-          <DayListComponent></DayListComponent>
+          <DayComponent
+            goalTypes={goalTypesStore.goalTypes}
+            day={dayStore.currentDay}
+          ></DayComponent>
         </div>
         <div className={""}>
           <GoalTypeListComponent
             updateGoalType={goalTypesStore.update}
-            goalTypeList={goalTypesStore.goalTypes}
+            goalTypes={goalTypesStore.goalTypes}
           ></GoalTypeListComponent>
         </div>
       </div>

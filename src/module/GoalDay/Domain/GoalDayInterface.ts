@@ -6,4 +6,5 @@ export default interface GoalDayInterface {
   createdDate: Date
   day: DayInterface | null
   goalType: GoalTypeInterface | null
+  value: number
 }
