@@ -3,22 +3,33 @@ import { GoalTypeListComponent } from "@/module/GoalType/Component/GoalTypeListC
 import { useGoalTypeStore } from "@/module/GoalType/Application/GoalTypeStore.ts"
 import { useDayStore } from "@/module/Day/Application/DayStore.ts"
 import { getDayByDate } from "@/module/Day/Domain/DayManager.ts"
-import createDay from "@/module/Day/Domain/createDay.ts"
 import { DayComponent } from "@/module/Day/Component/DayComponent.tsx"
+import { CalendarComponent } from "@/module/Calendar/Component/CalendarComponent.tsx"
+import { useCalendarStore } from "@/module/Calendar/Application/CalendarStore.ts"
 
 function App() {
   const goalTypesStore = useGoalTypeStore()
   const dayStore = useDayStore()
+  const calendarStore = useCalendarStore()
 
-  dayStore.currentDay = getDayByDate(new Date(), dayStore.days) ?? createDay()
+  const onChangeDay = (date: Date) => {
+    calendarStore.update(getDayByDate(date, dayStore.days))
+  }
 
   return (
     <>
+      <div>
+        <div>{calendarStore.currentDay.createdDate.toDateString()}</div>
+        <CalendarComponent
+          currentDay={calendarStore.currentDay}
+          onClick={onChangeDay}
+        ></CalendarComponent>
+      </div>
       <div className="App grid grid-cols-2 gap-4">
         <div className={""}>
           <DayComponent
             goalTypes={goalTypesStore.goalTypes}
-            day={dayStore.currentDay}
+            day={getDayByDate(calendarStore.currentDay.createdDate, dayStore.days)}
           ></DayComponent>
         </div>
         <div className={""}>

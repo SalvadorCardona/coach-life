@@ -1,4 +1,5 @@
 import GoalTypeInterface from "@/module/GoalType/Domain/GoalTypeInterface.ts"
+import removeById from "@/module/Shared/Domain/Manager/Id/removeById.ts"
 
 export function addGoalType(
   goalType: GoalTypeInterface,
@@ -11,8 +12,7 @@ export function removeGoalType(
   goalType: GoalTypeInterface,
   goalTypes: GoalTypeInterface[]
 ): void {
-  const index = goalTypes.indexOf(goalType)
-  goalTypes.splice(index, 1)
+  removeById(goalType.id, goalTypes)
 }
 
 export function updateGoalType(

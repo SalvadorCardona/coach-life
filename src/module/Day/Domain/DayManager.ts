@@ -1,5 +1,5 @@
 import DayInterface from "@/module/Day/Domain/DayInterface.ts"
+import createDay from "@/module/Day/Domain/createDay.ts"
 
-export function getDayByDate(date: Date, days: DayInterface[]): DayInterface | null {
-  return days.find((day) => day.createdDate === date) ?? null
-}
+export const getDayByDate = (date: Date, days: DayInterface[]): DayInterface =>
+  days.find((day) => day.createdDate === date) ?? createDay([], date)

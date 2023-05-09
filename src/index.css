@@ -29,7 +29,7 @@ body {
 }
 
 .btn {
-  @apply px-4 py-2 text-white inline-block bg-primary hover:bg-primary-darker rounded-md;
+  @apply px-4 py-2 text-white inline-block hover:bg-primary-darker rounded-md;
 }
 
 .btn_primary {
@@ -37,7 +37,7 @@ body {
 }
 
 .btn_secondary {
-  @apply btn bg-secondary hover:bg-secondary-darker
+  @apply bg-secondary btn hover:bg-secondary-darker
 }
 
 .input {

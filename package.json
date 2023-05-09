@@ -11,6 +11,7 @@
     "format": "prettier --write \"**/*.+(js|jsx|json|css|md)\""
   },
   "dependencies": {
+    "classnames": "^2.3.2",
     "react": "latest",
     "react-dom": "latest",
     "zustand": "^4.3.7"
