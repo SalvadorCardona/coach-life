@@ -1,11 +1,9 @@
 import GoalTypeInterface from "@/module/GoalType/Domain/GoalTypeInterface.ts"
 import { GoalTypeComponent } from "@/module/GoalType/Component/GoalTypeComponent.tsx"
 import { createGoalType } from "@/module/GoalType/Domain/createGoalType.ts"
-import {
-  addGoalType,
-  removeGoalType,
-} from "@/module/GoalType/Domain/GoalTypeManager.ts"
+import { removeGoalType } from "@/module/GoalType/Domain/removeGoalType.ts"
 import { useState } from "react"
+import { addGoalType } from "@/module/GoalType/Domain/addGoalType.ts"
 
 export interface GoalTypeListComponentPropsInterface {
   goalTypes: GoalTypeInterface[]
