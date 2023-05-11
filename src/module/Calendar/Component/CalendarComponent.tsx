@@ -1,30 +1,29 @@
-import DayInterface from "@/module/Day/Domain/DayInterface.ts"
-import { formatDate } from "@/module/Shared/Domain/Manager/Date/formatDate.ts"
+import { formatDate } from "@/module/Shared/Application/Date/formatDate.ts"
 import createPaginationCalendar from "@/module/Calendar/Domain/createPaginationCalendar.ts"
 import cn from "classnames"
-import isSameDay from "@/module/Shared/Domain/Manager/Date/isSameDay.ts"
+import isSameDay from "@/module/Shared/Application/Date/isSameDay.ts"
+import { DateString } from "@/module/Shared/Application/Date/DateStringType.ts"
+import serializerDate from "@/module/Shared/Application/Date/serializerDate.ts"
 
 export interface CalendarComponentPropsInterface {
-  currentDay: DayInterface
-  onClick: (date: Date) => void
+  currentDate: DateString
+  onClick: (currentDate: DateString) => void
 }
 
 export function CalendarComponent(props: CalendarComponentPropsInterface) {
-  const onClick = (date: Date) => props.onClick(date)
-
-  const isSelect = (day: Date): boolean =>
-    isSameDay(day, props.currentDay.createdDate)
-
   return (
     <div>
-      {createPaginationCalendar().map((day) => {
+      {createPaginationCalendar().map((date) => {
         return (
           <button
-            key={day.toString()}
-            onClick={() => onClick(day)}
-            className={cn("m-5", isSelect(day) ? "btn_primary" : "btn_secondary")}
+            key={date.toString()}
+            onClick={() => props.onClick(serializerDate(date))}
+            className={cn(
+              "m-5",
+              isSameDay(date, props.currentDate) ? "btn_primary" : "btn_secondary"
+            )}
           >
-            {formatDate(day)}
+            {formatDate(date)}
           </button>
         )
       })}

@@ -1,10 +1,12 @@
 import DayInterface from "@/module/Day/Domain/DayInterface.ts"
 import GoalDayInterface from "@/module/GoalDay/Domain/GoalDayInterface.ts"
-import { createUniqId } from "@/module/Shared/Domain/uniqId.ts"
+import { createUniqId } from "@/module/Shared/Application/Id/uniqId.ts"
+import { DateString } from "@/module/Shared/Application/Date/DateStringType.ts"
+import serializerDate from "@/module/Shared/Application/Date/serializerDate.ts"
 
 export default function createDay(
   goalDays: GoalDayInterface[] = [],
-  createdDate: Date = new Date()
+  createdDate: DateString = serializerDate(new Date())
 ): DayInterface {
   return {
     id: createUniqId(),

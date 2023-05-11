@@ -1,5 +1,5 @@
-import { IdAbleListType } from "@/module/Shared/Domain/Manager/Id/IdAbleInterface.ts"
-import getIndexById from "@/module/Shared/Domain/Manager/Id/getIndexById.ts"
+import { IdAbleListType } from "@/module/Shared/Application/Id/IdAbleInterface.ts"
+import getIndexById from "@/module/Shared/Application/Id/getIndexById.ts"
 
 export default function removeById(id: string, list: IdAbleListType): void {
   const index = getIndexById(id, list)

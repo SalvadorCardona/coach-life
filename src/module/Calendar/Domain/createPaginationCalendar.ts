@@ -1,5 +1,5 @@
 export default function createPaginationCalendar(): Date[] {
-  const maxDay = 20
+  const maxDay = 2
   const days: Date[] = []
   const today = new Date()
 

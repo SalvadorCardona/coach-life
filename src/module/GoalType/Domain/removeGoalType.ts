@@ -1,5 +1,5 @@
 import GoalTypeInterface from "@/module/GoalType/Domain/GoalTypeInterface.ts"
-import removeById from "@/module/Shared/Domain/Manager/Id/removeById.ts"
+import removeById from "@/module/Shared/Application/Id/removeById.ts"
 
 export function removeGoalType(
   goalType: GoalTypeInterface,

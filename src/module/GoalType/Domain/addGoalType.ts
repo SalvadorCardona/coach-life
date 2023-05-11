@@ -1,5 +1,5 @@
 import GoalTypeInterface from "@/module/GoalType/Domain/GoalTypeInterface.ts"
-import addTo from "@/module/Shared/Domain/Manager/addTo.ts"
+import addTo from "@/module/Shared/Application/List/addTo.ts"
 
 export function addGoalType(
   goalType: GoalTypeInterface,

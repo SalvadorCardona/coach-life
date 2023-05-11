@@ -1,19 +1,20 @@
 import { create } from "zustand"
-import DayInterface from "@/module/Day/Domain/DayInterface.ts"
+
 import {
-  getCalendar,
+  restoreCalendar,
   persistCalendar,
-} from "@/module/Calendar/Domain/CalendarRepository.ts"
+} from "@/module/Calendar/Infratructure/CalendarRepository.ts"
+import { DateString } from "@/module/Shared/Application/Date/DateStringType.ts"
 
 interface CalendarState {
-  currentDay: DayInterface
-  update: (currentDay: DayInterface) => void
+  currentDate: DateString
+  update: (currentDate: DateString) => void
 }
 
 export const useCalendarStore = create<CalendarState>((set) => ({
-  currentDay: getCalendar(),
-  update: (currentDay: DayInterface) => {
-    set({ currentDay })
-    persistCalendar(currentDay)
+  currentDate: restoreCalendar(),
+  update: (currentDate: DateString) => {
+    set({ currentDate })
+    persistCalendar(currentDate)
   },
 }))
