@@ -83,11 +83,11 @@ input, select {
 
 
 .title {
-  @apply text-neutral-500 text-2xl font-bold mb-4 uppercase;
+  @apply text-neutral-600 text-2xl font-bold mb-4 uppercase;
 }
 
 .subtitle {
-  @apply text-neutral-500 text-xl font-semibold mb-2 uppercase
+  @apply text-neutral-600 text-xl font-semibold mb-2 uppercase
 }
 
 .text {

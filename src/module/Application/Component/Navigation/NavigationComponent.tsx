@@ -11,7 +11,7 @@ export function NavigationComponent(props: NavigationComponentPropsInterface) {
 
   return (
     <>
-      <nav className={"bg-white w-full  py-3 px-2  top-0 left-0 z-10 h-screen"}>
+      <nav className={"bg-white py-3 px-2  h-screen w-9"}>
         <button onClick={() => setOpen(!open)}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -27,7 +27,7 @@ export function NavigationComponent(props: NavigationComponentPropsInterface) {
             />
           </svg>
         </button>
-        <div className={cn(open ? "show" : "hide")}>Hello</div>
+        {/*<div className={cn(open ? "show" : "hide")}>Hello</div>*/}
       </nav>
     </>
   )

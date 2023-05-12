@@ -15,9 +15,7 @@ function App() {
   return (
     <>
       <div className={"flex"}>
-        <div className={"w-56"}>
-          <NavigationComponent />
-        </div>
+        <NavigationComponent />
         <div className={"px-16 p-4"}>
           <CalendarComponent
             currentDate={calendarStore.currentDate}
