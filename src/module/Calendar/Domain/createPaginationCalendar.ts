@@ -1,11 +1,16 @@
-export default function createPaginationCalendar(): Date[] {
-  const maxDay = 7
-  const days: Date[] = []
-  const today = new Date()
+import { DateString } from "@/module/Shared/Application/Date/DateStringType.ts"
+import deSerializerDate from "@/module/Shared/Application/Date/deSerializerDate.ts"
 
-  for (let i = 0; i <= maxDay; i++) {
+export default function createPaginationCalendar(
+  toDay: Date | DateString = new Date()
+): Date[] {
+  toDay = deSerializerDate(toDay)
+  const maxDay = 3
+  const days: Date[] = []
+
+  for (let i = -maxDay; i <= maxDay; i++) {
     const date = new Date()
-    date.setDate(today.getDate() - i)
+    date.setDate(toDay.getDate() - i)
     days.push(date)
   }
 

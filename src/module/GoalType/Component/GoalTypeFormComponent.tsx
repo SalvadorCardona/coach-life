@@ -2,6 +2,7 @@ import { FormEvent, useState } from "react"
 import GoalTypeInterface from "@/module/GoalType/Domain/GoalTypeInterface.ts"
 import { createGoalType } from "@/module/GoalType/Domain/createGoalType.ts"
 import { SubTitleComponent } from "@/module/Shared/Component/Typography/SubTitleComponent.tsx"
+import GoalTypeMetricEnum from "@/module/GoalType/Domain/GoalTypeMetricEnum.ts"
 
 export interface GoalTypeFormComponentPropsInterface {
   updateGoalType: (goalType: GoalTypeInterface) => void
@@ -34,6 +35,7 @@ export function GoalTypeFormComponent(props: GoalTypeFormComponentPropsInterface
             type={"text"}
             value={newGoalType.name}
             onChange={(event) => nameHandler(event.target.value)}
+            placeholder={"Your name..."}
           />
         </div>
         <div className="form-group">
@@ -42,7 +44,15 @@ export function GoalTypeFormComponent(props: GoalTypeFormComponentPropsInterface
             type={"number"}
             value={newGoalType.defaultValue}
             onChange={(event) => defaultValueHandler(event.target.value)}
+            placeholder={"Your defaults value..."}
           />
+        </div>
+        <div className="form-group">
+          <label>Metrics :</label>
+          <select>
+            <option value={GoalTypeMetricEnum.QUANTITY}>Quantity</option>
+            <option value={GoalTypeMetricEnum.HOUR}>Time in hour</option>
+          </select>
         </div>
         <input type={"submit"} className={"mt-5 btn_primary"} value={"Add"} />
       </form>

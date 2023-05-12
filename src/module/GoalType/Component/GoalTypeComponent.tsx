@@ -10,7 +10,7 @@ export function GoalTypeComponent(props: GoalTypeComponentPropsInterface) {
     <div className={"wrapper flex justify-between items-center"}>
       <span>{props.goalType.name}</span>
       <button
-        className={"btn_secondary"}
+        className={"btn_danger"}
         onClick={() => props.removeHandler(props.goalType)}
       >
         x

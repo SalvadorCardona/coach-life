@@ -18,7 +18,7 @@ function App() {
         <div className={"w-56"}>
           <NavigationComponent />
         </div>
-        <div className={"px-16"}>
+        <div className={"px-16 p-4"}>
           <CalendarComponent
             currentDate={calendarStore.currentDate}
             onClick={calendarStore.update}
