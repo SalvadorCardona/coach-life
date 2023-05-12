@@ -6,10 +6,11 @@ import serializerDate from "@/module/Shared/Application/Date/serializerDate"
 export default function createGoalDay(
   goalType: GoalTypeInterface | null = null
 ): GoalDayInterface {
+  const defaultValue = goalType?.defaultValue ?? 0
   return {
     id: createUniqId(),
     createdDate: serializerDate(new Date()),
     goalType: goalType,
-    value: 0,
+    value: defaultValue,
   }
 }

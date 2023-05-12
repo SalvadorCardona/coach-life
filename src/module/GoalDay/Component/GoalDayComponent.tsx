@@ -7,17 +7,15 @@ export interface GoalDayComponentPropsInterface {
 }
 
 export function GoalDayComponent(props: GoalDayComponentPropsInterface) {
-  const [goalDay, setGoalDay] = useState<GoalDayInterface>(props.goalDay)
+  const [goalDay] = useState<GoalDayInterface>(props.goalDay)
   const increment = () => {
-    goalDay.value = goalDay.value + 0.5
+    goalDay.value++
     props.onUpdate(goalDay)
-    setGoalDay(goalDay)
   }
 
   const decrement = () => {
     goalDay.value--
     props.onUpdate(goalDay)
-    setGoalDay(goalDay)
   }
 
   return (

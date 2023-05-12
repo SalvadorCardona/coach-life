@@ -1,5 +1,5 @@
 export default function createPaginationCalendar(): Date[] {
-  const maxDay = 2
+  const maxDay = 7
   const days: Date[] = []
   const today = new Date()
 
@@ -9,5 +9,5 @@ export default function createPaginationCalendar(): Date[] {
     days.push(date)
   }
 
-  return days
+  return days.reverse()
 }

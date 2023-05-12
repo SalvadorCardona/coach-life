@@ -5,7 +5,6 @@
 :root {
   font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
   font-size: 16px;
-
   background-color: #242424;
 }
 
@@ -24,8 +23,12 @@ body {
   @apply bg-gray-200
 }
 
+html, body, #root {
+  @apply text-neutral-4
+}
+
 .wrapper {
-  @apply p-4 shadow border-solid border-t-2 border-primary bg-white
+  @apply p-4 shadow bg-white rounded-xl
 }
 
 .btn {
@@ -54,4 +57,17 @@ body {
 
 input, select {
   @apply input;
+}
+
+
+.title {
+  @apply text-neutral-700 text-2xl font-semibold mb-4 uppercase;
+}
+
+.subtitle {
+  @apply text-neutral-600 text-xl font-semibold mb-2
+}
+
+.text {
+  @apply text-neutral-4 text-base mb-2
 }

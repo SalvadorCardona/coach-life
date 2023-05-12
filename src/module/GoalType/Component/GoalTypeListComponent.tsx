@@ -1,49 +1,32 @@
 import GoalTypeInterface from "@/module/GoalType/Domain/GoalTypeInterface.ts"
 import { GoalTypeComponent } from "@/module/GoalType/Component/GoalTypeComponent.tsx"
-import { createGoalType } from "@/module/GoalType/Domain/createGoalType.ts"
-import { removeGoalType } from "@/module/GoalType/Domain/removeGoalType.ts"
-import { useState } from "react"
-import { addGoalType } from "@/module/GoalType/Domain/addGoalType.ts"
+import { GoalTypeFormComponent } from "@/module/GoalType/Component/GoalTypeFormComponent.tsx"
+import { TitleComponent } from "@/module/Shared/Component/Typography/TitleComponent.tsx"
+import { SubTitleComponent } from "@/module/Shared/Component/Typography/SubTitleComponent.tsx"
 
 export interface GoalTypeListComponentPropsInterface {
   goalTypes: GoalTypeInterface[]
-  updateGoalType: (goalTypes: GoalTypeInterface[]) => void
+  updateGoalType: (goalType: GoalTypeInterface) => void
+  removeGoalType: (goalType: GoalTypeInterface) => void
 }
 
 export function GoalTypeListComponent(props: GoalTypeListComponentPropsInterface) {
-  const [newGoalTypeName, setNewGoalTypeName] = useState<string>("")
-  const addGoalTypeHandler = () => {
-    const newGoalType = createGoalType()
-    newGoalType.name = newGoalTypeName
-    addGoalType(newGoalType, props.goalTypes)
-    props.updateGoalType(props.goalTypes)
-  }
-
-  const removeGoalTypeHandler = (goalType: GoalTypeInterface) => {
-    removeGoalType(goalType, props.goalTypes)
-    props.updateGoalType(props.goalTypes)
-  }
-
   return (
     <>
-      <div>Hello GoalTypeListComponent</div>
-      <div>
-        {props.goalTypes.map((goalType) => (
-          <GoalTypeComponent
-            removeHandler={removeGoalTypeHandler}
-            key={goalType.id}
-            goalType={goalType}
-          ></GoalTypeComponent>
-        ))}
+      <TitleComponent>Your goals types</TitleComponent>
+      <div className={"mb-5"}>
+        <GoalTypeFormComponent updateGoalType={props.updateGoalType} />
       </div>
-      <div className={"form-group"}>
-        <input
-          value={newGoalTypeName}
-          onChange={(event) => setNewGoalTypeName(event.target.value)}
-        />
-        <button className={"mt-5 btn_primary"} onClick={addGoalTypeHandler}>
-          Ajouter un type d'ojectif +
-        </button>
+      <SubTitleComponent>Your current goals</SubTitleComponent>
+      <div className={"mt-5"}>
+        {props.goalTypes.map((goalType) => (
+          <div className="mt-2" key={goalType.id}>
+            <GoalTypeComponent
+              removeHandler={props.removeGoalType}
+              goalType={goalType}
+            />
+          </div>
+        ))}
       </div>
     </>
   )

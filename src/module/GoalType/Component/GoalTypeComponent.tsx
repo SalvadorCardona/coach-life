@@ -7,9 +7,14 @@ export interface GoalTypeComponentPropsInterface {
 
 export function GoalTypeComponent(props: GoalTypeComponentPropsInterface) {
   return (
-    <div>
-      Hello {props.goalType.name}
-      <button onClick={() => props.removeHandler(props.goalType)}>x</button>
+    <div className={"wrapper flex justify-between items-center"}>
+      <span>{props.goalType.name}</span>
+      <button
+        className={"btn_secondary"}
+        onClick={() => props.removeHandler(props.goalType)}
+      >
+        x
+      </button>
     </div>
   )
 }

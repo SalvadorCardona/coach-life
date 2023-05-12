@@ -1,0 +1,7 @@
+.hide {
+  @apply -translate-x-full;
+}
+
+.show {
+  @apply translate-x-0;
+}
