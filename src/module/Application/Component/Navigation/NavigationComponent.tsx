@@ -1,6 +1,8 @@
 import "./NavigationComponent.css"
 import { useState } from "react"
+import BiList from "@/module/Shared/Asset/Icon/bi-list.svg"
 import cn from "classnames"
+import { routes } from "@/module/Application/routes.tsx"
 
 export interface NavigationComponentPropsInterface {
   open?: boolean
@@ -13,21 +15,17 @@ export function NavigationComponent(props: NavigationComponentPropsInterface) {
     <>
       <nav className={"bg-white py-3 px-2  h-screen w-9"}>
         <button onClick={() => setOpen(!open)}>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="16"
-            height="16"
-            fill="currentColor"
-            className="bi bi-list"
-            viewBox="0 0 16 16"
-          >
-            <path
-              fillRule={"evenodd"}
-              d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"
-            />
-          </svg>
+          <BiList />
         </button>
         {/*<div className={cn(open ? "show" : "hide")}>Hello</div>*/}
+        {routes.map((route) => {
+          return (
+            <div key={route.path} className={cn(open ? "show" : "hide")}>
+              {route.name}
+              <route.icon />
+            </div>
+          )
+        })}
       </nav>
     </>
   )

@@ -62,7 +62,7 @@ html, body {
 
 
 .input {
-  @apply appearance-none border-2 border-gray-300 w-full py-2 px-4 text_base_color rounded-md focus:border-primary focus:outline-primary ;
+  @apply appearance-none border border-gray-300 w-full py-2 px-4 text_base_color rounded-md focus:border-primary focus:outline-primary ;
 }
 
 input[type="submit"] {
