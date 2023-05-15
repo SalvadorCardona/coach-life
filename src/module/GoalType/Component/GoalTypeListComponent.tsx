@@ -17,7 +17,7 @@ export function GoalTypeListComponent(props: GoalTypeListComponentPropsInterface
       <div className={"mb-5"}>
         <GoalTypeFormComponent updateGoalType={props.updateGoalType} />
       </div>
-      <SubTitleComponent>Your current goals</SubTitleComponent>
+      <SubTitleComponent>Your current goals types</SubTitleComponent>
       <div className={"mt-5"}>
         {props.goalTypes.map((goalType) => (
           <div className="mt-2" key={goalType.id}>

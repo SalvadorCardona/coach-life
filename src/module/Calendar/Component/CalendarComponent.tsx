@@ -8,7 +8,7 @@ import flatpickr from "flatpickr"
 import { useEffect, useRef, useState } from "react"
 import "flatpickr/dist/flatpickr.css"
 import { SubTitleComponent } from "@/module/Shared/Component/Typography/SubTitleComponent.tsx"
-import BiCalendarType from "./Asset/bi-calendar-date.svg"
+import BiCalendarType from "../../Shared/Asset/Icon/bi-calendar-date.svg"
 import { TitleComponent } from "@/module/Shared/Component/Typography/TitleComponent.tsx"
 import { SeparatorComponent } from "@/module/Shared/Component/SeparatorComponent.tsx"
 
