@@ -1,4 +1,8 @@
 import GoalTypeInterface from "@/module/GoalType/Domain/GoalTypeInterface.ts"
+import { WrapperComponent } from "@/module/Shared/Component/WrapperComponent.tsx"
+import { Flex, Spacer } from "@chakra-ui/react"
+import { ButtonComponent } from "@/module/Shared/Component/Form/ButtonComponent.tsx"
+import { RxCross2 } from "react-icons/all"
 
 export interface GoalTypeComponentPropsInterface {
   goalType: GoalTypeInterface
@@ -7,14 +11,18 @@ export interface GoalTypeComponentPropsInterface {
 
 export function GoalTypeComponent(props: GoalTypeComponentPropsInterface) {
   return (
-    <div className={"wrapper flex justify-between items-center"}>
-      <span>{props.goalType.name}</span>
-      <button
-        className={"btn_danger"}
-        onClick={() => props.removeHandler(props.goalType)}
-      >
-        x
-      </button>
-    </div>
+    <WrapperComponent>
+      <Flex>
+        <span>{props.goalType.name}</span>
+        <Spacer />
+        <ButtonComponent
+          attributes={{
+            onClick: () => props.removeHandler(props.goalType),
+          }}
+        >
+          <RxCross2 />
+        </ButtonComponent>
+      </Flex>
+    </WrapperComponent>
   )
 }

@@ -1,11 +1,12 @@
 import { ReactNode } from "react"
+import { Heading } from "@chakra-ui/react"
 
 export function SubTitleComponent(props: { children: ReactNode }) {
   return (
     <>
-      <div className={"subtitle"}>
-        <h2>{props.children}</h2>
-      </div>
+      <Heading as="h3" size="lg" mb={5} color={"gray.800"}>
+        {props.children}
+      </Heading>
     </>
   )
 }

@@ -1,6 +1,9 @@
 import GoalDayInterface from "@/module/GoalDay/Domain/GoalDayInterface.ts"
 import { useState } from "react"
 import GoalTypeMetricEnum from "@/module/GoalType/Domain/GoalTypeMetricEnum.ts"
+import { WrapperComponent } from "@/module/Shared/Component/WrapperComponent.tsx"
+import { Box, Flex, Heading, Spacer, Text } from "@chakra-ui/react"
+import { ButtonComponent } from "@/module/Shared/Component/Form/ButtonComponent.tsx"
 
 export interface GoalDayComponentPropsInterface {
   goalDay: GoalDayInterface
@@ -20,25 +23,30 @@ export function GoalDayComponent(props: GoalDayComponentPropsInterface) {
   }
 
   return (
-    <div className={"wrapper"}>
-      <h4 className={"text-1xl capitalize"}>{props.goalDay.goalType?.name} :</h4>
-      <div className={"flex justify-start items-center"}>
-        <span className={"text-2xl my-2 mr-5 text-primary"}>{goalDay.value}</span>
-        <span className={"text-light"}>
+    <WrapperComponent>
+      <Heading as={"h4"} fontSize={"lg"}>
+        {props.goalDay.goalType?.name}
+      </Heading>
+      <Flex alignItems={"center"} mt={4}>
+        <Text color={"blue.600"} fontSize={"2xl"} as={"b"} mr={2}>
+          {goalDay.value}
+        </Text>
+        <Text color={"grey"} fontSize={"lg"}>
           {goalDay.goalType?.metric === GoalTypeMetricEnum.QUANTITY
             ? "Qty"
             : "Hours"}
-        </span>
-      </div>
+        </Text>
+      </Flex>
 
-      <div className={"flex flex-row justify-between"}>
-        <button className={"btn_primary"} onClick={decrement}>
-          -
-        </button>
-        <button className={"btn_primary"} onClick={increment}>
-          +
-        </button>
-      </div>
-    </div>
+      <Flex mt={4}>
+        <Box>
+          <ButtonComponent attributes={{ onClick: decrement }}>-</ButtonComponent>
+        </Box>
+        <Spacer />
+        <Box>
+          <ButtonComponent attributes={{ onClick: increment }}>+</ButtonComponent>
+        </Box>
+      </Flex>
+    </WrapperComponent>
   )
 }

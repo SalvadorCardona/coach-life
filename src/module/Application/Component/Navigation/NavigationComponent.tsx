@@ -1,32 +1,71 @@
 import "./NavigationComponent.css"
 import { useState } from "react"
-import BiList from "@/module/Shared/Asset/Icon/bi-list.svg"
-import cn from "classnames"
+
 import { routes } from "@/module/Application/routes.tsx"
+import { RxHamburgerMenu } from "react-icons/all"
+import {
+  Box,
+  Button,
+  Flex,
+  Icon,
+  Link,
+  useColorModeValue,
+  Text,
+} from "@chakra-ui/react"
 
 export interface NavigationComponentPropsInterface {
   open?: boolean
 }
 
 export function NavigationComponent(props: NavigationComponentPropsInterface) {
-  const [open, setOpen] = useState<boolean>(props.open ?? false)
+  const [open, setOpen] = useState<boolean>(props.open ?? true)
 
   return (
     <>
-      <nav className={"bg-white py-3 px-2  h-screen w-9"}>
-        <button onClick={() => setOpen(!open)}>
-          <BiList />
-        </button>
-        {/*<div className={cn(open ? "show" : "hide")}>Hello</div>*/}
+      <Box minH="100vh" bg={useColorModeValue("gray.100", "gray.900")}>
+        <Button colorScheme={"gray"} onClick={() => setOpen(!open)}>
+          <RxHamburgerMenu />
+        </Button>
+        <Flex h="20" alignItems="center" mx="8" justifyContent="space-between">
+          <Text fontSize="2xl" fontFamily="monospace" fontWeight="bold">
+            {open ? "Disciplinus" : "D"}
+          </Text>
+        </Flex>
         {routes.map((route) => {
           return (
-            <div key={route.path} className={cn(open ? "show" : "hide")}>
-              {route.name}
-              <route.icon />
-            </div>
+            <Link
+              href="#"
+              style={{ textDecoration: "none" }}
+              _focus={{ boxShadow: "none" }}
+            >
+              <Flex
+                align="center"
+                p="4"
+                mx="4"
+                borderRadius="lg"
+                role="group"
+                cursor="pointer"
+                _hover={{
+                  bg: "cyan.400",
+                  color: "white",
+                }}
+              >
+                {route.icon && (
+                  <Icon
+                    mr={open ? "4" : "0"}
+                    fontSize="16"
+                    _groupHover={{
+                      color: "white",
+                    }}
+                    as={route.icon}
+                  />
+                )}
+                {open ? route.name : ""}
+              </Flex>
+            </Link>
           )
         })}
-      </nav>
+      </Box>
     </>
   )
 }

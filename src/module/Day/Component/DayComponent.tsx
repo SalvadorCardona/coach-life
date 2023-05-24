@@ -5,6 +5,7 @@ import createGoalDayList from "@/module/GoalDay/Domain/createGoalDayList.ts"
 import updateById from "@/module/Shared/Application/Id/updateById.ts"
 import GoalDayInterface from "@/module/GoalDay/Domain/GoalDayInterface.ts"
 import { TitleComponent } from "@/module/Shared/Component/Typography/TitleComponent.tsx"
+import { Grid } from "@chakra-ui/react"
 
 export interface DayComponentPropsInterface {
   day: DayInterface
@@ -21,13 +22,13 @@ export function DayComponent(props: DayComponentPropsInterface) {
   return (
     <>
       <TitleComponent>Your data goal</TitleComponent>
-      <div className={"grid grid-cols-3 gap-4"}>
+      <Grid templateColumns="repeat(3, 1fr)" gap={6}>
         {createGoalDayList(props.day.goalDays, props.goalTypes).map((goalDay) => (
           <div key={goalDay.id}>
             <GoalDayComponent onUpdate={updateHandler} goalDay={goalDay} />
           </div>
         ))}
-      </div>
+      </Grid>
     </>
   )
 }

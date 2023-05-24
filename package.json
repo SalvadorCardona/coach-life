@@ -14,12 +14,17 @@
     "deploy-gh": "yarn build-preview && yarn deploy-local"
   },
   "dependencies": {
+    "@chakra-ui/react": "^2.6.1",
+    "@emotion/react": "^11.11.0",
+    "@emotion/styled": "^11.11.0",
     "classnames": "^2.3.2",
     "flatpickr": "^4.6.13",
+    "framer-motion": "^10.12.13",
     "localforage": "^1.10.0",
     "match-sorter": "^6.3.1",
     "react": "latest",
     "react-dom": "latest",
+    "react-icons": "^4.8.0",
     "react-router-dom": "^6.11.1",
     "sort-by": "^1.2.0",
     "vite-plugin-svgr": "^3.2.0",

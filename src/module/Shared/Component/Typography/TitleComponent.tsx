@@ -1,11 +1,18 @@
 import { ReactNode } from "react"
+import { Heading } from "@chakra-ui/react"
 
 export function TitleComponent(props: { children: ReactNode }) {
   return (
     <>
-      <div className={"title"}>
-        <h1>{props.children}</h1>
-      </div>
+      <Heading
+        as="h1"
+        size="xl"
+        color={"gray.600"}
+        textTransform={"uppercase"}
+        mb={5}
+      >
+        {props.children}
+      </Heading>
     </>
   )
 }

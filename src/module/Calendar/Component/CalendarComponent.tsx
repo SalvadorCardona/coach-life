@@ -8,9 +8,11 @@ import flatpickr from "flatpickr"
 import { useEffect, useRef, useState } from "react"
 import "flatpickr/dist/flatpickr.css"
 import { SubTitleComponent } from "@/module/Shared/Component/Typography/SubTitleComponent.tsx"
-import BiCalendarType from "../../Shared/Asset/Icon/bi-calendar-date.svg"
 import { TitleComponent } from "@/module/Shared/Component/Typography/TitleComponent.tsx"
 import { SeparatorComponent } from "@/module/Shared/Component/SeparatorComponent.tsx"
+import { WrapperComponent } from "@/module/Shared/Component/WrapperComponent.tsx"
+import { ButtonComponent } from "@/module/Shared/Component/Form/ButtonComponent.tsx"
+import { BsCalendarDate } from "react-icons/bs"
 
 export interface CalendarComponentPropsInterface {
   currentDate: DateString
@@ -41,31 +43,33 @@ export function CalendarComponent(props: CalendarComponentPropsInterface) {
   return (
     <>
       <TitleComponent>Your Calendar</TitleComponent>
-      <div className={"wrapper"}>
-        <div className={"w-56"}>
-          <SubTitleComponent>Choose a date :</SubTitleComponent>
-          <div ref={datePickerRef} className={"btn_primary"}>
-            <BiCalendarType />
-            <span className={"ml-4"}>{formatDate(props.currentDate)}</span>
-          </div>
+      <WrapperComponent>
+        <div>
+          <SubTitleComponent>Choose your date :</SubTitleComponent>
+          <ButtonComponent attributes={{ mt: 5 }}>
+            <BsCalendarDate />
+            <span ref={datePickerRef} className={"ml-4"}>
+              {formatDate(props.currentDate)}
+            </span>
+          </ButtonComponent>
         </div>
         <SeparatorComponent />
         {createPaginationCalendar(props.currentDate).map((date) => {
           return (
-            <button
+            <ButtonComponent
+              attributes={{
+                onClick: () => props.onClick(serializerDate(date)),
+                colorScheme: isSameDay(date, props.currentDate) ? "blue" : "gray",
+                isLoading: isAnimation,
+                className: cn("mr-2 mt-2"),
+              }}
               key={date.toString()}
-              onClick={() => props.onClick(serializerDate(date))}
-              className={cn(
-                "mr-2 mt-2",
-                isSameDay(date, props.currentDate) ? "btn_primary" : "btn_neutral",
-                isAnimation ? "animate-bounce" : ""
-              )}
             >
               {formatDate(date)}
-            </button>
+            </ButtonComponent>
           )
         })}
-      </div>
+      </WrapperComponent>
     </>
   )
 }
