@@ -14,7 +14,7 @@ export function GoalTypeComponent(props: GoalTypeComponentPropsInterface) {
     <WrapperComponent>
       <Flex>
         <span>{props.goalType.name}</span>
-        <Spacer />
+        <Spacer mr={5} />
         <ButtonComponent
           attributes={{
             onClick: () => props.removeHandler(props.goalType),

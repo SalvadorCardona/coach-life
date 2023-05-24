@@ -3,15 +3,7 @@ import { useState } from "react"
 
 import { routes } from "@/module/Application/routes.tsx"
 import { RxHamburgerMenu } from "react-icons/all"
-import {
-  Box,
-  Button,
-  Flex,
-  Icon,
-  Link,
-  useColorModeValue,
-  Text,
-} from "@chakra-ui/react"
+import { Box, Button, Flex, Icon, useColorModeValue, Text } from "@chakra-ui/react"
 
 import { Link as RouterLink } from "react-router-dom"
 
@@ -37,7 +29,7 @@ export function NavigationComponent(props: NavigationComponentPropsInterface) {
 
         {childrenRoute.map((route) => {
           return (
-            <RouterLink key={route.path} to={route.path as string}>
+            <RouterLink key={route.name} to={route.path as string}>
               <Flex
                 align="center"
                 p="4"

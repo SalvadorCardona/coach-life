@@ -1,7 +1,6 @@
 import GoalTypeInterface from "@/module/GoalType/Domain/GoalTypeInterface.ts"
 import { GoalTypeComponent } from "@/module/GoalType/Component/GoalTypeComponent.tsx"
-import { GoalTypeFormComponent } from "@/module/GoalType/Component/GoalTypeFormComponent.tsx"
-import { TitleComponent } from "@/module/Shared/Component/Typography/TitleComponent.tsx"
+import { Box } from "@chakra-ui/react"
 
 export interface GoalTypeListComponentPropsInterface {
   goalTypes: GoalTypeInterface[]
@@ -12,21 +11,14 @@ export interface GoalTypeListComponentPropsInterface {
 export function GoalTypeListComponent(props: GoalTypeListComponentPropsInterface) {
   return (
     <>
-      <TitleComponent>Your goals types</TitleComponent>
-      <div className={"mb-5"}>
-        <GoalTypeFormComponent updateGoalType={props.updateGoalType} />
-      </div>
-      <TitleComponent>Your current goals types</TitleComponent>
-      <div className={"mt-5"}>
-        {props.goalTypes.map((goalType) => (
-          <div className="mt-2" key={goalType.id}>
-            <GoalTypeComponent
-              removeHandler={props.removeGoalType}
-              goalType={goalType}
-            />
-          </div>
-        ))}
-      </div>
+      {props.goalTypes.map((goalType) => (
+        <Box className="mt-2" key={goalType.id}>
+          <GoalTypeComponent
+            removeHandler={props.removeGoalType}
+            goalType={goalType}
+          />
+        </Box>
+      ))}
     </>
   )
 }

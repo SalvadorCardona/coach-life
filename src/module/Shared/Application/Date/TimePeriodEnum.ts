@@ -1,8 +1,6 @@
-const enum TimePeriodEnum {
-  Day = "day",
-  Week = "week",
-  Month = "month",
-  Year = "year",
+export declare enum TimePeriodEnum {
+  DAY = "day",
+  WEEK = "week",
+  MONTH = "month",
+  YEAR = "year",
 }
-
-export default TimePeriodEnum

@@ -3,7 +3,7 @@ import { useDayStore } from "@/module/Day/Application/DayStore.ts"
 import { useCalendarStore } from "@/module/Calendar/Application/CalendarStore.ts"
 import { CalendarComponent } from "@/module/Calendar/Component/CalendarComponent.tsx"
 import { DayComponent } from "@/module/Day/Component/DayComponent.tsx"
-import { GoalTypeListComponent } from "@/module/GoalType/Component/GoalTypeListComponent.tsx"
+import { Box } from "@chakra-ui/react"
 
 export function MainPage() {
   const goalTypesStore = useGoalTypeStore()
@@ -16,22 +16,13 @@ export function MainPage() {
         currentDate={calendarStore.currentDate}
         onClick={calendarStore.update}
       />
-      <div className="App grid grid-cols-2 gap-4 mt-5">
-        <div>
-          <DayComponent
-            goalTypes={goalTypesStore.goalTypes}
-            day={dayStore.getDayByDate(calendarStore.currentDate)}
-            onUpdateDay={dayStore.updateDay}
-          />
-        </div>
-        <div>
-          <GoalTypeListComponent
-            removeGoalType={goalTypesStore.removeGoalType}
-            updateGoalType={goalTypesStore.updateGoalType}
-            goalTypes={goalTypesStore.goalTypes}
-          />
-        </div>
-      </div>
+      <Box mt={5}>
+        <DayComponent
+          goalTypes={goalTypesStore.goalTypes}
+          day={dayStore.getDayByDate(calendarStore.currentDate)}
+          onUpdateDay={dayStore.updateDay}
+        />
+      </Box>
     </>
   )
 }
