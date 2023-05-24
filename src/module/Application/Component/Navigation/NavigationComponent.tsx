@@ -13,12 +13,15 @@ import {
   Text,
 } from "@chakra-ui/react"
 
+import { Link as RouterLink } from "react-router-dom"
+
 export interface NavigationComponentPropsInterface {
   open?: boolean
 }
 
 export function NavigationComponent(props: NavigationComponentPropsInterface) {
   const [open, setOpen] = useState<boolean>(props.open ?? true)
+  const childrenRoute = routes[0].children ?? []
 
   return (
     <>
@@ -31,13 +34,10 @@ export function NavigationComponent(props: NavigationComponentPropsInterface) {
             {open ? "Disciplinus" : "D"}
           </Text>
         </Flex>
-        {routes.map((route) => {
+
+        {childrenRoute.map((route) => {
           return (
-            <Link
-              href="#"
-              style={{ textDecoration: "none" }}
-              _focus={{ boxShadow: "none" }}
-            >
+            <RouterLink key={route.path} to={route.path as string}>
               <Flex
                 align="center"
                 p="4"
@@ -60,9 +60,10 @@ export function NavigationComponent(props: NavigationComponentPropsInterface) {
                     as={route.icon}
                   />
                 )}
+
                 {open ? route.name : ""}
               </Flex>
-            </Link>
+            </RouterLink>
           )
         })}
       </Box>

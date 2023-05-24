@@ -1,9 +1,7 @@
 import "./App.css"
-import { NavigationComponent } from "@/module/Application/Component/Navigation/NavigationComponent.tsx"
 import { RouterProvider, createHashRouter } from "react-router-dom"
 import { routes } from "@/module/Application/routes.tsx"
-import { extendTheme, ChakraProvider, Box } from "@chakra-ui/react"
-import { Flex } from "@chakra-ui/react"
+import { extendTheme, ChakraProvider } from "@chakra-ui/react"
 
 const router = createHashRouter(routes)
 
@@ -20,16 +18,7 @@ function App() {
   return (
     <>
       <ChakraProvider theme={theme}>
-        <Flex>
-          <Box>
-            <NavigationComponent />
-          </Box>
-          <Box>
-            <div className={"px-16 p-4"}>
-              <RouterProvider router={router} />
-            </div>
-          </Box>
-        </Flex>
+        <RouterProvider router={router} />
       </ChakraProvider>
     </>
   )
