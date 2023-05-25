@@ -6,6 +6,7 @@ import {
   persistObjectType,
   restoreObjectType,
 } from "@/module/GoalObjective/Infratructure/GoalObjectiveRepository.ts"
+import removeById from "@/module/Shared/Application/Id/removeById.ts"
 
 interface GoalObjectiveState {
   goalObjectives: GoalObjectiveInterface[]
@@ -14,6 +15,7 @@ interface GoalObjectiveState {
   getGoalObjectiveById: (
     id: GoalObjectiveInterface["id"]
   ) => GoalObjectiveInterface | undefined
+  removeGoalObjectiveById: (id: GoalObjectiveInterface["id"]) => void
 }
 
 export const useGoalObjectiveStore = create<GoalObjectiveState>((set, getState) => ({
@@ -23,8 +25,8 @@ export const useGoalObjectiveStore = create<GoalObjectiveState>((set, getState) 
   },
   updateGoalObjective: (goalObjective: GoalObjectiveInterface) => {
     const goalObjectives = getState().goalObjectives
-
-    if (getById(goalObjective.id, goalObjectives) === null) {
+    console.log(goalObjective)
+    if (!getById(goalObjective.id, goalObjectives)) {
       goalObjectives.push(goalObjective)
     }
 
@@ -34,5 +36,11 @@ export const useGoalObjectiveStore = create<GoalObjectiveState>((set, getState) 
   },
   getGoalObjectiveById: (id: GoalObjectiveInterface["id"]) => {
     return getById(id, getState().goalObjectives)
+  },
+  removeGoalObjectiveById: (id: GoalObjectiveInterface["id"]) => {
+    const goalObjectives = getState().goalObjectives
+    removeById(id, goalObjectives)
+    set({ goalObjectives })
+    persistObjectType(goalObjectives)
   },
 }))

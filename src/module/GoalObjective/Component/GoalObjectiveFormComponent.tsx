@@ -24,13 +24,12 @@ export function GoalObjectiveFormComponent({
   )
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
-
-    setGoalOjective({
+    const formData = {
       ...newGoalOjective,
       ...formDataToObject<GoalObjectiveInterface>(event.target as HTMLFormElement),
-    })
+    }
 
-    addGoalObjective(newGoalOjective)
+    addGoalObjective(formData)
     setGoalOjective(createGoalObjective())
   }
 
@@ -38,7 +37,7 @@ export function GoalObjectiveFormComponent({
     <>
       <WrapperComponent>
         <form onSubmit={handleSubmit}>
-          <SubTitleComponent>Add a new goal type</SubTitleComponent>
+          <SubTitleComponent>Add a new objective</SubTitleComponent>
           <FormControl mt={5}>
             <FormLabel>Name :</FormLabel>
             <Input
@@ -51,8 +50,8 @@ export function GoalObjectiveFormComponent({
           <FormControl mt={5}>
             <FormLabel>Value :</FormLabel>
             <Input
-              name={"name"}
-              type="text"
+              name={"value"}
+              type="number"
               defaultValue={newGoalOjective.value}
               placeholder={"Your value..."}
             />
@@ -98,7 +97,7 @@ export function GoalObjectiveFormComponent({
           </FormControl>
 
           <ButtonComponent attributes={{ type: "submit", mt: 5 }}>
-            Add goal
+            Add objective
           </ButtonComponent>
         </form>
       </WrapperComponent>

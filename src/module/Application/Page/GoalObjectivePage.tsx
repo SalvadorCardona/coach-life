@@ -15,13 +15,15 @@ export function GoalObjectivePage() {
         <Box mr={5}>
           <GoalObjectiveListComponent
             goalObjectives={goalObjectivesStore.goalObjectives}
-          ></GoalObjectiveListComponent>
+            goalTypes={goalTypesStore.goalTypes}
+            removeGoalObjectiveById={goalObjectivesStore.removeGoalObjectiveById}
+          />
         </Box>
         <Box>
           <GoalObjectiveFormComponent
             goalTypes={goalTypesStore.goalTypes}
             addGoalObjective={goalObjectivesStore.updateGoalObjective}
-          ></GoalObjectiveFormComponent>
+          />
         </Box>
       </Flex>
     </>

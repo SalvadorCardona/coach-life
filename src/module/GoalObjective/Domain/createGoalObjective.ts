@@ -15,6 +15,7 @@ interface CreateGoalObjectiveInterface {
 export default function createGoalObjective(
   args: CreateGoalObjectiveInterface = {}
 ): GoalObjectiveInterface {
+  console.log("qui m")
   return {
     ...{
       id: createUniqId(),
