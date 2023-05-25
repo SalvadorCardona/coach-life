@@ -1,4 +1,3 @@
-import { TitleComponent } from "@/module/Shared/Component/Typography/TitleComponent.tsx"
 import { Box, Flex } from "@chakra-ui/react"
 import { GoalObjectiveListComponent } from "@/module/GoalObjective/Component/GoalObjectiveListComponent.tsx"
 import { GoalObjectiveFormComponent } from "@/module/GoalObjective/Component/GoalObjectiveFormComponent.tsx"
@@ -10,7 +9,6 @@ export function GoalObjectivePage() {
   const goalTypesStore = useGoalTypeStore()
   return (
     <>
-      <TitleComponent>Your Goal Objectives</TitleComponent>
       <Flex>
         <Box mr={5}>
           <GoalObjectiveListComponent

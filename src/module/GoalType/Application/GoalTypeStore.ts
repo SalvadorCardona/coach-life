@@ -35,5 +35,6 @@ export const useGoalTypeStore = create<GoalTypeState>((set, getState) => ({
     removeById(idAble.id, goalTypes)
 
     set({ goalTypes })
+    persistGoalTypes(goalTypes)
   },
 }))

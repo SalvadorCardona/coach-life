@@ -4,6 +4,7 @@ import { StatPage } from "@/module/Application/Page/StatPage.tsx"
 import { ComponentType } from "react"
 import {
   BiObjectsVerticalBottom,
+  BsCalendarDay,
   FiHome,
   FiTrendingUp,
   GiTargetArrows,
@@ -12,12 +13,14 @@ import { LayoutComponent } from "@/module/Application/Component/LayoutComponent.
 import { NonIndexRouteObject } from "react-router/dist/lib/context"
 import { GoalTypePage } from "@/module/Application/Page/GoalTypePage.tsx"
 import { GoalObjectivePage } from "@/module/Application/Page/GoalObjectivePage.tsx"
+import { DaysPage } from "@/module/Application/Page/DaysPage.tsx"
 
 export enum RoutesEnum {
   MAIN = "main",
   STAT = "stat",
   GOAL_TYPE = "goal-type",
   GOAL_OBJECTIVE = "goal-objective",
+  DAYS = "days",
 }
 
 interface NavigationItemInterface extends NonIndexRouteObject {
@@ -25,6 +28,8 @@ interface NavigationItemInterface extends NonIndexRouteObject {
   icon?: ComponentType
   children?: NavigationItemInterface[]
   index?: true | false
+  title?: string
+  subTitle?: string
 }
 
 export const childrenRoutes: NavigationItemInterface[] = [
@@ -41,6 +46,7 @@ export const childrenRoutes: NavigationItemInterface[] = [
     id: RoutesEnum.GOAL_TYPE,
     icon: BiObjectsVerticalBottom,
     name: "Goal Type",
+    title: "Your goals types",
   },
   {
     path: "/goal-objective",
@@ -48,6 +54,15 @@ export const childrenRoutes: NavigationItemInterface[] = [
     id: RoutesEnum.GOAL_OBJECTIVE,
     icon: GiTargetArrows,
     name: "Goal Objective",
+    title: "Your Goal Objectives",
+  },
+  {
+    path: "/days",
+    element: <DaysPage />,
+    id: RoutesEnum.DAYS,
+    icon: BsCalendarDay,
+    name: "Days",
+    title: "Your Days",
   },
   {
     path: "/stat",
@@ -57,6 +72,10 @@ export const childrenRoutes: NavigationItemInterface[] = [
     name: "Statistic",
   },
 ]
+
+export function getRouteByPath(path: string): NavigationItemInterface | undefined {
+  return childrenRoutes.find((route) => route.path === path)
+}
 
 export const routes: IndexRouteObject[] = [
   {

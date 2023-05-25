@@ -29,6 +29,8 @@ export function GoalObjectiveFormComponent({
       ...formDataToObject<GoalObjectiveInterface>(event.target as HTMLFormElement),
     }
 
+    formData.value = Number(formData.value)
+
     addGoalObjective(formData)
     setGoalOjective(createGoalObjective())
   }
@@ -41,6 +43,7 @@ export function GoalObjectiveFormComponent({
           <FormControl mt={5}>
             <FormLabel>Name :</FormLabel>
             <Input
+              required={true}
               name={"name"}
               type="text"
               defaultValue={newGoalOjective.name}

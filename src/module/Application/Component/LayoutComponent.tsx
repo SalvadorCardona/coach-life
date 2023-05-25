@@ -1,10 +1,14 @@
-import { Box, Flex } from "@chakra-ui/react"
-import { NavigationComponent } from "@/module/Application/Component/Navigation/NavigationComponent.tsx"
-import { Outlet, RouterProvider } from "react-router-dom"
+import { Box, Flex, Text } from "@chakra-ui/react"
+import { NavigationComponent } from "@/module/Shared/Component/Navigation/NavigationComponent.tsx"
+import { Outlet, useLocation } from "react-router-dom"
+import { getRouteByPath } from "@/module/Application/routes.tsx"
+import { TitleComponent } from "@/module/Shared/Component/Typography/TitleComponent.tsx"
 
 export interface LayoutComponentPropsInterface {}
 
 export function LayoutComponent(props: LayoutComponentPropsInterface) {
+  const route = getRouteByPath(useLocation().pathname)
+
   return (
     <>
       <Flex>
@@ -12,9 +16,11 @@ export function LayoutComponent(props: LayoutComponentPropsInterface) {
           <NavigationComponent />
         </Box>
         <Box>
-          <div className={"px-16 p-4"}>
+          <Box px={16} py={4}>
+            {route?.title && <TitleComponent>{route.title}</TitleComponent>}
+            {route?.subTitle && <Text>{route.subTitle}</Text>}
             <Outlet />
-          </div>
+          </Box>
         </Box>
       </Flex>
     </>

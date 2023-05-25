@@ -1,8 +1,7 @@
 import GoalDayInterface from "@/module/GoalDay/Domain/GoalDayInterface.ts"
-import { useState } from "react"
+import { ChangeEvent, useState } from "react"
 import GoalTypeMetricEnum from "@/module/GoalType/Domain/GoalTypeMetricEnum.ts"
-import { WrapperComponent } from "@/module/Shared/Component/WrapperComponent.tsx"
-import { Box, Flex, Heading, Spacer, Text } from "@chakra-ui/react"
+import { Flex, Input, Td, Text, Tr } from "@chakra-ui/react"
 import { ButtonComponent } from "@/module/Shared/Component/Form/ButtonComponent.tsx"
 
 export interface GoalDayComponentPropsInterface {
@@ -11,42 +10,55 @@ export interface GoalDayComponentPropsInterface {
 }
 
 export function GoalDayComponent(props: GoalDayComponentPropsInterface) {
-  const [goalDay] = useState<GoalDayInterface>(props.goalDay)
+  const [goalDay, setGoalDay] = useState<GoalDayInterface>(props.goalDay)
   const increment = () => {
     goalDay.value++
+    setGoalDay(goalDay)
     props.onUpdate(goalDay)
   }
 
   const decrement = () => {
     goalDay.value--
+    setGoalDay(goalDay)
     props.onUpdate(goalDay)
   }
 
-  return (
-    <WrapperComponent>
-      <Heading as={"h4"} fontSize={"lg"}>
-        {props.goalDay.goalType?.name}
-      </Heading>
-      <Flex alignItems={"center"} mt={4}>
-        <Text color={"blue.600"} fontSize={"2xl"} as={"b"} mr={2}>
-          {goalDay.value}
-        </Text>
-        <Text color={"grey"} fontSize={"lg"}>
-          {goalDay.goalType?.metric === GoalTypeMetricEnum.QUANTITY
-            ? "Qty"
-            : "Hours"}
-        </Text>
-      </Flex>
+  const onChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
+    const { value } = event.target
+    goalDay.value = Number(value)
+    props.onUpdate(goalDay)
+  }
 
-      <Flex mt={4}>
-        <Box>
-          <ButtonComponent attributes={{ onClick: decrement }}>-</ButtonComponent>
-        </Box>
-        <Spacer />
-        <Box>
+  const metricType =
+    goalDay.goalType?.metric === GoalTypeMetricEnum.QUANTITY ? "Qty" : "Hours"
+
+  return (
+    <>
+      <Tr>
+        <Td>{props.goalDay.goalType?.name}</Td>
+        <Td>{metricType}</Td>
+        <Td>
+          <Flex alignItems={"center"}>
+            <Input
+              mr={1}
+              name={"name"}
+              type="number"
+              value={goalDay.value}
+              w={20}
+              onChange={onChangeHandler}
+            />
+            <Text color={"gray"} fontSize={"sm"}>
+              {metricType}
+            </Text>
+          </Flex>
+        </Td>
+        <Td>
+          <ButtonComponent attributes={{ onClick: decrement, mr: 5 }}>
+            -
+          </ButtonComponent>
           <ButtonComponent attributes={{ onClick: increment }}>+</ButtonComponent>
-        </Box>
-      </Flex>
-    </WrapperComponent>
+        </Td>
+      </Tr>
+    </>
   )
 }

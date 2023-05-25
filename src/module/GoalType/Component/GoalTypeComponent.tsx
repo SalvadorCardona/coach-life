@@ -1,6 +1,5 @@
 import GoalTypeInterface from "@/module/GoalType/Domain/GoalTypeInterface.ts"
-import { WrapperComponent } from "@/module/Shared/Component/WrapperComponent.tsx"
-import { Flex, Spacer } from "@chakra-ui/react"
+import { Td, Tr } from "@chakra-ui/react"
 import { ButtonComponent } from "@/module/Shared/Component/Form/ButtonComponent.tsx"
 import { RxCross2 } from "react-icons/all"
 
@@ -11,18 +10,20 @@ export interface GoalTypeComponentPropsInterface {
 
 export function GoalTypeComponent(props: GoalTypeComponentPropsInterface) {
   return (
-    <WrapperComponent>
-      <Flex>
-        <span>{props.goalType.name}</span>
-        <Spacer mr={5} />
+    <Tr>
+      <Td>{props.goalType.name}</Td>
+      <Td>{props.goalType.metric}</Td>
+      <Td>{props.goalType.defaultValue}</Td>
+      <Td>
         <ButtonComponent
           attributes={{
+            colorScheme: "red",
             onClick: () => props.removeHandler(props.goalType),
           }}
         >
           <RxCross2 />
         </ButtonComponent>
-      </Flex>
-    </WrapperComponent>
+      </Td>
+    </Tr>
   )
 }

@@ -6,6 +6,8 @@ import GoalTypeMetricEnum from "@/module/GoalType/Domain/GoalTypeMetricEnum.ts"
 import { FormControl, FormLabel, Input, Select } from "@chakra-ui/react"
 import { ButtonComponent } from "@/module/Shared/Component/Form/ButtonComponent.tsx"
 import { WrapperComponent } from "@/module/Shared/Component/WrapperComponent.tsx"
+import formDataToObject from "@/module/Shared/Application/Form/formDataToObject.ts"
+import GoalObjectiveInterface from "@/module/GoalObjective/Domain/GoalObjectiveInterface.ts"
 
 export interface GoalTypeFormComponentPropsInterface {
   updateGoalType: (goalType: GoalTypeInterface) => void
@@ -14,17 +16,17 @@ export interface GoalTypeFormComponentPropsInterface {
 export function GoalTypeFormComponent(props: GoalTypeFormComponentPropsInterface) {
   const [newGoalType, setGoalType] = useState<GoalTypeInterface>(createGoalType())
 
-  const nameHandler = (value: string) => {
-    setGoalType({ ...newGoalType, name: value })
-  }
-
-  const defaultValueHandler = (value: string) => {
-    setGoalType({ ...newGoalType, defaultValue: Number(value) })
-  }
-
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
-    props.updateGoalType(newGoalType)
+
+    const formData = {
+      ...newGoalType,
+      ...formDataToObject<GoalObjectiveInterface>(event.target as HTMLFormElement),
+    }
+
+    formData.defaultValue = Number(formData.defaultValue)
+
+    props.updateGoalType(formData)
     setGoalType(createGoalType())
   }
 
@@ -35,25 +37,26 @@ export function GoalTypeFormComponent(props: GoalTypeFormComponentPropsInterface
         <FormControl mt={5}>
           <FormLabel>Name :</FormLabel>
           <Input
+            required={true}
             type="text"
-            value={newGoalType.name}
-            onChange={(event) => nameHandler(event.target.value)}
+            defaultValue={newGoalType.name}
             placeholder={"Your name..."}
+            name={"name"}
           />
         </FormControl>
         <FormControl mt={5}>
           <FormLabel>Default value :</FormLabel>
           <Input
             type="number"
-            value={newGoalType.defaultValue}
-            onChange={(event) => defaultValueHandler(event.target.value)}
+            defaultValue={newGoalType.defaultValue}
             placeholder={"Your defaults value..."}
+            name={"defaultValue"}
           />
         </FormControl>
 
         <FormControl mt={5}>
           <FormLabel>Metrics :</FormLabel>
-          <Select>
+          <Select name={"metric"}>
             <option value={GoalTypeMetricEnum.QUANTITY}>Quantity</option>
             <option value={GoalTypeMetricEnum.HOUR}>Time in hour</option>
           </Select>

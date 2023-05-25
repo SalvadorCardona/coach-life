@@ -5,7 +5,15 @@ import createGoalDayList from "@/module/GoalDay/Domain/createGoalDayList.ts"
 import updateById from "@/module/Shared/Application/Id/updateById.ts"
 import GoalDayInterface from "@/module/GoalDay/Domain/GoalDayInterface.ts"
 import { TitleComponent } from "@/module/Shared/Component/Typography/TitleComponent.tsx"
-import { Grid } from "@chakra-ui/react"
+import {
+  Table,
+  TableCaption,
+  TableContainer,
+  Tbody,
+  Th,
+  Thead,
+  Tr,
+} from "@chakra-ui/react"
 
 export interface DayComponentPropsInterface {
   day: DayInterface
@@ -22,13 +30,30 @@ export function DayComponent(props: DayComponentPropsInterface) {
   return (
     <>
       <TitleComponent>Your data goal</TitleComponent>
-      <Grid templateColumns="repeat(3, 1fr)" gap={6}>
-        {createGoalDayList(props.day.goalDays, props.goalTypes).map((goalDay) => (
-          <div key={goalDay.id}>
-            <GoalDayComponent onUpdate={updateHandler} goalDay={goalDay} />
-          </div>
-        ))}
-      </Grid>
+      <TableContainer>
+        <Table variant="simple">
+          <TableCaption>Imperial to metric conversion factors</TableCaption>
+          <Thead>
+            <Tr>
+              <Th>Goal name</Th>
+              <Th>Metric Type</Th>
+              <Th>Value</Th>
+              <Th>Actions</Th>
+            </Tr>
+          </Thead>
+          <Tbody>
+            {createGoalDayList(props.day.goalDays, props.goalTypes).map(
+              (goalDay) => (
+                <GoalDayComponent
+                  key={goalDay.id}
+                  onUpdate={updateHandler}
+                  goalDay={goalDay}
+                />
+              )
+            )}
+          </Tbody>
+        </Table>
+      </TableContainer>
     </>
   )
 }
