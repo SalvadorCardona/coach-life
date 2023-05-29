@@ -1,7 +1,6 @@
-import "./NavigationComponent.css"
 import { useState } from "react"
 
-import { routes } from "@/module/Application/routes.tsx"
+import { getMenuRoutes } from "@/module/Application/routes.tsx"
 import { RxHamburgerMenu } from "react-icons/all"
 import { Box, Button, Flex, Icon, useColorModeValue, Text } from "@chakra-ui/react"
 
@@ -13,7 +12,6 @@ export interface NavigationComponentPropsInterface {
 
 export function NavigationComponent(props: NavigationComponentPropsInterface) {
   const [open, setOpen] = useState<boolean>(props.open ?? true)
-  const childrenRoute = routes[0].children ?? []
 
   return (
     <>
@@ -27,7 +25,7 @@ export function NavigationComponent(props: NavigationComponentPropsInterface) {
           </Text>
         </Flex>
 
-        {childrenRoute.map((route) => {
+        {getMenuRoutes().map((route) => {
           return (
             <RouterLink key={route.name} to={route.path as string}>
               <Flex

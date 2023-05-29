@@ -1,0 +1,4 @@
+thead  { position: sticky; top: 0; background: red}
+.chakra-table__container {
+  overflow-y: visible;
+}

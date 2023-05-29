@@ -10,7 +10,7 @@ export interface GoalObjectiveItemComponentPropsInterface {
   goalType: GoalTypeInterface | undefined
 }
 
-export function GoalObjectiveItemComponent({
+export function GoalObjectiveTableItemComponent({
   goalObjective,
   removeGoalObjectiveById,
   goalType,
@@ -20,9 +20,9 @@ export function GoalObjectiveItemComponent({
     <>
       <Tr>
         <Td>{goalObjective.name}</Td>
-        <Td>{goalObjective.value}</Td>
-        <Td>{goalObjective.byTypeTime}</Td>
         <Td>{goalTypeName}</Td>
+        <Td>{goalObjective.byTypeTime}</Td>
+        <Td>{goalObjective.value}</Td>
         <Td>
           <ButtonComponent
             attributes={{

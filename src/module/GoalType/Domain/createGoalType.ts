@@ -1,4 +1,4 @@
-import { createUniqId } from "@/module/Shared/Application/Id/uniqId.ts"
+import { createUniqId } from "@/module/Shared/Application/Id/createUniqId.ts"
 import GoalTypeInterface from "@/module/GoalType/Domain/GoalTypeInterface.ts"
 import GoalTypeMetricEnum from "@/module/GoalType/Domain/GoalTypeMetricEnum.ts"
 

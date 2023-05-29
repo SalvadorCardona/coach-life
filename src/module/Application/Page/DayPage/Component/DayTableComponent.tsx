@@ -1,6 +1,6 @@
 import DayInterface from "@/module/Day/Domain/DayInterface.ts"
 import GoalTypeInterface from "@/module/GoalType/Domain/GoalTypeInterface.ts"
-import { GoalDayComponent } from "@/module/GoalDay/Component/GoalDayComponent.tsx"
+import { DayTableItemComponent } from "@/module/Application/Page/DayPage/Component/DayTableItemComponent.tsx"
 import createGoalDayList from "@/module/GoalDay/Domain/createGoalDayList.ts"
 import updateById from "@/module/Shared/Application/Id/updateById.ts"
 import GoalDayInterface from "@/module/GoalDay/Domain/GoalDayInterface.ts"
@@ -21,7 +21,7 @@ export interface DayComponentPropsInterface {
   onUpdateDay: (day: DayInterface) => void
 }
 
-export function DayComponent(props: DayComponentPropsInterface) {
+export function DayTableComponent(props: DayComponentPropsInterface) {
   const updateHandler = (goalDay: GoalDayInterface) => {
     updateById(goalDay, props.day.goalDays)
     props.onUpdateDay(props.day)
@@ -44,7 +44,7 @@ export function DayComponent(props: DayComponentPropsInterface) {
           <Tbody>
             {createGoalDayList(props.day.goalDays, props.goalTypes).map(
               (goalDay) => (
-                <GoalDayComponent
+                <DayTableItemComponent
                   key={goalDay.id}
                   onUpdate={updateHandler}
                   goalDay={goalDay}

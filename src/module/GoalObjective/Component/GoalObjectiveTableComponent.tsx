@@ -1,5 +1,5 @@
 import GoalObjectiveInterface from "@/module/GoalObjective/Domain/GoalObjectiveInterface.ts"
-import { GoalObjectiveItemComponent } from "@/module/GoalObjective/Component/GoalObjectiveItemComponent.tsx"
+import { GoalObjectiveTableItemComponent } from "@/module/GoalObjective/Component/GoalObjectiveTableItemComponent.tsx"
 import {
   Table,
   Thead,
@@ -18,7 +18,7 @@ export interface GoalObjectiveListComponentPropsInterface {
   goalTypes: GoalTypeInterface[]
 }
 
-export function GoalObjectiveListComponent({
+export function GoalObjectiveTableComponent({
   goalObjectives,
   goalTypes,
   removeGoalObjectiveById,
@@ -31,7 +31,7 @@ export function GoalObjectiveListComponent({
           <Thead>
             <Tr>
               <Th>Objective name</Th>
-              <Th>Goal</Th>
+              <Th>Goal Type</Th>
               <Th>By time</Th>
               <Th>Value</Th>
               <Th>Actions</Th>
@@ -40,11 +40,11 @@ export function GoalObjectiveListComponent({
           <Tbody>
             {goalObjectives.map((goalObjective) => {
               return (
-                <GoalObjectiveItemComponent
+                <GoalObjectiveTableItemComponent
                   goalObjective={goalObjective}
                   key={goalObjective.id}
                   goalType={
-                    getById(goalObjective.goalId, goalTypes) as GoalTypeInterface
+                    getById(goalObjective.goalTypeId, goalTypes) as GoalTypeInterface
                   }
                   removeGoalObjectiveById={removeGoalObjectiveById}
                 />

@@ -62,7 +62,7 @@ export function GoalObjectiveFormComponent({
 
           <FormControl mt={5}>
             <FormLabel>Goal Type :</FormLabel>
-            <Select name={"goalId"}>
+            <Select name={"goalTypeId"}>
               {goalTypes.map((goalType) => {
                 return (
                   <option key={goalType.id} value={goalType.id}>

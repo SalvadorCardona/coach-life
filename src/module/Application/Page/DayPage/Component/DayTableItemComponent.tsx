@@ -9,7 +9,7 @@ export interface GoalDayComponentPropsInterface {
   onUpdate: (goalDay: GoalDayInterface) => void
 }
 
-export function GoalDayComponent(props: GoalDayComponentPropsInterface) {
+export function DayTableItemComponent(props: GoalDayComponentPropsInterface) {
   const [goalDay, setGoalDay] = useState<GoalDayInterface>(props.goalDay)
   const increment = () => {
     goalDay.value++

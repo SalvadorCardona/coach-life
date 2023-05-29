@@ -1,6 +1,6 @@
-import { IndexRouteObject, RouteObject as RouteObjectBase } from "react-router-dom"
-import { MainPage } from "@/module/Application/Page/MainPage.tsx"
-import { StatPage } from "@/module/Application/Page/StatPage.tsx"
+import { IndexRouteObject } from "react-router-dom"
+import { DayPage } from "@/module/Application/Page/DayPage/DayPage.tsx"
+import { StatisticPage } from "@/module/Application/Page/StaticticPage/StatisticPage.tsx"
 import { ComponentType } from "react"
 import {
   BiObjectsVerticalBottom,
@@ -13,32 +13,45 @@ import { LayoutComponent } from "@/module/Application/Component/LayoutComponent.
 import { NonIndexRouteObject } from "react-router/dist/lib/context"
 import { GoalTypePage } from "@/module/Application/Page/GoalTypePage.tsx"
 import { GoalObjectivePage } from "@/module/Application/Page/GoalObjectivePage.tsx"
-import { DaysPage } from "@/module/Application/Page/DaysPage.tsx"
+import { DayListPage } from "@/module/Application/Page/DaysPage/DayListPage.tsx"
+import { HomePage } from "@/module/Application/Page/Home/HomePage.tsx"
 
 export enum RoutesEnum {
-  MAIN = "main",
+  HOME = "home",
   STAT = "stat",
   GOAL_TYPE = "goal-type",
   GOAL_OBJECTIVE = "goal-objective",
   DAYS = "days",
+  DAY = "day",
 }
 
-interface NavigationItemInterface extends NonIndexRouteObject {
+export interface NavigationItemInterface extends NonIndexRouteObject {
   name?: string
   icon?: ComponentType
   children?: NavigationItemInterface[]
   index?: true | false
   title?: string
   subTitle?: string
+  inMenu?: true | false
 }
 
 export const childrenRoutes: NavigationItemInterface[] = [
   {
     index: true,
-    element: <MainPage />,
-    id: RoutesEnum.MAIN,
+    element: <HomePage />,
+    id: RoutesEnum.HOME,
     icon: FiHome,
     name: "Home",
+    title: "Home",
+    path: "/",
+  },
+  {
+    element: <DayPage />,
+    id: RoutesEnum.DAY,
+    name: "day",
+    path: "/day/:date",
+    title: "Your day",
+    inMenu: false,
   },
   {
     path: "/goal-type",
@@ -47,34 +60,43 @@ export const childrenRoutes: NavigationItemInterface[] = [
     icon: BiObjectsVerticalBottom,
     name: "Goal Type",
     title: "Your goals types",
+    subTitle: "Show yours goal type",
   },
   {
     path: "/goal-objective",
     element: <GoalObjectivePage />,
     id: RoutesEnum.GOAL_OBJECTIVE,
     icon: GiTargetArrows,
-    name: "Goal Objective",
-    title: "Your Goal Objectives",
+    name: "Objective",
+    title: "Your Objectives",
+    subTitle: "Show yours objectives",
   },
   {
     path: "/days",
-    element: <DaysPage />,
+    element: <DayListPage />,
     id: RoutesEnum.DAYS,
     icon: BsCalendarDay,
     name: "Days",
     title: "Your Days",
+    subTitle: "Show yours days",
   },
   {
     path: "/stat",
-    element: <StatPage />,
+    element: <StatisticPage />,
     id: RoutesEnum.STAT,
     icon: FiTrendingUp,
     name: "Statistic",
+    title: "Your statistic",
+    subTitle: "Show yours statistics",
   },
 ]
 
 export function getRouteByPath(path: string): NavigationItemInterface | undefined {
   return childrenRoutes.find((route) => route.path === path)
+}
+
+export function getMenuRoutes(): NavigationItemInterface[] {
+  return childrenRoutes.filter((route) => route?.inMenu !== false)
 }
 
 export const routes: IndexRouteObject[] = [

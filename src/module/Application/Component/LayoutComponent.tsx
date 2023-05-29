@@ -4,9 +4,7 @@ import { Outlet, useLocation } from "react-router-dom"
 import { getRouteByPath } from "@/module/Application/routes.tsx"
 import { TitleComponent } from "@/module/Shared/Component/Typography/TitleComponent.tsx"
 
-export interface LayoutComponentPropsInterface {}
-
-export function LayoutComponent(props: LayoutComponentPropsInterface) {
+export function LayoutComponent() {
   const route = getRouteByPath(useLocation().pathname)
 
   return (

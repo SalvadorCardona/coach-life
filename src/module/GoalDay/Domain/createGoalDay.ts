@@ -1,5 +1,5 @@
 import GoalDayInterface from "@/module/GoalDay/Domain/GoalDayInterface.ts"
-import { createUniqId } from "@/module/Shared/Application/Id/uniqId.ts"
+import { createUniqId } from "@/module/Shared/Application/Id/createUniqId.ts"
 import GoalTypeInterface from "@/module/GoalType/Domain/GoalTypeInterface.ts"
 import serializerDate from "@/module/Shared/Application/Date/serializerDate"
 
