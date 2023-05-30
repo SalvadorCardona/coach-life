@@ -13,12 +13,12 @@ import { GoalObjectiveTypeEnum } from "@/module/GoalObjective/Domain/GoalObjecti
 interface GoalObjectiveFormComponentPropsInterface {
   addGoalObjective: (goalObjective: GoalObjectiveInterface) => void
   goalTypes: GoalTypeInterface[]
+  goalType?: GoalTypeInterface
 }
 
-export function GoalObjectiveFormComponent({
-  addGoalObjective,
-  goalTypes,
-}: GoalObjectiveFormComponentPropsInterface) {
+export function GoalObjectiveFormComponent(
+  props: GoalObjectiveFormComponentPropsInterface
+) {
   const [newGoalOjective, setGoalOjective] = useState<GoalObjectiveInterface>(
     createGoalObjective()
   )
@@ -31,7 +31,7 @@ export function GoalObjectiveFormComponent({
 
     formData.value = Number(formData.value)
 
-    addGoalObjective(formData)
+    props.addGoalObjective(formData)
     setGoalOjective(createGoalObjective())
   }
 
@@ -60,18 +60,24 @@ export function GoalObjectiveFormComponent({
             />
           </FormControl>
 
-          <FormControl mt={5}>
-            <FormLabel>Goal Type :</FormLabel>
-            <Select name={"goalTypeId"}>
-              {goalTypes.map((goalType) => {
-                return (
-                  <option key={goalType.id} value={goalType.id}>
-                    {goalType.name}
-                  </option>
-                )
-              })}
-            </Select>
-          </FormControl>
+          {!props?.goalType && (
+            <FormControl mt={5}>
+              <FormLabel>Goal Type :</FormLabel>
+              <Select name={"goalTypeId"}>
+                {props.goalTypes.map((goalType) => {
+                  return (
+                    <option key={goalType.id} value={goalType.id}>
+                      {goalType.name}
+                    </option>
+                  )
+                })}
+              </Select>
+            </FormControl>
+          )}
+
+          {props?.goalType && (
+            <Input name={"goalTypeId"} type="hidden" value={props?.goalType.id} />
+          )}
 
           <FormControl mt={5}>
             <FormLabel>By type day :</FormLabel>
@@ -99,7 +105,7 @@ export function GoalObjectiveFormComponent({
             </Select>
           </FormControl>
 
-          <ButtonComponent attributes={{ type: "submit", mt: 5 }}>
+          <ButtonComponent {...{ type: "submit", mt: 5 }}>
             Add objective
           </ButtonComponent>
         </form>

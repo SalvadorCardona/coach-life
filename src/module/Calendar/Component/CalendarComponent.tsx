@@ -46,7 +46,7 @@ export function CalendarComponent(props: CalendarComponentPropsInterface) {
       <WrapperComponent>
         <div>
           <SubTitleComponent>Choose your date :</SubTitleComponent>
-          <ButtonComponent attributes={{ mt: 5 }}>
+          <ButtonComponent {...{ mt: 5 }}>
             <BsCalendarDate />
             <span ref={datePickerRef} className={"ml-4"}>
               {formatDate(props.currentDate)}
@@ -57,7 +57,7 @@ export function CalendarComponent(props: CalendarComponentPropsInterface) {
         {createPaginationCalendar(props.currentDate).map((date) => {
           return (
             <ButtonComponent
-              attributes={{
+              {...{
                 onClick: () => props.onClick(serializerDate(date)),
                 colorScheme: isSameDay(date, props.currentDate) ? "blue" : "gray",
                 isLoading: isAnimation,

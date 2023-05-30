@@ -67,7 +67,7 @@ export function GoalTypeFormComponent(props: GoalTypeFormComponentPropsInterface
           </Select>
         </FormControl>
 
-        <ButtonComponent attributes={{ type: "submit", mt: 5 }}>
+        <ButtonComponent {...{ type: "submit", mt: 5 }}>
           Add goal type
         </ButtonComponent>
       </form>

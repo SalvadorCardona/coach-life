@@ -1,19 +1,11 @@
 import DayInterface from "@/module/Day/Domain/DayInterface.ts"
 import GoalTypeInterface from "@/module/GoalType/Domain/GoalTypeInterface.ts"
 import { DayTableItemComponent } from "@/module/Application/Page/DayPage/Component/DayTableItemComponent.tsx"
-import createGoalDayList from "@/module/GoalDay/Domain/createGoalDayList.ts"
+import createGoalMetricList from "@/module/GoalMetric/Domain/createGoalMetricList.ts"
 import updateById from "@/module/Shared/Application/Id/updateById.ts"
-import GoalDayInterface from "@/module/GoalDay/Domain/GoalDayInterface.ts"
+import GoalMetricInterface from "@/module/GoalMetric/Domain/GoalMetricInterface.ts"
 import { TitleComponent } from "@/module/Shared/Component/Typography/TitleComponent.tsx"
-import {
-  Table,
-  TableCaption,
-  TableContainer,
-  Tbody,
-  Th,
-  Thead,
-  Tr,
-} from "@chakra-ui/react"
+import { Table, TableContainer, Tbody, Th, Thead, Tr } from "@chakra-ui/react"
 
 export interface DayComponentPropsInterface {
   day: DayInterface
@@ -22,8 +14,8 @@ export interface DayComponentPropsInterface {
 }
 
 export function DayTableComponent(props: DayComponentPropsInterface) {
-  const updateHandler = (goalDay: GoalDayInterface) => {
-    updateById(goalDay, props.day.goalDays)
+  const updateHandler = (goalMetric: GoalMetricInterface) => {
+    updateById(goalMetric, props.day.goalMetrics)
     props.onUpdateDay(props.day)
   }
 
@@ -32,7 +24,6 @@ export function DayTableComponent(props: DayComponentPropsInterface) {
       <TitleComponent>Your data goal</TitleComponent>
       <TableContainer>
         <Table variant="simple">
-          <TableCaption>Imperial to metric conversion factors</TableCaption>
           <Thead>
             <Tr>
               <Th>Goal name</Th>
@@ -42,12 +33,12 @@ export function DayTableComponent(props: DayComponentPropsInterface) {
             </Tr>
           </Thead>
           <Tbody>
-            {createGoalDayList(props.day.goalDays, props.goalTypes).map(
-              (goalDay) => (
+            {createGoalMetricList(props.day.goalMetrics, props.goalTypes).map(
+              (goalMetric) => (
                 <DayTableItemComponent
-                  key={goalDay.id}
+                  key={goalMetric.id}
                   onUpdate={updateHandler}
-                  goalDay={goalDay}
+                  goalMetric={goalMetric}
                 />
               )
             )}

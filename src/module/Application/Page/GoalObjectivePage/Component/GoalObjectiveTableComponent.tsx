@@ -1,15 +1,7 @@
 import GoalObjectiveInterface from "@/module/GoalObjective/Domain/GoalObjectiveInterface.ts"
 import { GoalObjectiveTableItemComponent } from "@/module/Application/Page/GoalObjectivePage/Component/GoalObjectiveTableItemComponent.tsx"
-import {
-  Table,
-  Thead,
-  Tbody,
-  Tr,
-  Th,
-  TableCaption,
-  TableContainer,
-} from "@chakra-ui/react"
-import getById from "@/module/Shared/Application/Id/getById.ts"
+import { Table, Thead, Tbody, Tr, Th, TableContainer } from "@chakra-ui/react"
+import getItemById from "@/module/Shared/Application/Id/getItemById.ts"
 import GoalTypeInterface from "@/module/GoalType/Domain/GoalTypeInterface.ts"
 
 export interface GoalObjectiveListComponentPropsInterface {
@@ -27,7 +19,6 @@ export function GoalObjectiveTableComponent({
     <>
       <TableContainer>
         <Table variant="simple">
-          <TableCaption>Imperial to metric conversion factors</TableCaption>
           <Thead>
             <Tr>
               <Th>Objective name</Th>
@@ -45,7 +36,10 @@ export function GoalObjectiveTableComponent({
                   goalObjective={goalObjective}
                   key={goalObjective.id}
                   goalType={
-                    getById(goalObjective.goalTypeId, goalTypes) as GoalTypeInterface
+                    getItemById(
+                      goalObjective.goalTypeId,
+                      goalTypes
+                    ) as GoalTypeInterface
                   }
                   removeGoalObjectiveById={removeGoalObjectiveById}
                 />

@@ -8,23 +8,23 @@ import deSerializerDate from "@/module/Shared/Application/Date/deSerializerDate.
 
 export interface StatisticItemComponentPropsInterface {
   goalType: GoalTypeInterface
-  goalDays: DayInterface[]
+  goalMetrics: DayInterface[]
 }
 
 export function StatisticItemComponent(props: StatisticItemComponentPropsInterface) {
   const ref = useRef<HTMLCanvasElement>(null)
 
-  const dayList = props.goalDays.map((day) => {
+  const dayList = props.goalMetrics.map((day) => {
     const date = deSerializerDate(day.createdDate)
     return date.getDay() + "/" + date.getMonth()
   })
 
-  const goalDayValueList = props.goalDays.map((day) => {
-    const goalDay = day.goalDays.find((goalDay) => {
-      return goalDay.goalType?.id === props.goalType.id
+  const goalMetricValueList = props.goalMetrics.map((day) => {
+    const goalMetric = day.goalMetrics.find((goalMetric) => {
+      return goalMetric.goalType?.id === props.goalType.id
     })
 
-    return goalDay ? goalDay.value : 0
+    return goalMetric ? goalMetric.value : 0
   })
 
   useEffect(() => {
@@ -34,7 +34,7 @@ export function StatisticItemComponent(props: StatisticItemComponentPropsInterfa
       labels: dayList,
       datasets: [
         {
-          data: goalDayValueList,
+          data: goalMetricValueList,
           fill: true,
           backgroundColor: "rgba(75,192,192,0.2)",
           borderColor: "rgba(75,192,192,1)",
@@ -47,6 +47,8 @@ export function StatisticItemComponent(props: StatisticItemComponentPropsInterfa
       data: data,
     }
 
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
     const myChart = new Chart(ref.current, config)
 
     return () => {

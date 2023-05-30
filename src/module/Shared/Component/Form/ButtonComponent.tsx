@@ -1,14 +1,12 @@
 import { ReactNode } from "react"
 import { Button, ButtonProps } from "@chakra-ui/react"
 
-export function ButtonComponent(props: {
-  children: ReactNode
-  attributes?: ButtonProps
-}) {
-  const baseAttributes: ButtonProps = {
-    colorScheme: "blue",
-    ...props.attributes,
-  }
+type ButtonComponentPropsType = { children: ReactNode } & ButtonProps
 
-  return <Button {...baseAttributes}>{props.children}</Button>
+export function ButtonComponent(props: ButtonComponentPropsType) {
+  return (
+    <Button {...props} colorScheme="blue">
+      {props.children}
+    </Button>
+  )
 }

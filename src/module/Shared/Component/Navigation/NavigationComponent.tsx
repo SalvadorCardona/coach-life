@@ -1,10 +1,14 @@
 import { useState } from "react"
 
-import { getMenuRoutes } from "@/module/Application/routes.tsx"
+import {
+  getMenuRoutes,
+  getRouteByPath,
+  NavigationItemInterface,
+} from "@/module/Application/routes.tsx"
 import { RxHamburgerMenu } from "react-icons/all"
 import { Box, Button, Flex, Icon, useColorModeValue, Text } from "@chakra-ui/react"
 
-import { Link as RouterLink } from "react-router-dom"
+import { Link as RouterLink, useLocation } from "react-router-dom"
 
 export interface NavigationComponentPropsInterface {
   open?: boolean
@@ -12,6 +16,16 @@ export interface NavigationComponentPropsInterface {
 
 export function NavigationComponent(props: NavigationComponentPropsInterface) {
   const [open, setOpen] = useState<boolean>(props.open ?? true)
+  const currentRoute = getRouteByPath(useLocation().pathname)
+
+  const selectedStyle = {
+    bgColor: "cyan.400",
+    color: "white",
+  }
+
+  const isSelected = (route: NavigationItemInterface) => {
+    return route.path === currentRoute?.path
+  }
 
   return (
     <>
@@ -29,6 +43,7 @@ export function NavigationComponent(props: NavigationComponentPropsInterface) {
           return (
             <RouterLink key={route.name} to={route.path as string}>
               <Flex
+                {...(isSelected(route) ? selectedStyle : {})}
                 align="center"
                 p="4"
                 mx="4"
@@ -41,14 +56,7 @@ export function NavigationComponent(props: NavigationComponentPropsInterface) {
                 }}
               >
                 {route.icon && (
-                  <Icon
-                    mr={open ? "4" : "0"}
-                    fontSize="16"
-                    _groupHover={{
-                      color: "white",
-                    }}
-                    as={route.icon}
-                  />
+                  <Icon mr={open ? "4" : "0"} fontSize="16" as={route.icon} />
                 )}
 
                 {open ? route.name : ""}

@@ -4,7 +4,7 @@ import {
   getGoalTypes,
   persistGoalTypes,
 } from "@/module/GoalType/Domain/GoalTypeRepository.ts"
-import getById from "@/module/Shared/Application/Id/getById.ts"
+import getItemById from "@/module/Shared/Application/Id/getItemById.ts"
 import removeById from "@/module/Shared/Application/Id/removeById.ts"
 import updateById from "@/module/Shared/Application/Id/updateById.ts"
 import { IdAbleInterface } from "@/module/Shared/Application/Id/IdAbleInterface.ts"
@@ -24,7 +24,7 @@ export const useGoalTypeStore = create<GoalTypeState>((set, getState) => ({
   },
   updateGoalType: (goalType: GoalTypeInterface) => {
     const goalTypes = getState().goalTypes
-    const goalTypeToUpdate = getById(goalType.id, goalTypes)
+    const goalTypeToUpdate = getItemById(goalType.id, goalTypes)
     goalTypeToUpdate ? updateById(goalType, goalTypes) : goalTypes.push(goalType)
 
     set({ goalTypes })

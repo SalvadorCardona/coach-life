@@ -1,7 +1,7 @@
 import GoalObjectiveInterface from "@/module/GoalObjective/Domain/GoalObjectiveInterface.ts"
 import updateById from "@/module/Shared/Application/Id/updateById.ts"
 import { create } from "zustand"
-import getById from "@/module/Shared/Application/Id/getById.ts"
+import getItemById from "@/module/Shared/Application/Id/getItemById.ts"
 import {
   persistObjectType,
   restoreObjectType,
@@ -25,8 +25,7 @@ export const useGoalObjectiveStore = create<GoalObjectiveState>((set, getState) 
   },
   updateGoalObjective: (goalObjective: GoalObjectiveInterface) => {
     const goalObjectives = getState().goalObjectives
-    console.log(goalObjective)
-    if (!getById(goalObjective.id, goalObjectives)) {
+    if (!getItemById(goalObjective.id, goalObjectives)) {
       goalObjectives.push(goalObjective)
     }
 
@@ -35,7 +34,7 @@ export const useGoalObjectiveStore = create<GoalObjectiveState>((set, getState) 
     persistObjectType(goalObjectives)
   },
   getGoalObjectiveById: (id: GoalObjectiveInterface["id"]) => {
-    return getById(id, getState().goalObjectives)
+    return getItemById(id, getState().goalObjectives)
   },
   removeGoalObjectiveById: (id: GoalObjectiveInterface["id"]) => {
     const goalObjectives = getState().goalObjectives

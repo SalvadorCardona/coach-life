@@ -1,6 +1,6 @@
 import GoalTypeInterface from "@/module/GoalType/Domain/GoalTypeInterface.ts"
 import DayInterface from "@/module/Day/Domain/DayInterface.ts"
-import GoalDayInterface from "@/module/GoalDay/Domain/GoalDayInterface.ts"
+import GoalMetricInterface from "@/module/GoalMetric/Domain/GoalMetricInterface.ts"
 import {
   CircularProgress,
   CircularProgressLabel,
@@ -10,7 +10,7 @@ import {
 } from "@chakra-ui/react"
 import { formatDate } from "@/module/Shared/Application/Date/formatDate.ts"
 import updateById from "@/module/Shared/Application/Id/updateById.ts"
-import createGoalDay from "@/module/GoalDay/Domain/createGoalDay.ts"
+import createGoalMetric from "@/module/GoalMetric/Domain/createGoalMetric.ts"
 import { useGoalObjectiveStore } from "@/module/GoalObjective/Application/GoalObjectiveStore.ts"
 import calculateDayObjective from "@/module/GoalObjective/Domain/calculateDayObjective.ts"
 import ratioTOPercentage from "@/module/Shared/Application/Math/ratioTOPercentage.ts"
@@ -24,22 +24,22 @@ export interface DayItemTableComponentPropsInterface {
 export function DayItemTableComponent(props: DayItemTableComponentPropsInterface) {
   // TODO : replace by a props
   const goalObjectives = useGoalObjectiveStore().goalObjectives
-  const getGoalDay = (
+  const getGoalMetric = (
     day: DayInterface,
     goalType: GoalTypeInterface
-  ): GoalDayInterface | undefined => {
-    return day.goalDays.find((goalDay) => {
-      return goalDay.goalType?.id === goalType.id
+  ): GoalMetricInterface | undefined => {
+    return day.goalMetrics.find((goalMetric) => {
+      return goalMetric.goalType?.id === goalType.id
     })
   }
 
-  const updateGoalDay = (
+  const updateGoalMetric = (
     value: string,
     day: DayInterface,
-    goalDay: GoalDayInterface
+    goalMetric: GoalMetricInterface
   ) => {
-    goalDay.value = Number(value ?? 0)
-    updateById(goalDay, day.goalDays)
+    goalMetric.value = Number(value ?? 0)
+    updateById(goalMetric, day.goalMetrics)
 
     props.updateDay(day)
   }
@@ -48,17 +48,19 @@ export function DayItemTableComponent(props: DayItemTableComponentPropsInterface
     <Tr>
       <Td>{formatDate(props.day.createdDate)}</Td>
       {props.goalTypes.map((goalType) => {
-        const goalDay = getGoalDay(props.day, goalType) ?? createGoalDay(goalType)
+        const goalMetric =
+          getGoalMetric(props.day, goalType) ??
+          createGoalMetric({ goalType: goalType })
         return (
           <Td key={goalType.id}>
             <Input
               w={16}
-              name={goalDay.id}
+              name={goalMetric.id}
               type="number"
-              value={goalDay.value ?? ""}
+              value={goalMetric.value ?? ""}
               placeholder={goalType.defaultValue.toString()}
               onChange={(event) =>
-                updateGoalDay(event.target.value, props.day, goalDay)
+                updateGoalMetric(event.target.value, props.day, goalMetric)
               }
             />
           </Td>

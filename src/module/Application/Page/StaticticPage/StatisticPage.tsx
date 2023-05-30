@@ -30,7 +30,10 @@ export function StatisticPage() {
       {goalTypeStore.goalTypes.map((goalType) => {
         return (
           <Box mr={5}>
-            <StatisticItemComponent goalType={goalType} goalDays={dayStore.days} />
+            <StatisticItemComponent
+              goalType={goalType}
+              goalMetrics={dayStore.days}
+            />
           </Box>
         )
       })}

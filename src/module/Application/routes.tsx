@@ -11,7 +11,7 @@ import {
 } from "react-icons/all"
 import { LayoutComponent } from "@/module/Application/Component/LayoutComponent.tsx"
 import { NonIndexRouteObject } from "react-router/dist/lib/context"
-import { GoalTypePage } from "@/module/Application/Page/GoalTypePage.tsx"
+import { GoalTypePage } from "@/module/Application/Page/GoalTypePage/GoalTypePage.tsx"
 import { GoalObjectivePage } from "@/module/Application/Page/GoalObjectivePage/GoalObjectivePage.tsx"
 import { DayListPage } from "@/module/Application/Page/DaysPage/DayListPage.tsx"
 import { HomePage } from "@/module/Application/Page/Home/HomePage.tsx"

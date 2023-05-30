@@ -19,7 +19,6 @@ export function DayListPage() {
     <>
       <TableContainer style={{ overflowY: "unset", overflowX: "unset" }}>
         <Table variant="simple">
-          <TableCaption>Imperial to metric conversion factors</TableCaption>
           <Thead style={{ position: "sticky", top: 0, zIndex: 1 }} bg={"white"}>
             <Tr>
               <Th>Day</Th>

@@ -1,41 +1,41 @@
-import GoalDayInterface from "@/module/GoalDay/Domain/GoalDayInterface.ts"
+import GoalMetricInterface from "@/module/GoalMetric/Domain/GoalMetricInterface.ts"
 import { ChangeEvent, useState } from "react"
 import GoalTypeMetricEnum from "@/module/GoalType/Domain/GoalTypeMetricEnum.ts"
 import { Flex, Input, Td, Text, Tr } from "@chakra-ui/react"
 import { ButtonComponent } from "@/module/Shared/Component/Form/ButtonComponent.tsx"
 
-export interface GoalDayComponentPropsInterface {
-  goalDay: GoalDayInterface
-  onUpdate: (goalDay: GoalDayInterface) => void
+export interface GoalMetricComponentPropsInterface {
+  goalMetric: GoalMetricInterface
+  onUpdate: (goalMetric: GoalMetricInterface) => void
 }
 
-export function DayTableItemComponent(props: GoalDayComponentPropsInterface) {
-  const [goalDay, setGoalDay] = useState<GoalDayInterface>(props.goalDay)
+export function DayTableItemComponent(props: GoalMetricComponentPropsInterface) {
+  const [goalMetric, setGoalMetric] = useState<GoalMetricInterface>(props.goalMetric)
   const increment = () => {
-    goalDay.value++
-    setGoalDay(goalDay)
-    props.onUpdate(goalDay)
+    goalMetric.value++
+    setGoalMetric(goalMetric)
+    props.onUpdate(goalMetric)
   }
 
   const decrement = () => {
-    goalDay.value--
-    setGoalDay(goalDay)
-    props.onUpdate(goalDay)
+    goalMetric.value--
+    setGoalMetric(goalMetric)
+    props.onUpdate(goalMetric)
   }
 
   const onChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target
-    goalDay.value = Number(value)
-    props.onUpdate(goalDay)
+    goalMetric.value = Number(value)
+    props.onUpdate(goalMetric)
   }
 
   const metricType =
-    goalDay.goalType?.metric === GoalTypeMetricEnum.QUANTITY ? "Qty" : "Hours"
+    goalMetric.goalType?.metric === GoalTypeMetricEnum.QUANTITY ? "Qty" : "Hours"
 
   return (
     <>
       <Tr>
-        <Td>{props.goalDay.goalType?.name}</Td>
+        <Td>{props.goalMetric.goalType?.name}</Td>
         <Td>{metricType}</Td>
         <Td>
           <Flex alignItems={"center"}>
@@ -43,7 +43,7 @@ export function DayTableItemComponent(props: GoalDayComponentPropsInterface) {
               mr={1}
               name={"name"}
               type="number"
-              value={goalDay.value}
+              value={goalMetric.value}
               w={20}
               onChange={onChangeHandler}
             />
@@ -53,10 +53,8 @@ export function DayTableItemComponent(props: GoalDayComponentPropsInterface) {
           </Flex>
         </Td>
         <Td>
-          <ButtonComponent attributes={{ onClick: decrement, mr: 5 }}>
-            -
-          </ButtonComponent>
-          <ButtonComponent attributes={{ onClick: increment }}>+</ButtonComponent>
+          <ButtonComponent {...{ onClick: decrement, mr: 5 }}>-</ButtonComponent>
+          <ButtonComponent {...{ onClick: increment }}>+</ButtonComponent>
         </Td>
       </Tr>
     </>

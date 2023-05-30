@@ -11,9 +11,9 @@ export default function calculateDayObjective(
   let ratio = 0
   let calculated = 0
 
-  day.goalDays.forEach((goalDay) => {
-    const goalType = goalDay.goalType
-    const goalDayValue = goalDay.value ?? 1
+  day.goalMetrics.forEach((goalMetric) => {
+    const goalType = goalMetric.goalType
+    const goalMetricValue = goalMetric.value ?? 1
     const goalObjectivesCurrent = goalObjectives.filter((goalObjective) => {
       return goalObjective.goalTypeId === goalType?.id
     })
@@ -24,7 +24,7 @@ export default function calculateDayObjective(
     goalObjectivesCurrent.forEach((goalObjective) => {
       ratio += calculateObjective(
         goalObjective.value,
-        goalDayValue,
+        goalMetricValue,
         goalObjective.type
       )
     })

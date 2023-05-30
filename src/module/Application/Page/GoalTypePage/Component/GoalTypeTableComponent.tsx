@@ -1,27 +1,23 @@
 import GoalTypeInterface from "@/module/GoalType/Domain/GoalTypeInterface.ts"
-import { GoalTypeComponent } from "@/module/GoalType/Component/GoalTypeComponent.tsx"
-import {
-  Table,
-  TableCaption,
-  TableContainer,
-  Tbody,
-  Th,
-  Thead,
-  Tr,
-} from "@chakra-ui/react"
+import { GoalTypeTableItemComponent } from "@/module/Application/Page/GoalTypePage/Component/GoalTypeTableItemComponent.tsx"
+import { Table, TableContainer, Tbody, Th, Thead, Tr } from "@chakra-ui/react"
+import GoalObjectiveInterface from "@/module/GoalObjective/Domain/GoalObjectiveInterface.ts"
+
+import getListBy from "@/module/Shared/Application/Id/getListBy.ts"
 
 export interface GoalTypeListComponentPropsInterface {
   goalTypes: GoalTypeInterface[]
   updateGoalType: (goalType: GoalTypeInterface) => void
   removeGoalType: (goalType: GoalTypeInterface) => void
+  openModal: (goalType: GoalTypeInterface) => void
+  goalObjectives: GoalObjectiveInterface[]
 }
 
-export function GoalTypeListComponent(props: GoalTypeListComponentPropsInterface) {
+export function GoalTypeTableComponent(props: GoalTypeListComponentPropsInterface) {
   return (
     <>
       <TableContainer>
         <Table variant="simple">
-          <TableCaption>Imperial to metric conversion factors</TableCaption>
           <Thead>
             <Tr>
               <Th>Goal name</Th>
@@ -32,10 +28,15 @@ export function GoalTypeListComponent(props: GoalTypeListComponentPropsInterface
           </Thead>
           <Tbody>
             {props.goalTypes.map((goalType) => (
-              <GoalTypeComponent
+              <GoalTypeTableItemComponent
                 key={goalType.id}
                 removeHandler={props.removeGoalType}
                 goalType={goalType}
+                openModal={props.openModal}
+                goalObjectives={
+                  getListBy("goalTypeId", goalType.id, props.goalObjectives) ??
+                  ([] as GoalObjectiveInterface[])
+                }
               />
             ))}
           </Tbody>

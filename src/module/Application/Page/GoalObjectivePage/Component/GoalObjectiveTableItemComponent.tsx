@@ -26,7 +26,7 @@ export function GoalObjectiveTableItemComponent({
         <Td>{goalObjective.value}</Td>
         <Td>
           <ButtonComponent
-            attributes={{
+            {...{
               colorScheme: "red",
               onClick: () => removeGoalObjectiveById(goalObjective.id),
             }}
