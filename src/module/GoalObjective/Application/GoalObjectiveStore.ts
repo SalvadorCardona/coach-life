@@ -8,7 +8,7 @@ import {
 } from "@/module/GoalObjective/Infratructure/GoalObjectiveRepository.ts"
 import removeById from "@/module/Shared/Application/Id/removeById.ts"
 
-interface GoalObjectiveState {
+export interface GoalObjectiveState {
   goalObjectives: GoalObjectiveInterface[]
   updateAll: (goalObjectives: GoalObjectiveInterface[]) => void
   updateGoalObjective: (goalObjective: GoalObjectiveInterface) => void

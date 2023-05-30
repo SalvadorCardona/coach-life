@@ -1,5 +1,5 @@
 import GoalObjectiveInterface from "@/module/GoalObjective/Domain/GoalObjectiveInterface.ts"
-import { GoalObjectiveTableItemComponent } from "@/module/GoalObjective/Component/GoalObjectiveTableItemComponent.tsx"
+import { GoalObjectiveTableItemComponent } from "@/module/Application/Page/GoalObjectivePage/Component/GoalObjectiveTableItemComponent.tsx"
 import {
   Table,
   Thead,
@@ -33,6 +33,7 @@ export function GoalObjectiveTableComponent({
               <Th>Objective name</Th>
               <Th>Goal Type</Th>
               <Th>By time</Th>
+              <Th>Objective type</Th>
               <Th>Value</Th>
               <Th>Actions</Th>
             </Tr>

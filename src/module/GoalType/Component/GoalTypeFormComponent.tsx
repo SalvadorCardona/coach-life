@@ -57,13 +57,18 @@ export function GoalTypeFormComponent(props: GoalTypeFormComponentPropsInterface
         <FormControl mt={5}>
           <FormLabel>Metrics :</FormLabel>
           <Select name={"metric"}>
-            <option value={GoalTypeMetricEnum.QUANTITY}>Quantity</option>
-            <option value={GoalTypeMetricEnum.HOUR}>Time in hour</option>
+            {Object.values(GoalTypeMetricEnum).map((value) => {
+              return (
+                <option key={value} value={value}>
+                  {value}
+                </option>
+              )
+            })}
           </Select>
         </FormControl>
 
         <ButtonComponent attributes={{ type: "submit", mt: 5 }}>
-          Add goal
+          Add goal type
         </ButtonComponent>
       </form>
     </WrapperComponent>

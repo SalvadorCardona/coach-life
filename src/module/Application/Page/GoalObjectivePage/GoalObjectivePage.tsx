@@ -1,5 +1,5 @@
 import { Box, Flex } from "@chakra-ui/react"
-import { GoalObjectiveTableComponent } from "@/module/GoalObjective/Component/GoalObjectiveTableComponent.tsx"
+import { GoalObjectiveTableComponent } from "@/module/Application/Page/GoalObjectivePage/Component/GoalObjectiveTableComponent.tsx"
 import { GoalObjectiveFormComponent } from "@/module/GoalObjective/Component/GoalObjectiveFormComponent.tsx"
 import { useGoalObjectiveStore } from "@/module/GoalObjective/Application/GoalObjectiveStore.ts"
 import { useGoalTypeStore } from "@/module/GoalType/Application/GoalTypeStore.ts"

@@ -10,7 +10,7 @@ import createDay from "@/module/Day/Domain/createDay.ts"
 import addTo from "@/module/Shared/Application/List/addTo.ts"
 import { getDayByDate } from "@/module/Day/Domain/getDayByDate.ts"
 
-interface DayState {
+export interface DayState {
   days: DayInterface[]
   updateAll: (days: DayInterface[]) => void
   updateDay: (day: DayInterface) => void

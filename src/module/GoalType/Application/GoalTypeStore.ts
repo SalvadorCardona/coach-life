@@ -9,7 +9,7 @@ import removeById from "@/module/Shared/Application/Id/removeById.ts"
 import updateById from "@/module/Shared/Application/Id/updateById.ts"
 import { IdAbleInterface } from "@/module/Shared/Application/Id/IdAbleInterface.ts"
 
-interface GoalTypeState {
+export interface GoalTypeState {
   goalTypes: GoalTypeInterface[]
   updateAll: (goalTypes: GoalTypeInterface[]) => void
   updateGoalType: (goalType: GoalTypeInterface) => void

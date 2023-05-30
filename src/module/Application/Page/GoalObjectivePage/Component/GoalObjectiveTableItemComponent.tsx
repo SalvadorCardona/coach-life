@@ -22,6 +22,7 @@ export function GoalObjectiveTableItemComponent({
         <Td>{goalObjective.name}</Td>
         <Td>{goalTypeName}</Td>
         <Td>{goalObjective.byTypeTime}</Td>
+        <Td>{goalObjective.type}</Td>
         <Td>{goalObjective.value}</Td>
         <Td>
           <ButtonComponent
