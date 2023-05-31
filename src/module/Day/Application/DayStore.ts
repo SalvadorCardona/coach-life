@@ -6,7 +6,7 @@ import {
 } from "@/module/Day/Infratructure/DayRepository.ts"
 import updateById from "@/module/Shared/Application/Id/updateById.ts"
 import { DateString } from "@/module/Shared/Application/Date/DateStringType.ts"
-import createDay from "@/module/Day/Domain/createDay.ts"
+
 import addTo from "@/module/Shared/Application/List/addTo.ts"
 import { getDayByDate } from "@/module/Day/Domain/getDayByDate.ts"
 
@@ -14,7 +14,7 @@ export interface DayState {
   days: DayInterface[]
   updateAll: (days: DayInterface[]) => void
   updateDay: (day: DayInterface) => void
-  getDayByDate: (date: DateString) => DayInterface
+  getDayByDate: (date: DateString) => DayInterface | undefined
 }
 
 export const useDayStore = create<DayState>((set, getState) => ({
@@ -35,6 +35,6 @@ export const useDayStore = create<DayState>((set, getState) => ({
     persistDays(days)
   },
   getDayByDate: (date: DateString) => {
-    return getDayByDate(date, getState().days) ?? createDay([], date)
+    return getDayByDate(date, getState().days)
   },
 }))

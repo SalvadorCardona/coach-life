@@ -22,7 +22,6 @@ export interface DayItemTableComponentPropsInterface {
 }
 
 export function DayItemTableComponent(props: DayItemTableComponentPropsInterface) {
-  // TODO : replace by a props
   const goalObjectives = useGoalObjectiveStore().goalObjectives
   const getGoalMetric = (
     day: DayInterface,

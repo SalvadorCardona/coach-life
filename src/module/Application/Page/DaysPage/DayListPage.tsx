@@ -1,13 +1,5 @@
 import { useDayStore } from "@/module/Day/Application/DayStore.ts"
-import {
-  Table,
-  TableCaption,
-  TableContainer,
-  Tbody,
-  Th,
-  Thead,
-  Tr,
-} from "@chakra-ui/react"
+import { Table, TableContainer, Tbody, Th, Thead, Tr } from "@chakra-ui/react"
 import { useGoalTypeStore } from "@/module/GoalType/Application/GoalTypeStore.ts"
 import { DayItemTableComponent } from "@/module/Application/Page/DaysPage/Component/DayItemTableComponent.tsx"
 

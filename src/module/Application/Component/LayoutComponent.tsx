@@ -30,6 +30,7 @@ export function LayoutComponent() {
                 {route.subTitle}
               </LightTextComponent>
             )}
+
             <Box mt={5}>
               <Outlet />
             </Box>

@@ -4,6 +4,7 @@ import { useCalendarStore } from "@/module/Calendar/Application/CalendarStore.ts
 import { CalendarComponent } from "@/module/Calendar/Component/CalendarComponent.tsx"
 import { DayTableComponent } from "@/module/Application/Page/DayPage/Component/DayTableComponent.tsx"
 import { Box } from "@chakra-ui/react"
+import createDay from "@/module/Day/Domain/createDay.ts"
 
 export function DayPage() {
   const goalTypesStore = useGoalTypeStore()
@@ -19,7 +20,10 @@ export function DayPage() {
       <Box mt={5}>
         <DayTableComponent
           goalTypes={goalTypesStore.goalTypes}
-          day={dayStore.getDayByDate(calendarStore.currentDate)}
+          day={
+            dayStore.getDayByDate(calendarStore.currentDate) ??
+            createDay({ createdDate: calendarStore.currentDate })
+          }
           onUpdateDay={dayStore.updateDay}
         />
       </Box>
