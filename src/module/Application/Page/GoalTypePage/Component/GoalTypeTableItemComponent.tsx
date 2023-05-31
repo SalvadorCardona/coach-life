@@ -34,7 +34,7 @@ export function GoalTypeTableItemComponent(props: GoalTypeComponentPropsInterfac
             leftIcon={<Icon as={IoIosAdd} color={"white"} />}
             onClick={() => props.openModal(props.goalType)}
           >
-            Ajouter un objectif
+            Add a objective
           </ButtonComponent>
         </Td>
         <Td>{props.goalType.metric}</Td>

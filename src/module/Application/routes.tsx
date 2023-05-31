@@ -13,7 +13,7 @@ import { LayoutComponent } from "@/module/Application/Component/LayoutComponent.
 import { NonIndexRouteObject } from "react-router/dist/lib/context"
 import { GoalTypePage } from "@/module/Application/Page/GoalTypePage/GoalTypePage.tsx"
 import { GoalObjectivePage } from "@/module/Application/Page/GoalObjectivePage/GoalObjectivePage.tsx"
-import { DayListPage } from "@/module/Application/Page/DaysPage/DayListPage.tsx"
+import { DaysPage } from "@/module/Application/Page/DaysPage/DaysPage.tsx"
 import { HomePage } from "@/module/Application/Page/Home/HomePage.tsx"
 
 export enum RoutesEnum {
@@ -73,7 +73,7 @@ export const childrenRoutes: NavigationItemInterface[] = [
   },
   {
     path: "/days",
-    element: <DayListPage />,
+    element: <DaysPage />,
     id: RoutesEnum.DAYS,
     icon: BsCalendarDay,
     name: "Days",

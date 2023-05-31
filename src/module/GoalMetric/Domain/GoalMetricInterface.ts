@@ -7,5 +7,5 @@ export default interface GoalMetricInterface {
   goalType: GoalTypeInterface | null
   goalTypeId: string | null
   goalDayId: string | null
-  value: number
+  value: number | null
 }

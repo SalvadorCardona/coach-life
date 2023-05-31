@@ -1,7 +1,7 @@
 import { DateString } from "@/module/Shared/Application/Date/DateStringType.ts"
 import deSerializerDate from "@/module/Shared/Application/Date/deSerializerDate.ts"
 
-export default function isFutureDay(
+export default function isFutureDate(
   date1: Date | DateString,
   date2: Date | DateString
 ): boolean {

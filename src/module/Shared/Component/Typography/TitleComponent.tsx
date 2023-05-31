@@ -1,7 +1,6 @@
-import { ReactNode } from "react"
-import { Heading } from "@chakra-ui/react"
+import { Heading, HeadingProps } from "@chakra-ui/react"
 
-export function TitleComponent(props: { children: ReactNode }) {
+export function TitleComponent(props: HeadingProps) {
   return (
     <>
       <Heading

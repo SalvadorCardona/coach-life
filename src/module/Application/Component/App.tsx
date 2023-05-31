@@ -1,4 +1,3 @@
-import "./App.css"
 import { RouterProvider, createHashRouter } from "react-router-dom"
 import { routes } from "@/module/Application/routes.tsx"
 import { extendTheme, ChakraProvider } from "@chakra-ui/react"
