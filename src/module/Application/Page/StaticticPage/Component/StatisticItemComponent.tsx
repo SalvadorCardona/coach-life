@@ -1,27 +1,24 @@
-import GoalTypeInterface from "@/module/GoalType/Domain/GoalTypeInterface.ts"
+import MetricTypeInterface from "@/module/MetricType/Domain/MetricTypeInterface.ts"
 import { useEffect, useRef } from "react"
 import { Chart } from "chart.js"
 import { WrapperComponent } from "@/module/Shared/Component/WrapperComponent.tsx"
 import { SubTitleComponent } from "@/module/Shared/Component/Typography/SubTitleComponent.tsx"
 import DayInterface from "@/module/Day/Domain/DayInterface.ts"
-import deSerializerDate from "@/module/Shared/Application/Date/deSerializerDate.ts"
+import { formatDate } from "@/module/Shared/Application/Date/formatDate.ts"
 
 export interface StatisticItemComponentPropsInterface {
-  goalType: GoalTypeInterface
+  metricType: MetricTypeInterface
   goalMetrics: DayInterface[]
 }
 
 export function StatisticItemComponent(props: StatisticItemComponentPropsInterface) {
   const ref = useRef<HTMLCanvasElement>(null)
 
-  const dayList = props.goalMetrics.map((day) => {
-    const date = deSerializerDate(day.createdDate)
-    return date.getDay() + "/" + date.getMonth()
-  })
+  const dayList = props.goalMetrics.map((day) => formatDate(day.createdDate))
 
   const goalMetricValueList = props.goalMetrics.map((day) => {
     const goalMetric = day.goalMetrics.find((goalMetric) => {
-      return goalMetric.goalType?.id === props.goalType.id
+      return goalMetric.metricType?.id === props.metricType.id
     })
 
     return goalMetric ? goalMetric.value : 0
@@ -58,7 +55,7 @@ export function StatisticItemComponent(props: StatisticItemComponentPropsInterfa
 
   return (
     <WrapperComponent>
-      <SubTitleComponent>{props.goalType.name}</SubTitleComponent>
+      <SubTitleComponent>{props.metricType.name}</SubTitleComponent>
       <canvas ref={ref}></canvas>
     </WrapperComponent>
   )

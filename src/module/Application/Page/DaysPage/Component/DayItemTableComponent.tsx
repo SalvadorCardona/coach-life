@@ -1,4 +1,4 @@
-import GoalTypeInterface from "@/module/GoalType/Domain/GoalTypeInterface.ts"
+import MetricTypeInterface from "@/module/MetricType/Domain/MetricTypeInterface.ts"
 import DayInterface from "@/module/Day/Domain/DayInterface.ts"
 import GoalMetricInterface from "@/module/GoalMetric/Domain/GoalMetricInterface.ts"
 import {
@@ -16,19 +16,20 @@ import calculateDayObjective from "@/module/GoalObjective/Domain/calculateDayObj
 import ratioTOPercentage from "@/module/Shared/Application/Math/ratioTOPercentage.ts"
 
 export interface DayItemTableComponentPropsInterface {
-  goalTypes: GoalTypeInterface[]
+  metricTypes: MetricTypeInterface[]
   day: DayInterface
   updateDay: (day: DayInterface) => void
 }
 
 export function DayItemTableComponent(props: DayItemTableComponentPropsInterface) {
   const goalObjectives = useGoalObjectiveStore().goalObjectives
+  const ratio = ratioTOPercentage(calculateDayObjective(props.day, goalObjectives))
   const getGoalMetric = (
     day: DayInterface,
-    goalType: GoalTypeInterface
+    metricType: MetricTypeInterface
   ): GoalMetricInterface | undefined => {
     return day.goalMetrics.find((goalMetric) => {
-      return goalMetric.goalType?.id === goalType.id
+      return goalMetric.metricType?.id === metricType.id
     })
   }
 
@@ -46,18 +47,18 @@ export function DayItemTableComponent(props: DayItemTableComponentPropsInterface
   return (
     <Tr>
       <Td>{formatDate(props.day.createdDate)}</Td>
-      {props.goalTypes.map((goalType) => {
+      {props.metricTypes.map((metricType) => {
         const goalMetric =
-          getGoalMetric(props.day, goalType) ??
-          createGoalMetric({ goalType: goalType })
+          getGoalMetric(props.day, metricType) ??
+          createGoalMetric({ metricType: metricType })
         return (
-          <Td key={goalType.id}>
+          <Td key={metricType.id}>
             <Input
               w={16}
               name={goalMetric.id}
               type="number"
               value={goalMetric.value ?? ""}
-              placeholder={goalType.defaultValue.toString()}
+              placeholder={metricType.defaultValue.toString()}
               onChange={(event) =>
                 updateGoalMetric(event.target.value, props.day, goalMetric)
               }
@@ -67,12 +68,10 @@ export function DayItemTableComponent(props: DayItemTableComponentPropsInterface
       })}
       <Td>
         <CircularProgress
-          value={ratioTOPercentage(calculateDayObjective(props.day, goalObjectives))}
-          color="green.400"
+          value={ratio}
+          color={ratio > 100 ? "green.400" : "red.400"}
         >
-          <CircularProgressLabel>
-            {ratioTOPercentage(calculateDayObjective(props.day, goalObjectives))} %
-          </CircularProgressLabel>
+          <CircularProgressLabel>{ratio} %</CircularProgressLabel>
         </CircularProgress>
       </Td>
     </Tr>

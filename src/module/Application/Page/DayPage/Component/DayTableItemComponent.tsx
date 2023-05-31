@@ -1,6 +1,6 @@
 import GoalMetricInterface from "@/module/GoalMetric/Domain/GoalMetricInterface.ts"
 import { ChangeEvent, useState } from "react"
-import GoalTypeMetricEnum from "@/module/GoalType/Domain/GoalTypeMetricEnum.ts"
+import MetricTypeMetricEnum from "@/module/MetricType/Domain/MetricTypeMetricEnum.ts"
 import { Flex, Input, Td, Text, Tr } from "@chakra-ui/react"
 import { ButtonComponent } from "@/module/Shared/Component/Form/ButtonComponent.tsx"
 
@@ -30,12 +30,12 @@ export function DayTableItemComponent(props: GoalMetricComponentPropsInterface) 
   }
 
   const metricType =
-    goalMetric.goalType?.metric === GoalTypeMetricEnum.QUANTITY ? "Qty" : "Hours"
+    goalMetric.metricType?.metric === MetricTypeMetricEnum.QUANTITY ? "Qty" : "Hours"
 
   return (
     <>
       <Tr>
-        <Td>{props.goalMetric.goalType?.name}</Td>
+        <Td>{props.goalMetric.metricType?.name}</Td>
         <Td>{metricType}</Td>
         <Td>
           <Flex alignItems={"center"}>

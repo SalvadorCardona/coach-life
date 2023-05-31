@@ -1,19 +1,21 @@
-import GoalTypeInterface from "@/module/GoalType/Domain/GoalTypeInterface.ts"
-import { GoalTypeTableItemComponent } from "@/module/Application/Page/GoalTypePage/Component/GoalTypeTableItemComponent.tsx"
+import MetricTypeInterface from "@/module/MetricType/Domain/MetricTypeInterface.ts"
+import { MetricTypeTableItemComponent } from "@/module/Application/Page/MetricTypePage/Component/MetricTypeTableItemComponent.tsx"
 import { Table, TableContainer, Tbody, Th, Thead, Tr } from "@chakra-ui/react"
 import GoalObjectiveInterface from "@/module/GoalObjective/Domain/GoalObjectiveInterface.ts"
 
 import getListBy from "@/module/Shared/Application/Id/getListBy.ts"
 
-export interface GoalTypeListComponentPropsInterface {
-  goalTypes: GoalTypeInterface[]
-  updateGoalType: (goalType: GoalTypeInterface) => void
-  removeGoalType: (goalType: GoalTypeInterface) => void
-  openModal: (goalType: GoalTypeInterface) => void
+export interface MetricTypeListComponentPropsInterface {
+  metricTypes: MetricTypeInterface[]
+  updateMetricType: (metricType: MetricTypeInterface) => void
+  removeMetricType: (metricType: MetricTypeInterface) => void
+  openModal: (metricType: MetricTypeInterface) => void
   goalObjectives: GoalObjectiveInterface[]
 }
 
-export function GoalTypeTableComponent(props: GoalTypeListComponentPropsInterface) {
+export function MetricTypeTableComponent(
+  props: MetricTypeListComponentPropsInterface
+) {
   return (
     <>
       <TableContainer>
@@ -27,14 +29,14 @@ export function GoalTypeTableComponent(props: GoalTypeListComponentPropsInterfac
             </Tr>
           </Thead>
           <Tbody>
-            {props.goalTypes.map((goalType) => (
-              <GoalTypeTableItemComponent
-                key={goalType.id}
-                removeHandler={props.removeGoalType}
-                goalType={goalType}
+            {props.metricTypes.map((metricType) => (
+              <MetricTypeTableItemComponent
+                key={metricType.id}
+                removeHandler={props.removeMetricType}
+                metricType={metricType}
                 openModal={props.openModal}
                 goalObjectives={
-                  getListBy("goalTypeId", goalType.id, props.goalObjectives) ??
+                  getListBy("metricTypeId", metricType.id, props.goalObjectives) ??
                   ([] as GoalObjectiveInterface[])
                 }
               />

@@ -10,7 +10,7 @@ import {
   Tr,
   Text,
 } from "@chakra-ui/react"
-import { useGoalTypeStore } from "@/module/GoalType/Application/GoalTypeStore.ts"
+import { useMetricTypeStore } from "@/module/MetricType/Application/MetricTypeStore.ts"
 import { DayItemTableComponent } from "@/module/Application/Page/DaysPage/Component/DayItemTableComponent.tsx"
 import createDaysOfMonth from "@/module/Day/Domain/createDaysOfMonth.ts"
 import { useGoalMetricStore } from "@/module/GoalMetric/Application/GoalMetricStore.ts"
@@ -21,7 +21,7 @@ import { useState } from "react"
 
 export function DaysPage() {
   const dayStore = useDayStore()
-  const goalTypeStore = useGoalTypeStore()
+  const metricTypeStore = useMetricTypeStore()
   const goalMetricStore = useGoalMetricStore()
   const [currentDate, currentDateSetter] = useState<Date>(new Date())
 
@@ -30,7 +30,7 @@ export function DaysPage() {
     year: currentDate.getFullYear(),
     days: dayStore.days,
     goalMetrics: goalMetricStore.goalMetrics,
-    goalTypes: goalTypeStore.goalTypes,
+    metricTypes: metricTypeStore.metricTypes,
   }).reverse()
 
   const changeDateHandler = (direction: -1 | 1) => {
@@ -61,8 +61,8 @@ export function DaysPage() {
           <Thead style={{ position: "sticky", top: 0, zIndex: 1 }} bg={"white"}>
             <Tr>
               <Th>Day</Th>
-              {goalTypeStore.goalTypes.map((goalType) => {
-                return <Th key={goalType.id}>{goalType.name}</Th>
+              {metricTypeStore.metricTypes.map((metricType) => {
+                return <Th key={metricType.id}>{metricType.name}</Th>
               })}
               <Th>Score</Th>
               <Th>
@@ -83,7 +83,7 @@ export function DaysPage() {
                 <DayItemTableComponent
                   key={day.id}
                   day={day}
-                  goalTypes={goalTypeStore.goalTypes}
+                  metricTypes={metricTypeStore.metricTypes}
                   updateDay={dayStore.updateDay}
                 />
               )

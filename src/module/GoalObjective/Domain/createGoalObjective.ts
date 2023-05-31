@@ -2,13 +2,13 @@ import GoalObjectiveInterface from "@/module/GoalObjective/Domain/GoalObjectiveI
 import { createUniqId } from "@/module/Shared/Application/Id/createUniqId.ts"
 import { TimePeriodEnum } from "@/module/Shared/Application/Date/TimePeriodEnum.ts"
 import { GoalObjectiveTypeEnum } from "@/module/GoalObjective/Domain/GoalObjectiveTypeEnum.ts"
-import GoalTypeInterface from "@/module/GoalType/Domain/GoalTypeInterface.ts"
+import MetricTypeInterface from "@/module/MetricType/Domain/MetricTypeInterface.ts"
 
 interface CreateGoalObjectiveInterface {
   byTypeTime?: TimePeriodEnum
   value?: number
   name?: string
-  goalId?: GoalTypeInterface["id"]
+  goalId?: MetricTypeInterface["id"]
   type?: GoalObjectiveTypeEnum
 }
 

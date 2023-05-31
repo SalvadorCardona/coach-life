@@ -1,5 +1,5 @@
-import { GoalTypeTableComponent } from "@/module/Application/Page/GoalTypePage/Component/GoalTypeTableComponent.tsx"
-import { useGoalTypeStore } from "@/module/GoalType/Application/GoalTypeStore.ts"
+import { MetricTypeTableComponent } from "@/module/Application/Page/MetricTypePage/Component/MetricTypeTableComponent.tsx"
+import { useMetricTypeStore } from "@/module/MetricType/Application/MetricTypeStore.ts"
 import {
   Box,
   Flex,
@@ -8,19 +8,19 @@ import {
   ModalOverlay,
   ModalContent,
 } from "@chakra-ui/react"
-import { GoalTypeFormComponent } from "@/module/GoalType/Component/GoalTypeFormComponent.tsx"
-import GoalTypeInterface from "@/module/GoalType/Domain/GoalTypeInterface.ts"
+import { MetricTypeFormComponent } from "@/module/MetricType/Component/MetricTypeFormComponent.tsx"
+import MetricTypeInterface from "@/module/MetricType/Domain/MetricTypeInterface.ts"
 import { GoalObjectiveFormComponent } from "@/module/GoalObjective/Component/GoalObjectiveFormComponent.tsx"
 import { useState } from "react"
 import { useGoalObjectiveStore } from "@/module/GoalObjective/Application/GoalObjectiveStore.ts"
 
-export function GoalTypePage() {
-  const goalTypesStore = useGoalTypeStore()
+export function MetricTypePage() {
+  const metricTypesStore = useMetricTypeStore()
   const goalObjectivesStore = useGoalObjectiveStore()
-  const [goalType, setGoalType] = useState<GoalTypeInterface | null>(null)
+  const [metricType, setMetricType] = useState<MetricTypeInterface | null>(null)
   const { isOpen, onOpen, onClose } = useDisclosure()
-  const addObjective = (goalType: GoalTypeInterface): void => {
-    setGoalType(goalType)
+  const addObjective = (metricType: MetricTypeInterface): void => {
+    setMetricType(metricType)
     onOpen()
   }
 
@@ -28,16 +28,18 @@ export function GoalTypePage() {
     <>
       <Flex>
         <Box mr={5}>
-          <GoalTypeTableComponent
-            removeGoalType={goalTypesStore.removeGoalType}
-            updateGoalType={goalTypesStore.updateGoalType}
-            goalTypes={goalTypesStore.goalTypes}
+          <MetricTypeTableComponent
+            removeMetricType={metricTypesStore.removeMetricType}
+            updateMetricType={metricTypesStore.updateMetricType}
+            metricTypes={metricTypesStore.metricTypes}
             openModal={addObjective}
             goalObjectives={goalObjectivesStore.goalObjectives}
           />
         </Box>
         <Box>
-          <GoalTypeFormComponent updateGoalType={goalTypesStore.updateGoalType} />
+          <MetricTypeFormComponent
+            updateMetricType={metricTypesStore.updateMetricType}
+          />
         </Box>
       </Flex>
       <Modal isOpen={isOpen} onClose={onClose}>
@@ -45,9 +47,9 @@ export function GoalTypePage() {
         <ModalContent>
           <GoalObjectiveFormComponent
             {...{
-              goalType: goalType as GoalTypeInterface,
+              metricType: metricType as MetricTypeInterface,
               addGoalObjective: goalObjectivesStore.updateGoalObjective,
-              goalTypes: goalTypesStore.goalTypes,
+              metricTypes: metricTypesStore.metricTypes,
             }}
           ></GoalObjectiveFormComponent>
         </ModalContent>

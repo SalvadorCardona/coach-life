@@ -7,16 +7,16 @@ import calculateObjective from "@/module/GoalObjective/Domain/calculateObjective
 export default function calculateDayObjective(
   day: DayInterface,
   goalObjectives: GoalObjectiveInterface[]
-): Ratio | null {
+): Ratio {
   let ratio = 0
   let calculated = 0
 
   day.goalMetrics.forEach((goalMetric) => {
-    const goalType = goalMetric.goalType
+    const metricType = goalMetric.metricType
     if (goalMetric.value === null) return
     const goalMetricValue = goalMetric.value ?? 1
     const goalObjectivesCurrent = goalObjectives.filter((goalObjective) => {
-      return goalObjective.goalTypeId === goalType?.id
+      return goalObjective.metricTypeId === metricType?.id
     })
 
     if (!goalObjectivesCurrent.length) return
@@ -31,7 +31,7 @@ export default function calculateDayObjective(
     })
   })
 
-  if (!ratio && !calculated) return null
+  if (!ratio && !calculated) return 0
 
   return (ratio / calculated) as Ratio
 }

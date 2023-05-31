@@ -2,25 +2,25 @@ import GoalObjectiveInterface from "@/module/GoalObjective/Domain/GoalObjectiveI
 import { Tr, Td } from "@chakra-ui/react"
 import { ButtonComponent } from "@/module/Shared/Component/Form/ButtonComponent.tsx"
 import { RxCross2 } from "react-icons/all"
-import GoalTypeInterface from "@/module/GoalType/Domain/GoalTypeInterface.ts"
+import MetricTypeInterface from "@/module/MetricType/Domain/MetricTypeInterface.ts"
 
 export interface GoalObjectiveItemComponentPropsInterface {
   goalObjective: GoalObjectiveInterface
   removeGoalObjectiveById: (id: string) => void
-  goalType: GoalTypeInterface | undefined
+  metricType: MetricTypeInterface | undefined
 }
 
 export function GoalObjectiveTableItemComponent({
   goalObjective,
   removeGoalObjectiveById,
-  goalType,
+  metricType,
 }: GoalObjectiveItemComponentPropsInterface) {
-  const goalTypeName = goalType ? goalType.name : "-"
+  const metricTypeName = metricType ? metricType.name : "-"
   return (
     <>
       <Tr>
         <Td>{goalObjective.name}</Td>
-        <Td>{goalTypeName}</Td>
+        <Td>{metricTypeName}</Td>
         <Td>{goalObjective.byTypeTime}</Td>
         <Td>{goalObjective.type}</Td>
         <Td>{goalObjective.value}</Td>

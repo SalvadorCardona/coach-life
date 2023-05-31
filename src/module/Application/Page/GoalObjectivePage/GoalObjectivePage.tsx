@@ -2,24 +2,24 @@ import { Box, Flex } from "@chakra-ui/react"
 import { GoalObjectiveTableComponent } from "@/module/Application/Page/GoalObjectivePage/Component/GoalObjectiveTableComponent.tsx"
 import { GoalObjectiveFormComponent } from "@/module/GoalObjective/Component/GoalObjectiveFormComponent.tsx"
 import { useGoalObjectiveStore } from "@/module/GoalObjective/Application/GoalObjectiveStore.ts"
-import { useGoalTypeStore } from "@/module/GoalType/Application/GoalTypeStore.ts"
+import { useMetricTypeStore } from "@/module/MetricType/Application/MetricTypeStore.ts"
 
 export function GoalObjectivePage() {
   const goalObjectivesStore = useGoalObjectiveStore()
-  const goalTypesStore = useGoalTypeStore()
+  const metricTypesStore = useMetricTypeStore()
   return (
     <>
       <Flex>
         <Box mr={5}>
           <GoalObjectiveTableComponent
             goalObjectives={goalObjectivesStore.goalObjectives}
-            goalTypes={goalTypesStore.goalTypes}
+            metricTypes={metricTypesStore.metricTypes}
             removeGoalObjectiveById={goalObjectivesStore.removeGoalObjectiveById}
           />
         </Box>
         <Box>
           <GoalObjectiveFormComponent
-            goalTypes={goalTypesStore.goalTypes}
+            metricTypes={metricTypesStore.metricTypes}
             addGoalObjective={goalObjectivesStore.updateGoalObjective}
           />
         </Box>

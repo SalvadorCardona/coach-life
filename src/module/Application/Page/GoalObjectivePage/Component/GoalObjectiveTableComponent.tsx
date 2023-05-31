@@ -2,17 +2,17 @@ import GoalObjectiveInterface from "@/module/GoalObjective/Domain/GoalObjectiveI
 import { GoalObjectiveTableItemComponent } from "@/module/Application/Page/GoalObjectivePage/Component/GoalObjectiveTableItemComponent.tsx"
 import { Table, Thead, Tbody, Tr, Th, TableContainer } from "@chakra-ui/react"
 import getItemById from "@/module/Shared/Application/Id/getItemById.ts"
-import GoalTypeInterface from "@/module/GoalType/Domain/GoalTypeInterface.ts"
+import MetricTypeInterface from "@/module/MetricType/Domain/MetricTypeInterface.ts"
 
 export interface GoalObjectiveListComponentPropsInterface {
   goalObjectives: GoalObjectiveInterface[]
   removeGoalObjectiveById: (id: string) => void
-  goalTypes: GoalTypeInterface[]
+  metricTypes: MetricTypeInterface[]
 }
 
 export function GoalObjectiveTableComponent({
   goalObjectives,
-  goalTypes,
+  metricTypes,
   removeGoalObjectiveById,
 }: GoalObjectiveListComponentPropsInterface) {
   return (
@@ -22,7 +22,7 @@ export function GoalObjectiveTableComponent({
           <Thead>
             <Tr>
               <Th>Objective name</Th>
-              <Th>Goal Type</Th>
+              <Th>Metric Type</Th>
               <Th>By time</Th>
               <Th>Objective type</Th>
               <Th>Value</Th>
@@ -35,11 +35,11 @@ export function GoalObjectiveTableComponent({
                 <GoalObjectiveTableItemComponent
                   goalObjective={goalObjective}
                   key={goalObjective.id}
-                  goalType={
+                  metricType={
                     getItemById(
-                      goalObjective.goalTypeId,
-                      goalTypes
-                    ) as GoalTypeInterface
+                      goalObjective.metricTypeId,
+                      metricTypes
+                    ) as MetricTypeInterface
                   }
                   removeGoalObjectiveById={removeGoalObjectiveById}
                 />

@@ -1,45 +1,49 @@
 import { FormEvent, useState } from "react"
-import GoalTypeInterface from "@/module/GoalType/Domain/GoalTypeInterface.ts"
-import { createGoalType } from "@/module/GoalType/Domain/createGoalType.ts"
+import MetricTypeInterface from "@/module/MetricType/Domain/MetricTypeInterface.ts"
+import { createMetricType } from "@/module/MetricType/Domain/createMetricType.ts"
 import { SubTitleComponent } from "@/module/Shared/Component/Typography/SubTitleComponent.tsx"
-import GoalTypeMetricEnum from "@/module/GoalType/Domain/GoalTypeMetricEnum.ts"
+import MetricTypeMetricEnum from "@/module/MetricType/Domain/MetricTypeMetricEnum.ts"
 import { FormControl, FormLabel, Input, Select } from "@chakra-ui/react"
 import { ButtonComponent } from "@/module/Shared/Component/Form/ButtonComponent.tsx"
 import { WrapperComponent } from "@/module/Shared/Component/WrapperComponent.tsx"
 import formDataToObject from "@/module/Shared/Application/Form/formDataToObject.ts"
 import GoalObjectiveInterface from "@/module/GoalObjective/Domain/GoalObjectiveInterface.ts"
 
-export interface GoalTypeFormComponentPropsInterface {
-  updateGoalType: (goalType: GoalTypeInterface) => void
+export interface MetricTypeFormComponentPropsInterface {
+  updateMetricType: (metricType: MetricTypeInterface) => void
 }
 
-export function GoalTypeFormComponent(props: GoalTypeFormComponentPropsInterface) {
-  const [newGoalType, setGoalType] = useState<GoalTypeInterface>(createGoalType())
+export function MetricTypeFormComponent(
+  props: MetricTypeFormComponentPropsInterface
+) {
+  const [newMetricType, setMetricType] = useState<MetricTypeInterface>(
+    createMetricType()
+  )
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
 
     const formData = {
-      ...newGoalType,
+      ...newMetricType,
       ...formDataToObject<GoalObjectiveInterface>(event.target as HTMLFormElement),
     }
 
     formData.defaultValue = Number(formData.defaultValue)
 
-    props.updateGoalType(formData)
-    setGoalType(createGoalType())
+    props.updateMetricType(formData)
+    setMetricType(createMetricType())
   }
 
   return (
     <WrapperComponent>
       <form onSubmit={handleSubmit}>
-        <SubTitleComponent>Add a new goal type</SubTitleComponent>
+        <SubTitleComponent>Add a new metric type</SubTitleComponent>
         <FormControl mt={5}>
           <FormLabel>Name :</FormLabel>
           <Input
             required={true}
             type="text"
-            defaultValue={newGoalType.name}
+            defaultValue={newMetricType.name}
             placeholder={"Your name..."}
             name={"name"}
           />
@@ -48,7 +52,7 @@ export function GoalTypeFormComponent(props: GoalTypeFormComponentPropsInterface
           <FormLabel>Default value :</FormLabel>
           <Input
             type="number"
-            defaultValue={newGoalType.defaultValue}
+            defaultValue={newMetricType.defaultValue}
             placeholder={"Your defaults value..."}
             name={"defaultValue"}
           />
@@ -57,7 +61,7 @@ export function GoalTypeFormComponent(props: GoalTypeFormComponentPropsInterface
         <FormControl mt={5}>
           <FormLabel>Metrics :</FormLabel>
           <Select name={"metric"}>
-            {Object.values(GoalTypeMetricEnum).map((value) => {
+            {Object.values(MetricTypeMetricEnum).map((value) => {
               return (
                 <option key={value} value={value}>
                   {value}
@@ -68,7 +72,7 @@ export function GoalTypeFormComponent(props: GoalTypeFormComponentPropsInterface
         </FormControl>
 
         <ButtonComponent {...{ type: "submit", mt: 5 }}>
-          Add goal type
+          Add metric type
         </ButtonComponent>
       </form>
     </WrapperComponent>

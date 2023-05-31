@@ -5,15 +5,15 @@ import { ButtonComponent } from "@/module/Shared/Component/Form/ButtonComponent.
 import { FormEvent, useState } from "react"
 import GoalObjectiveInterface from "@/module/GoalObjective/Domain/GoalObjectiveInterface.ts"
 import createGoalObjective from "@/module/GoalObjective/Domain/createGoalObjective.ts"
-import GoalTypeInterface from "@/module/GoalType/Domain/GoalTypeInterface.ts"
+import MetricTypeInterface from "@/module/MetricType/Domain/MetricTypeInterface.ts"
 import formDataToObject from "@/module/Shared/Application/Form/formDataToObject.ts"
 import { TimePeriodEnum } from "@/module/Shared/Application/Date/TimePeriodEnum.ts"
 import { GoalObjectiveTypeEnum } from "@/module/GoalObjective/Domain/GoalObjectiveTypeEnum.ts"
 
 interface GoalObjectiveFormComponentPropsInterface {
   addGoalObjective: (goalObjective: GoalObjectiveInterface) => void
-  goalTypes: GoalTypeInterface[]
-  goalType?: GoalTypeInterface
+  metricTypes: MetricTypeInterface[]
+  metricType?: MetricTypeInterface
 }
 
 export function GoalObjectiveFormComponent(
@@ -60,14 +60,14 @@ export function GoalObjectiveFormComponent(
             />
           </FormControl>
 
-          {!props?.goalType && (
+          {!props?.metricType && (
             <FormControl mt={5}>
-              <FormLabel>Goal Type :</FormLabel>
-              <Select name={"goalTypeId"}>
-                {props.goalTypes.map((goalType) => {
+              <FormLabel>Metric Type :</FormLabel>
+              <Select name={"metricTypeId"}>
+                {props.metricTypes.map((metricType) => {
                   return (
-                    <option key={goalType.id} value={goalType.id}>
-                      {goalType.name}
+                    <option key={metricType.id} value={metricType.id}>
+                      {metricType.name}
                     </option>
                   )
                 })}
@@ -75,8 +75,12 @@ export function GoalObjectiveFormComponent(
             </FormControl>
           )}
 
-          {props?.goalType && (
-            <Input name={"goalTypeId"} type="hidden" value={props?.goalType.id} />
+          {props?.metricType && (
+            <Input
+              name={"metricTypeId"}
+              type="hidden"
+              value={props?.metricType.id}
+            />
           )}
 
           <FormControl mt={5}>

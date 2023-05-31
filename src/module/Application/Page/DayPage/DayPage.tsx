@@ -1,4 +1,4 @@
-import { useGoalTypeStore } from "@/module/GoalType/Application/GoalTypeStore.ts"
+import { useMetricTypeStore } from "@/module/MetricType/Application/MetricTypeStore.ts"
 import { useDayStore } from "@/module/Day/Application/DayStore.ts"
 import { useCalendarStore } from "@/module/Calendar/Application/CalendarStore.ts"
 import { CalendarComponent } from "@/module/Calendar/Component/CalendarComponent.tsx"
@@ -7,7 +7,7 @@ import { Box } from "@chakra-ui/react"
 import createDay from "@/module/Day/Domain/createDay.ts"
 
 export function DayPage() {
-  const goalTypesStore = useGoalTypeStore()
+  const metricTypesStore = useMetricTypeStore()
   const dayStore = useDayStore()
   const calendarStore = useCalendarStore()
 
@@ -19,7 +19,7 @@ export function DayPage() {
       />
       <Box mt={5}>
         <DayTableComponent
-          goalTypes={goalTypesStore.goalTypes}
+          metricTypes={metricTypesStore.metricTypes}
           day={
             dayStore.getDayByDate(calendarStore.currentDate) ??
             createDay({ createdDate: calendarStore.currentDate })

@@ -11,7 +11,7 @@ import {
 } from "react-icons/all"
 import { LayoutComponent } from "@/module/Application/Component/LayoutComponent.tsx"
 import { NonIndexRouteObject } from "react-router/dist/lib/context"
-import { GoalTypePage } from "@/module/Application/Page/GoalTypePage/GoalTypePage.tsx"
+import { MetricTypePage } from "@/module/Application/Page/MetricTypePage/MetricTypePage.tsx"
 import { GoalObjectivePage } from "@/module/Application/Page/GoalObjectivePage/GoalObjectivePage.tsx"
 import { DaysPage } from "@/module/Application/Page/DaysPage/DaysPage.tsx"
 import { HomePage } from "@/module/Application/Page/Home/HomePage.tsx"
@@ -55,12 +55,12 @@ export const childrenRoutes: NavigationItemInterface[] = [
   },
   {
     path: "/goal-type",
-    element: <GoalTypePage />,
+    element: <MetricTypePage />,
     id: RoutesEnum.GOAL_TYPE,
     icon: BiObjectsVerticalBottom,
-    name: "Goal Type",
+    name: "Goal Metric Type",
     title: "Your goals types",
-    subTitle: "Show yours goal type",
+    subTitle: "Show yours metric type",
   },
   {
     path: "/goal-objective",

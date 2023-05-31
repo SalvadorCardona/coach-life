@@ -8,7 +8,7 @@ import {
   PointElement,
 } from "chart.js"
 import { useDayStore } from "@/module/Day/Application/DayStore.ts"
-import { useGoalTypeStore } from "@/module/GoalType/Application/GoalTypeStore.ts"
+import { useMetricTypeStore } from "@/module/MetricType/Application/MetricTypeStore.ts"
 import { StatisticItemComponent } from "@/module/Application/Page/StaticticPage/Component/StatisticItemComponent.tsx"
 import { Box, Flex } from "@chakra-ui/react"
 
@@ -23,15 +23,15 @@ Chart.register(
 
 export function StatisticPage() {
   const dayStore = useDayStore()
-  const goalTypeStore = useGoalTypeStore()
+  const metricTypeStore = useMetricTypeStore()
 
   return (
     <Flex>
-      {goalTypeStore.goalTypes.map((goalType) => {
+      {metricTypeStore.metricTypes.map((metricType) => {
         return (
           <Box mr={5}>
             <StatisticItemComponent
-              goalType={goalType}
+              metricType={metricType}
               goalMetrics={dayStore.days}
             />
           </Box>
