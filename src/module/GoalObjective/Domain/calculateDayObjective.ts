@@ -13,6 +13,7 @@ export default function calculateDayObjective(
 
   day.goalMetrics.forEach((goalMetric) => {
     const goalType = goalMetric.goalType
+    if (goalMetric.value === null) return
     const goalMetricValue = goalMetric.value ?? 1
     const goalObjectivesCurrent = goalObjectives.filter((goalObjective) => {
       return goalObjective.goalTypeId === goalType?.id

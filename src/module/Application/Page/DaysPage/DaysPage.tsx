@@ -17,19 +17,27 @@ import { useGoalMetricStore } from "@/module/GoalMetric/Application/GoalMetricSt
 import { formatDateWithoutDay } from "@/module/Shared/Application/Date/formatDateWithoutDay.ts"
 import { ButtonComponent } from "@/module/Shared/Component/Form/ButtonComponent.tsx"
 import { BiChevronLeft, IoIosAdd, BiChevronRight } from "react-icons/all"
+import { useState } from "react"
 
 export function DaysPage() {
   const dayStore = useDayStore()
   const goalTypeStore = useGoalTypeStore()
-  const currentDate = new Date()
+  const goalMetricStore = useGoalMetricStore()
+  const [currentDate, currentDateSetter] = useState<Date>(new Date())
 
   const days = createDaysOfMonth({
     month: currentDate.getMonth(),
     year: currentDate.getFullYear(),
     days: dayStore.days,
-    goalMetrics: useGoalMetricStore().goalMetrics,
+    goalMetrics: goalMetricStore.goalMetrics,
     goalTypes: goalTypeStore.goalTypes,
   }).reverse()
+
+  const changeDateHandler = (direction: -1 | 1) => {
+    const monthTarget = currentDate.getMonth() + direction
+    const newDate = new Date(currentDate.getFullYear(), monthTarget, 1)
+    currentDateSetter(newDate)
+  }
 
   return (
     <>
@@ -37,15 +45,15 @@ export function DaysPage() {
         <ButtonComponent
           size="xs"
           leftIcon={<Icon as={BiChevronLeft} color={"white"} />}
-          onClick={() => alert("Work in progress")}
+          onClick={() => changeDateHandler(-1)}
         ></ButtonComponent>
-        <Text textTransform={["uppercase"]} size="lg" px={5}>
+        <Text textTransform={["uppercase"]} as="b" fontSize="lg" px={5}>
           {formatDateWithoutDay(currentDate)}
         </Text>
         <ButtonComponent
           size="xs"
           leftIcon={<Icon as={BiChevronRight} color={"white"} />}
-          onClick={() => alert("Work in progress")}
+          onClick={() => changeDateHandler(1)}
         ></ButtonComponent>
       </Flex>
       <TableContainer style={{ overflowY: "unset", overflowX: "unset" }}>
@@ -58,7 +66,6 @@ export function DaysPage() {
               })}
               <Th>Score</Th>
               <Th>
-                {" "}
                 <ButtonComponent
                   mt={2}
                   size="xs"
