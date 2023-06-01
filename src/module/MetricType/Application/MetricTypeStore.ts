@@ -10,33 +10,33 @@ import updateById from "@/module/Shared/Application/Id/updateById.ts"
 import { IdAbleInterface } from "@/module/Shared/Application/Id/IdAbleInterface.ts"
 
 export interface MetricTypeState {
-  metricTypes: MetricTypeInterface[]
+  items: MetricTypeInterface[]
   updateAll: (metricTypes: MetricTypeInterface[]) => void
   updateMetricType: (metricType: MetricTypeInterface) => void
   removeMetricType: (id: IdAbleInterface) => void
 }
 
 export const useMetricTypeStore = create<MetricTypeState>((set, getState) => ({
-  metricTypes: getMetricTypes(),
+  items: getMetricTypes(),
   updateAll: (metricTypes: MetricTypeInterface[]) => {
-    set({ metricTypes })
+    set({ items: metricTypes })
     persistMetricTypes(metricTypes)
   },
   updateMetricType: (metricType: MetricTypeInterface) => {
-    const metricTypes = getState().metricTypes
+    const metricTypes = getState().items
     const metricTypeToUpdate = getItemById(metricType.id, metricTypes)
     metricTypeToUpdate
       ? updateById(metricType, metricTypes)
       : metricTypes.push(metricType)
 
-    set({ metricTypes })
+    set({ items: metricTypes })
     persistMetricTypes(metricTypes)
   },
   removeMetricType: (idAble: IdAbleInterface) => {
-    const metricTypes = getState().metricTypes
+    const metricTypes = getState().items
     removeById(idAble.id, metricTypes)
 
-    set({ metricTypes })
+    set({ items: metricTypes })
     persistMetricTypes(metricTypes)
   },
 }))

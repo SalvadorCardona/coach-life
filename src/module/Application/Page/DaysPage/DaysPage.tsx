@@ -9,6 +9,7 @@ import {
   Thead,
   Tr,
   Text,
+  useDisclosure,
 } from "@chakra-ui/react"
 import { useMetricTypeStore } from "@/module/MetricType/Application/MetricTypeStore.ts"
 import { DayItemTableComponent } from "@/module/Application/Page/DaysPage/Component/DayItemTableComponent.tsx"
@@ -18,19 +19,20 @@ import { formatDateWithoutDay } from "@/module/Shared/Application/Date/formatDat
 import { ButtonComponent } from "@/module/Shared/Component/Form/ButtonComponent.tsx"
 import { BiChevronLeft, IoIosAdd, BiChevronRight } from "react-icons/all"
 import { useState } from "react"
+import { ModalMetricTypeFormComponent } from "@/module/MetricType/Component/ModalMetricTypeFormComponent.tsx"
 
 export function DaysPage() {
   const dayStore = useDayStore()
   const metricTypeStore = useMetricTypeStore()
   const goalMetricStore = useGoalMetricStore()
   const [currentDate, currentDateSetter] = useState<Date>(new Date())
-
+  const { isOpen, onOpen, onClose } = useDisclosure()
   const days = createDaysOfMonth({
     month: currentDate.getMonth(),
     year: currentDate.getFullYear(),
-    days: dayStore.days,
-    goalMetrics: goalMetricStore.goalMetrics,
-    metricTypes: metricTypeStore.metricTypes,
+    days: dayStore.items,
+    goalMetrics: goalMetricStore.items,
+    metricTypes: metricTypeStore.items,
   }).reverse()
 
   const changeDateHandler = (direction: -1 | 1) => {
@@ -39,8 +41,17 @@ export function DaysPage() {
     currentDateSetter(newDate)
   }
 
+  const openModal = () => {
+    onOpen()
+  }
+
   return (
     <>
+      <ModalMetricTypeFormComponent
+        updateMetricType={metricTypeStore.updateMetricType}
+        isOpen={isOpen}
+        onClose={onClose}
+      ></ModalMetricTypeFormComponent>
       <Flex alignItems="center" justifyContent={"center"}>
         <ButtonComponent
           size="xs"
@@ -61,7 +72,7 @@ export function DaysPage() {
           <Thead style={{ position: "sticky", top: 0, zIndex: 1 }} bg={"white"}>
             <Tr>
               <Th>Day</Th>
-              {metricTypeStore.metricTypes.map((metricType) => {
+              {metricTypeStore.items.map((metricType) => {
                 return <Th key={metricType.id}>{metricType.name}</Th>
               })}
               <Th>Score</Th>
@@ -70,7 +81,7 @@ export function DaysPage() {
                   mt={2}
                   size="xs"
                   leftIcon={<Icon as={IoIosAdd} color={"white"} />}
-                  onClick={() => alert("Work in progress")}
+                  onClick={openModal}
                 >
                   Add a metric type
                 </ButtonComponent>
@@ -83,7 +94,7 @@ export function DaysPage() {
                 <DayItemTableComponent
                   key={day.id}
                   day={day}
-                  metricTypes={metricTypeStore.metricTypes}
+                  metricTypes={metricTypeStore.items}
                   updateDay={dayStore.updateDay}
                 />
               )

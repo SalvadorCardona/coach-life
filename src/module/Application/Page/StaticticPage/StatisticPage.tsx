@@ -27,13 +27,10 @@ export function StatisticPage() {
 
   return (
     <Flex>
-      {metricTypeStore.metricTypes.map((metricType) => {
+      {metricTypeStore.items.map((metricType) => {
         return (
           <Box mr={5}>
-            <StatisticItemComponent
-              metricType={metricType}
-              goalMetrics={dayStore.days}
-            />
+            <StatisticItemComponent metricType={metricType} days={dayStore.items} />
           </Box>
         )
       })}

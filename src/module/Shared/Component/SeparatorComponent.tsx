@@ -1,7 +1,5 @@
-export function SeparatorComponent() {
-  return (
-    <>
-      <hr className="border-t-1 border-gray-300 my-4" />
-    </>
-  )
+import { Divider, DividerProps } from "@chakra-ui/react"
+
+export function SeparatorComponent(props: DividerProps) {
+  return <Divider borderColor={"gray.300"} orientation="horizontal" {...props} />
 }

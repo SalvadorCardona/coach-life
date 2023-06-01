@@ -11,21 +11,21 @@ import {
 import getItemById from "@/module/Shared/Application/Id/getItemById.ts"
 
 export interface GoalMetricState {
-  goalMetrics: GoalMetricInterface[]
+  items: GoalMetricInterface[]
   updateGoalMetric: (goalMetric: GoalMetricInterface) => void
 }
 
 export const useGoalMetricStore = create<GoalMetricState>((set, getState) => ({
-  goalMetrics: restoreGoalMetric(),
+  items: restoreGoalMetric(),
   updateGoalMetric: (goalMetric: GoalMetricInterface) => {
-    const goalMetrics = getState().goalMetrics
+    const goalMetrics = getState().items
 
     if (!getItemById(goalMetric.id, goalMetrics)) {
       addTo(goalMetric, goalMetrics)
     }
 
     updateById(goalMetric, goalMetrics)
-    set({ goalMetrics })
+    set({ items: goalMetrics })
     persistGoalMetric(goalMetrics)
   },
 }))

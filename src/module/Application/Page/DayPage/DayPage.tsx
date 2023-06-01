@@ -19,7 +19,7 @@ export function DayPage() {
       />
       <Box mt={5}>
         <DayTableComponent
-          metricTypes={metricTypesStore.metricTypes}
+          metricTypes={metricTypesStore.items}
           day={
             dayStore.getDayByDate(calendarStore.currentDate) ??
             createDay({ createdDate: calendarStore.currentDate })

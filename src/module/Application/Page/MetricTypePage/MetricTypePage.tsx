@@ -31,7 +31,7 @@ export function MetricTypePage() {
           <MetricTypeTableComponent
             removeMetricType={metricTypesStore.removeMetricType}
             updateMetricType={metricTypesStore.updateMetricType}
-            metricTypes={metricTypesStore.metricTypes}
+            metricTypes={metricTypesStore.items}
             openModal={addObjective}
             goalObjectives={goalObjectivesStore.goalObjectives}
           />
@@ -49,7 +49,7 @@ export function MetricTypePage() {
             {...{
               metricType: metricType as MetricTypeInterface,
               addGoalObjective: goalObjectivesStore.updateGoalObjective,
-              metricTypes: metricTypesStore.metricTypes,
+              metricTypes: metricTypesStore.items,
             }}
           ></GoalObjectiveFormComponent>
         </ModalContent>

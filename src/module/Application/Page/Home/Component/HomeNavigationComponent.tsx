@@ -11,9 +11,9 @@ export function HomeNavigationComponent() {
       <Grid templateColumns={["repeat(2, 1fr)", "repeat(4, 1fr)"]} gap={6}>
         {routes.map((route) => {
           return (
-            <GridItem>
+            <GridItem key={route.name}>
               <WrapperComponent>
-                <RouterLink key={route.name} to={route.path as string}>
+                <RouterLink to={route.path as string}>
                   <Flex
                     align="center"
                     p="4"

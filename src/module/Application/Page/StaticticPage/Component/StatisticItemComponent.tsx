@@ -1,6 +1,6 @@
 import MetricTypeInterface from "@/module/MetricType/Domain/MetricTypeInterface.ts"
 import { useEffect, useRef } from "react"
-import { Chart } from "chart.js"
+import { Chart, ChartConfiguration } from "chart.js"
 import { WrapperComponent } from "@/module/Shared/Component/WrapperComponent.tsx"
 import { SubTitleComponent } from "@/module/Shared/Component/Typography/SubTitleComponent.tsx"
 import DayInterface from "@/module/Day/Domain/DayInterface.ts"
@@ -8,15 +8,15 @@ import { formatDate } from "@/module/Shared/Application/Date/formatDate.ts"
 
 export interface StatisticItemComponentPropsInterface {
   metricType: MetricTypeInterface
-  goalMetrics: DayInterface[]
+  days: DayInterface[]
 }
 
 export function StatisticItemComponent(props: StatisticItemComponentPropsInterface) {
   const ref = useRef<HTMLCanvasElement>(null)
 
-  const dayList = props.goalMetrics.map((day) => formatDate(day.createdDate))
+  const dayList = props.days.map((day) => formatDate(day.createdDate))
 
-  const goalMetricValueList = props.goalMetrics.map((day) => {
+  const goalMetricValueList = props.days.map((day) => {
     const goalMetric = day.goalMetrics.find((goalMetric) => {
       return goalMetric.metricType?.id === props.metricType.id
     })
@@ -39,13 +39,11 @@ export function StatisticItemComponent(props: StatisticItemComponentPropsInterfa
       ],
     }
 
-    const config = {
+    const config: ChartConfiguration = {
       type: "line",
       data: data,
     }
 
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
     const myChart = new Chart(ref.current, config)
 
     return () => {

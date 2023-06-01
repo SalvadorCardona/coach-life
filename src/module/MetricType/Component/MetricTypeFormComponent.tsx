@@ -11,6 +11,7 @@ import GoalObjectiveInterface from "@/module/GoalObjective/Domain/GoalObjectiveI
 
 export interface MetricTypeFormComponentPropsInterface {
   updateMetricType: (metricType: MetricTypeInterface) => void
+  onAdd?: () => void
 }
 
 export function MetricTypeFormComponent(
@@ -32,6 +33,8 @@ export function MetricTypeFormComponent(
 
     props.updateMetricType(formData)
     setMetricType(createMetricType())
+
+    if (props.onAdd) props.onAdd()
   }
 
   return (

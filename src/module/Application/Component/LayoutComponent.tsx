@@ -3,12 +3,14 @@ import { NavigationComponent } from "@/module/Shared/Component/Navigation/Naviga
 import { Outlet, useLocation } from "react-router-dom"
 import { getRouteByPath } from "@/module/Application/routes.tsx"
 import { LightTextComponent } from "@/module/Shared/Component/Typography/LightTextComponent.tsx"
+import TopMenuComponent from "@/module/Shared/Component/TopMenu/TopMenuComponent.tsx"
 
 export function LayoutComponent() {
   const route = getRouteByPath(useLocation().pathname)
 
   return (
     <>
+      <TopMenuComponent />
       <Flex>
         <Box>
           <NavigationComponent />

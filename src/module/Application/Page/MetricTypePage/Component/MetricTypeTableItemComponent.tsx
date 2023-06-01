@@ -21,7 +21,7 @@ export function MetricTypeTableItemComponent(
         <Td>
           {props.metricType.name}
           <LightTextComponent fontSize="xs" as={"p"}>
-            Nombre d'ojectif : {props.goalObjectives.length}
+            Number of objective: {props.goalObjectives.length}
           </LightTextComponent>
 
           {props.goalObjectives.map((goalObjective) => (

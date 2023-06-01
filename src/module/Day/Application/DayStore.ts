@@ -11,30 +11,30 @@ import addTo from "@/module/Shared/Application/List/addTo.ts"
 import { getDayByDate } from "@/module/Day/Domain/getDayByDate.ts"
 
 export interface DayState {
-  days: DayInterface[]
+  items: DayInterface[]
   updateAll: (days: DayInterface[]) => void
   updateDay: (day: DayInterface) => void
   getDayByDate: (date: DateString) => DayInterface | undefined
 }
 
 export const useDayStore = create<DayState>((set, getState) => ({
-  days: restoreDays(),
+  items: restoreDays(),
   updateAll: (days: DayInterface[]) => {
-    set({ days })
+    set({ items: days })
     persistDays(days)
   },
   updateDay: (day: DayInterface) => {
-    const days = getState().days
+    const days = getState().items
 
     if (!getDayByDate(day.createdDate, days)) {
       addTo(day, days)
     }
 
     updateById(day, days)
-    set({ days })
+    set({ items: days })
     persistDays(days)
   },
   getDayByDate: (date: DateString) => {
-    return getDayByDate(date, getState().days)
+    return getDayByDate(date, getState().items)
   },
 }))

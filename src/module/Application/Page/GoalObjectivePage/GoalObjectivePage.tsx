@@ -13,13 +13,13 @@ export function GoalObjectivePage() {
         <Box mr={5}>
           <GoalObjectiveTableComponent
             goalObjectives={goalObjectivesStore.goalObjectives}
-            metricTypes={metricTypesStore.metricTypes}
+            metricTypes={metricTypesStore.items}
             removeGoalObjectiveById={goalObjectivesStore.removeGoalObjectiveById}
           />
         </Box>
         <Box>
           <GoalObjectiveFormComponent
-            metricTypes={metricTypesStore.metricTypes}
+            metricTypes={metricTypesStore.items}
             addGoalObjective={goalObjectivesStore.updateGoalObjective}
           />
         </Box>
