@@ -1,7 +1,7 @@
 import calculateRatio, {
   Ratio,
 } from "@/module/Shared/Application/Math/calculateRatio.ts"
-import { GoalObjectiveTypeEnum } from "@/module/GoalObjective/Domain/GoalObjectiveTypeEnum.ts"
+import { GoalObjectiveTypeEnum } from "@/module/Objective/Domain/GoalObjectiveTypeEnum.ts"
 
 export default function calculateObjective(
   objectiveNeeded: number,

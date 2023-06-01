@@ -8,7 +8,7 @@ export default function createDay(args: Partial<DayInterface> = {}): DayInterfac
   return {
     ...{
       id: createUniqId(),
-      goalMetrics: [],
+      metrics: [],
       createdDate: serializerDate(new Date()),
     },
     ...args,

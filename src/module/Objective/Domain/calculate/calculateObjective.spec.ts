@@ -1,5 +1,5 @@
-import calculateObjective from "@/module/GoalObjective/Domain/calculate/calculateObjective.ts"
-import { GoalObjectiveTypeEnum } from "@/module/GoalObjective/Domain/GoalObjectiveTypeEnum.ts"
+import calculateObjective from "@/module/Objective/Domain/calculate/calculateObjective.ts"
+import { GoalObjectiveTypeEnum } from "@/module/Objective/Domain/GoalObjectiveTypeEnum.ts"
 
 test("calculateObjective: With zero", () => {
   expect(calculateObjective(0, 0)).toBe(1)

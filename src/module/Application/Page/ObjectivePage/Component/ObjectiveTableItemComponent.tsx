@@ -1,4 +1,4 @@
-import GoalObjectiveInterface from "@/module/GoalObjective/Domain/GoalObjectiveInterface.ts"
+import ObjectiveInterface from "@/module/Objective/Domain/ObjectiveInterface.ts"
 import { Tr, Td } from "@chakra-ui/react"
 import { ButtonComponent } from "@/module/Shared/Component/Form/ButtonComponent.tsx"
 
@@ -6,13 +6,13 @@ import MetricTypeInterface from "@/module/MetricType/Domain/MetricTypeInterface.
 import { RxCross2 } from "react-icons/rx"
 
 export interface GoalObjectiveItemComponentPropsInterface {
-  goalObjective: GoalObjectiveInterface
+  objective: ObjectiveInterface
   removeGoalObjectiveById: (id: string) => void
   metricType: MetricTypeInterface | undefined
 }
 
-export function GoalObjectiveTableItemComponent({
-  goalObjective,
+export function ObjectiveTableItemComponent({
+  objective,
   removeGoalObjectiveById,
   metricType,
 }: GoalObjectiveItemComponentPropsInterface) {
@@ -20,16 +20,16 @@ export function GoalObjectiveTableItemComponent({
   return (
     <>
       <Tr>
-        <Td>{goalObjective.name}</Td>
+        <Td>{objective.name}</Td>
         <Td>{metricTypeName}</Td>
-        <Td>{goalObjective.byTypeTime}</Td>
-        <Td>{goalObjective.type}</Td>
-        <Td>{goalObjective.value}</Td>
+        <Td>{objective.byTypeTime}</Td>
+        <Td>{objective.type}</Td>
+        <Td>{objective.value}</Td>
         <Td>
           <ButtonComponent
             {...{
               colorScheme: "red",
-              onClick: () => removeGoalObjectiveById(goalObjective.id),
+              onClick: () => removeGoalObjectiveById(objective.id),
             }}
           >
             <RxCross2 />

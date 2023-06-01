@@ -3,7 +3,7 @@ import { Td, Tr, Icon } from "@chakra-ui/react"
 import { ButtonComponent } from "@/module/Shared/Component/Form/ButtonComponent.tsx"
 
 import { LightTextComponent } from "@/module/Shared/Component/Typography/LightTextComponent.tsx"
-import GoalObjectiveInterface from "@/module/GoalObjective/Domain/GoalObjectiveInterface.ts"
+import ObjectiveInterface from "@/module/Objective/Domain/ObjectiveInterface.ts"
 import { IoIosAdd } from "react-icons/io"
 import { RxCross2 } from "react-icons/rx"
 
@@ -11,7 +11,7 @@ export interface MetricTypeComponentPropsInterface {
   metricType: MetricTypeInterface
   removeHandler: (metricType: MetricTypeInterface) => void
   openModal: (metricType: MetricTypeInterface) => void
-  goalObjectives: GoalObjectiveInterface[]
+  objectives: ObjectiveInterface[]
 }
 
 export function MetricTypeTableItemComponent(
@@ -23,12 +23,12 @@ export function MetricTypeTableItemComponent(
         <Td>
           {props.metricType.name}
           <LightTextComponent fontSize="xs" as={"p"}>
-            Number of objective: {props.goalObjectives.length}
+            Number of objective: {props.objectives.length}
           </LightTextComponent>
 
-          {props.goalObjectives.map((goalObjective) => (
-            <LightTextComponent fontSize={"xs"} ml={5} key={goalObjective.id}>
-              • {goalObjective.name}
+          {props.objectives.map((objective) => (
+            <LightTextComponent fontSize={"xs"} ml={5} key={objective.id}>
+              • {objective.name}
             </LightTextComponent>
           ))}
 

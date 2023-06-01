@@ -5,7 +5,7 @@ import { ComponentType } from "react"
 import { LayoutComponent } from "@/module/Application/Component/LayoutComponent.tsx"
 import { NonIndexRouteObject } from "react-router/dist/lib/context"
 import { MetricTypePage } from "@/module/Application/Page/MetricTypePage/MetricTypePage.tsx"
-import { GoalObjectivePage } from "@/module/Application/Page/GoalObjectivePage/GoalObjectivePage.tsx"
+import { ObjectivePage } from "@/module/Application/Page/ObjectivePage/ObjectivePage.tsx"
 import { DaysPage } from "@/module/Application/Page/DaysPage/DaysPage.tsx"
 import { HomePage } from "@/module/Application/Page/Home/HomePage.tsx"
 import { FiHome, FiTrendingUp } from "react-icons/fi"
@@ -18,8 +18,8 @@ import { FcTodoList } from "react-icons/fc"
 export enum RoutesEnum {
   HOME = "home",
   STAT = "stat",
-  GOAL_TYPE = "goal-type",
-  GOAL_OBJECTIVE = "goal-objective",
+  METRIC_TYPE = "metric-type",
+  OBJECTIVE = "objective",
   DAYS = "days",
   DAY = "day",
   TODO = "todo",
@@ -54,18 +54,18 @@ export const childrenRoutes: NavigationItemInterface[] = [
     inMenu: false,
   },
   {
-    path: "/goal-type",
+    path: "/type",
     element: <MetricTypePage />,
-    id: RoutesEnum.GOAL_TYPE,
+    id: RoutesEnum.METRIC_TYPE,
     icon: BiObjectsVerticalBottom,
     name: "Goal Metric Type",
     title: "Your goals types",
     subTitle: "Show yours metric type",
   },
   {
-    path: "/goal-objective",
-    element: <GoalObjectivePage />,
-    id: RoutesEnum.GOAL_OBJECTIVE,
+    path: "/objective",
+    element: <ObjectivePage />,
+    id: RoutesEnum.OBJECTIVE,
     icon: GiTargetArrows,
     name: "Objective",
     title: "Your Objectives",

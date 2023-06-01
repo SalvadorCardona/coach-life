@@ -19,7 +19,7 @@ export function DayPage() {
         onClick={calendarStore.update}
       />
       <Box mt={5}>
-        <TitleComponent>Your data goal</TitleComponent>
+        <TitleComponent>Your metric</TitleComponent>
         <DayTableComponent
           metricTypes={metricTypesStore.items}
           day={

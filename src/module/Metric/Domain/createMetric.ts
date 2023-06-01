@@ -1,10 +1,10 @@
-import GoalMetricInterface from "@/module/GoalMetric/Domain/GoalMetricInterface.ts"
+import MetricInterface from "@/module/Metric/Domain/MetricInterface.ts"
 import { createUniqId } from "@/module/Shared/Application/Id/createUniqId.ts"
 import serializerDate from "@/module/Shared/Application/Date/serializerDate"
 
-export default function createGoalMetric(
-  args: Partial<GoalMetricInterface>
-): GoalMetricInterface {
+export default function createMetric(
+  args: Partial<MetricInterface>
+): MetricInterface {
   // const defaultValue = args.metricType?.defaultValue ?? 0
 
   return {
@@ -13,7 +13,7 @@ export default function createGoalMetric(
       createdDate: serializerDate(new Date()),
       metricType: null,
       value: null,
-      goalDayId: null,
+      dayId: null,
       metricTypeId: null,
     },
     ...args,

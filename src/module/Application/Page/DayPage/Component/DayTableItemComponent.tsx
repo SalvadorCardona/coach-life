@@ -1,41 +1,43 @@
-import GoalMetricInterface from "@/module/GoalMetric/Domain/GoalMetricInterface.ts"
+import MetricInterface from "@/module/Metric/Domain/MetricInterface.ts"
 import { ChangeEvent, useState } from "react"
 import MetricTypeMetricEnum from "@/module/MetricType/Domain/MetricTypeMetricEnum.ts"
 import { Flex, Input, Td, Text, Tr } from "@chakra-ui/react"
 import { ButtonComponent } from "@/module/Shared/Component/Form/ButtonComponent.tsx"
 
 export interface GoalMetricComponentPropsInterface {
-  goalMetric: GoalMetricInterface
-  onUpdate: (goalMetric: GoalMetricInterface) => void
+  metric: MetricInterface
+  onUpdate: (metric: MetricInterface) => void
 }
 
 export function DayTableItemComponent(props: GoalMetricComponentPropsInterface) {
-  const [goalMetric, setGoalMetric] = useState<GoalMetricInterface>(props.goalMetric)
+  const [metric, setGoalMetric] = useState<MetricInterface>(props.metric)
+  metric?.value ? metric.value : 0
+
   const increment = () => {
-    goalMetric.value++
-    setGoalMetric(goalMetric)
-    props.onUpdate(goalMetric)
+    metric.value++
+    setGoalMetric(metric)
+    props.onUpdate(metric)
   }
 
   const decrement = () => {
-    goalMetric.value--
-    setGoalMetric(goalMetric)
-    props.onUpdate(goalMetric)
+    metric.value--
+    setGoalMetric(metric)
+    props.onUpdate(metric)
   }
 
   const onChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target
-    goalMetric.value = Number(value)
-    props.onUpdate(goalMetric)
+    metric.value = Number(value)
+    props.onUpdate(metric)
   }
 
   const metricType =
-    goalMetric.metricType?.metric === MetricTypeMetricEnum.QUANTITY ? "Qty" : "Hours"
+    metric.metricType?.metric === MetricTypeMetricEnum.QUANTITY ? "Qty" : "Hours"
 
   return (
     <>
       <Tr>
-        <Td>{props.goalMetric.metricType?.name}</Td>
+        <Td>{props.metric.metricType?.name}</Td>
         <Td>{metricType}</Td>
         <Td>
           <Flex alignItems={"center"}>
@@ -43,7 +45,7 @@ export function DayTableItemComponent(props: GoalMetricComponentPropsInterface) 
               mr={1}
               name={"name"}
               type="number"
-              value={goalMetric.value}
+              value={metric.value}
               w={20}
               onChange={onChangeHandler}
             />

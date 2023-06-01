@@ -4,7 +4,7 @@ import { GlobalStatisticComponent } from "@/module/Shared/Component/Stat/GlobalS
 import { useDayStore } from "@/module/Day/Application/DayStore.ts"
 import { useMetricTypeStore } from "@/module/MetricType/Application/MetricTypeStore.ts"
 import createDaysOfMonth from "@/module/Day/Domain/createDaysOfMonth.ts"
-import { useGoalMetricStore } from "@/module/GoalMetric/Application/GoalMetricStore.ts"
+import { useMetricStore } from "@/module/Metric/Application/MetricStore.ts"
 import { formatDateWithoutDay } from "@/module/Shared/Application/Date/formatDateWithoutDay.ts"
 import { Grid, GridItem, Text } from "@chakra-ui/react"
 import { DayTableComponent } from "@/module/Application/Page/DayPage/Component/DayTableComponent.tsx"
@@ -15,13 +15,13 @@ export function HomePage() {
   const metricTypesStore = useMetricTypeStore()
   const currentDate = new Date()
   const currentDateSerialized = serializerDate(currentDate)
-  const goalMetricStore = useGoalMetricStore()
+  const metricStore = useMetricStore()
 
   const days = createDaysOfMonth({
     month: currentDate.getMonth(),
     year: currentDate.getFullYear(),
     days: dayStore.items,
-    goalMetrics: goalMetricStore.items,
+    metrics: metricStore.items,
     metricTypes: metricTypesStore.items,
   }).reverse()
 

@@ -3,36 +3,36 @@ import { SubTitleComponent } from "@/module/Shared/Component/Typography/SubTitle
 import { FormControl, FormLabel, Input, Select } from "@chakra-ui/react"
 import { ButtonComponent } from "@/module/Shared/Component/Form/ButtonComponent.tsx"
 import { FormEvent, useState } from "react"
-import GoalObjectiveInterface from "@/module/GoalObjective/Domain/GoalObjectiveInterface.ts"
-import createGoalObjective from "@/module/GoalObjective/Domain/createGoalObjective.ts"
+import ObjectiveInterface from "@/module/Objective/Domain/ObjectiveInterface.ts"
+import createObjective from "@/module/Objective/Domain/createObjective.ts"
 import MetricTypeInterface from "@/module/MetricType/Domain/MetricTypeInterface.ts"
 import formDataToObject from "@/module/Shared/Application/Form/formDataToObject.ts"
 import { TimePeriodEnum } from "@/module/Shared/Application/Date/TimePeriodEnum.ts"
-import { GoalObjectiveTypeEnum } from "@/module/GoalObjective/Domain/GoalObjectiveTypeEnum.ts"
+import { GoalObjectiveTypeEnum } from "@/module/Objective/Domain/GoalObjectiveTypeEnum.ts"
 
 interface GoalObjectiveFormComponentPropsInterface {
-  addGoalObjective: (goalObjective: GoalObjectiveInterface) => void
+  addGoalObjective: (objective: ObjectiveInterface) => void
   metricTypes: MetricTypeInterface[]
   metricType?: MetricTypeInterface
 }
 
-export function GoalObjectiveFormComponent(
+export function ObjectiveFormComponent(
   props: GoalObjectiveFormComponentPropsInterface
 ) {
-  const [newGoalOjective, setGoalOjective] = useState<GoalObjectiveInterface>(
-    createGoalObjective()
+  const [newGoalOjective, setGoalOjective] = useState<ObjectiveInterface>(
+    createObjective()
   )
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     const formData = {
       ...newGoalOjective,
-      ...formDataToObject<GoalObjectiveInterface>(event.target as HTMLFormElement),
+      ...formDataToObject<ObjectiveInterface>(event.target as HTMLFormElement),
     }
 
     formData.value = Number(formData.value)
 
     props.addGoalObjective(formData)
-    setGoalOjective(createGoalObjective())
+    setGoalOjective(createObjective())
   }
 
   return (

@@ -1,9 +1,9 @@
 import DayInterface from "@/module/Day/Domain/DayInterface.ts"
 import MetricTypeInterface from "@/module/MetricType/Domain/MetricTypeInterface.ts"
 import { DayTableItemComponent } from "@/module/Application/Page/DayPage/Component/DayTableItemComponent.tsx"
-import createGoalMetricList from "@/module/GoalMetric/Domain/createGoalMetricList.ts"
+import createMetricList from "@/module/Metric/Domain/createMetricList.ts"
 import updateById from "@/module/Shared/Application/Id/updateById.ts"
-import GoalMetricInterface from "@/module/GoalMetric/Domain/GoalMetricInterface.ts"
+import MetricInterface from "@/module/Metric/Domain/MetricInterface.ts"
 import { Table, TableContainer, Tbody, Th, Thead, Tr } from "@chakra-ui/react"
 
 export interface DayComponentPropsInterface {
@@ -13,8 +13,8 @@ export interface DayComponentPropsInterface {
 }
 
 export function DayTableComponent(props: DayComponentPropsInterface) {
-  const updateHandler = (goalMetric: GoalMetricInterface) => {
-    updateById(goalMetric, props.day.goalMetrics)
+  const updateHandler = (metric: MetricInterface) => {
+    updateById(metric, props.day.metrics)
     props.onUpdateDay(props.day)
   }
 
@@ -31,12 +31,12 @@ export function DayTableComponent(props: DayComponentPropsInterface) {
             </Tr>
           </Thead>
           <Tbody>
-            {createGoalMetricList(props.day.goalMetrics, props.metricTypes).map(
-              (goalMetric) => (
+            {createMetricList(props.day.metrics, props.metricTypes).map(
+              (metric) => (
                 <DayTableItemComponent
-                  key={goalMetric.id}
+                  key={metric.id}
                   onUpdate={updateHandler}
-                  goalMetric={goalMetric}
+                  metric={metric}
                 />
               )
             )}

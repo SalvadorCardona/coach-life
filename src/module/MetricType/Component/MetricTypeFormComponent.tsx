@@ -7,7 +7,7 @@ import { FormControl, FormLabel, Input, Select } from "@chakra-ui/react"
 import { ButtonComponent } from "@/module/Shared/Component/Form/ButtonComponent.tsx"
 import { WrapperComponent } from "@/module/Shared/Component/WrapperComponent.tsx"
 import formDataToObject from "@/module/Shared/Application/Form/formDataToObject.ts"
-import GoalObjectiveInterface from "@/module/GoalObjective/Domain/GoalObjectiveInterface.ts"
+import ObjectiveInterface from "@/module/Objective/Domain/ObjectiveInterface.ts"
 
 export interface MetricTypeFormComponentPropsInterface {
   updateMetricType: (metricType: MetricTypeInterface) => void
@@ -26,7 +26,7 @@ export function MetricTypeFormComponent(
 
     const formData = {
       ...newMetricType,
-      ...formDataToObject<GoalObjectiveInterface>(event.target as HTMLFormElement),
+      ...formDataToObject<ObjectiveInterface>(event.target as HTMLFormElement),
     }
 
     formData.defaultValue = Number(formData.defaultValue)

@@ -4,7 +4,7 @@ import MetricTypeInterface from "@/module/MetricType/Domain/MetricTypeInterface.
 import { useEffect, useRef } from "react"
 import { ChartConfiguration, ChartDataset } from "chart.js"
 import Chart from "chart.js/auto"
-import getMetricsByMetricTypeId from "@/module/GoalMetric/Domain/getMetricsByMetricTypeId.ts"
+import getMetricsByMetricTypeId from "@/module/Metric/Domain/getMetricsByMetricTypeId.ts"
 import { useTheme } from "@chakra-ui/react"
 
 export interface GlobalStatisticComponentPropsInterface {
@@ -51,7 +51,7 @@ export function GlobalStatisticComponent(
   datasets = metricTypes.map((metricType) => {
     const values: number[] = []
     days.forEach((day) => {
-      getMetricsByMetricTypeId(day.goalMetrics, metricType.id).forEach((metric) => {
+      getMetricsByMetricTypeId(day.metrics, metricType.id).forEach((metric) => {
         values.push(metric?.value ?? 0)
       })
     })

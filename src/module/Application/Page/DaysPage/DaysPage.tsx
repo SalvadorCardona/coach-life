@@ -14,7 +14,7 @@ import {
 import { useMetricTypeStore } from "@/module/MetricType/Application/MetricTypeStore.ts"
 import { DayItemTableComponent } from "@/module/Application/Page/DaysPage/Component/DayItemTableComponent.tsx"
 import createDaysOfMonth from "@/module/Day/Domain/createDaysOfMonth.ts"
-import { useGoalMetricStore } from "@/module/GoalMetric/Application/GoalMetricStore.ts"
+import { useMetricStore } from "@/module/Metric/Application/MetricStore.ts"
 import { formatDateWithoutDay } from "@/module/Shared/Application/Date/formatDateWithoutDay.ts"
 import { ButtonComponent } from "@/module/Shared/Component/Form/ButtonComponent.tsx"
 
@@ -26,14 +26,14 @@ import { IoIosAdd } from "react-icons/io"
 export function DaysPage() {
   const dayStore = useDayStore()
   const metricTypeStore = useMetricTypeStore()
-  const goalMetricStore = useGoalMetricStore()
+  const metricStore = useMetricStore()
   const [currentDate, currentDateSetter] = useState<Date>(new Date())
   const { isOpen, onOpen, onClose } = useDisclosure()
   const days = createDaysOfMonth({
     month: currentDate.getMonth(),
     year: currentDate.getFullYear(),
     days: dayStore.items,
-    goalMetrics: goalMetricStore.items,
+    metrics: metricStore.items,
     metricTypes: metricTypeStore.items,
   }).reverse()
 

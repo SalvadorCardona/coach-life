@@ -17,12 +17,12 @@ export function StatisticItemComponent(props: StatisticItemComponentPropsInterfa
 
   const dayList = props.days.map((day) => formatDate(day.createdDate))
 
-  const goalMetricValueList = props.days.map((day) => {
-    const goalMetric = day.goalMetrics.find((goalMetric) => {
-      return goalMetric.metricType?.id === props.metricType.id
+  const metricValueList = props.days.map((day) => {
+    const metric = day.metrics.find((metric) => {
+      return metric.metricType?.id === props.metricType.id
     })
 
-    return goalMetric ? goalMetric.value : 0
+    return metric ? metric.value : 0
   })
 
   useEffect(() => {
@@ -32,7 +32,7 @@ export function StatisticItemComponent(props: StatisticItemComponentPropsInterfa
       labels: dayList,
       datasets: [
         {
-          data: goalMetricValueList,
+          data: metricValueList,
           fill: true,
           backgroundColor: "rgba(75,192,192,0.2)",
           borderColor: "rgba(75,192,192,1)",

@@ -10,13 +10,13 @@ import {
 } from "@chakra-ui/react"
 import { MetricTypeFormComponent } from "@/module/MetricType/Component/MetricTypeFormComponent.tsx"
 import MetricTypeInterface from "@/module/MetricType/Domain/MetricTypeInterface.ts"
-import { GoalObjectiveFormComponent } from "@/module/GoalObjective/Component/GoalObjectiveFormComponent.tsx"
+import { ObjectiveFormComponent } from "@/module/Objective/Component/ObjectiveFormComponent.tsx"
 import { useState } from "react"
-import { useGoalObjectiveStore } from "@/module/GoalObjective/Application/GoalObjectiveStore.ts"
+import { useObjectiveStore } from "@/module/Objective/Application/ObjectiveStore.ts"
 
 export function MetricTypePage() {
   const metricTypesStore = useMetricTypeStore()
-  const goalObjectivesStore = useGoalObjectiveStore()
+  const objectivesStore = useObjectiveStore()
   const [metricType, setMetricType] = useState<MetricTypeInterface | null>(null)
   const { isOpen, onOpen, onClose } = useDisclosure()
   const addObjective = (metricType: MetricTypeInterface): void => {
@@ -33,7 +33,7 @@ export function MetricTypePage() {
             updateMetricType={metricTypesStore.updateMetricType}
             metricTypes={metricTypesStore.items}
             openModal={addObjective}
-            goalObjectives={goalObjectivesStore.goalObjectives}
+            objectives={objectivesStore.items}
           />
         </Box>
         <Box>
@@ -45,13 +45,13 @@ export function MetricTypePage() {
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
-          <GoalObjectiveFormComponent
+          <ObjectiveFormComponent
             {...{
               metricType: metricType as MetricTypeInterface,
-              addGoalObjective: goalObjectivesStore.updateGoalObjective,
+              addGoalObjective: objectivesStore.updateObjective,
               metricTypes: metricTypesStore.items,
             }}
-          ></GoalObjectiveFormComponent>
+          ></ObjectiveFormComponent>
         </ModalContent>
       </Modal>
     </>

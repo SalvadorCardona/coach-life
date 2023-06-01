@@ -1,15 +1,15 @@
 import MetricTypeInterface from "@/module/MetricType/Domain/MetricTypeInterface.ts"
 import { MetricTypeTableItemComponent } from "@/module/Application/Page/MetricTypePage/Component/MetricTypeTableItemComponent.tsx"
 import { Table, TableContainer, Tbody, Th, Thead, Tr } from "@chakra-ui/react"
-import GoalObjectiveInterface from "@/module/GoalObjective/Domain/GoalObjectiveInterface.ts"
-import getObjectiveByMetricTypeId from "@/module/GoalObjective/Domain/getObjectiveByMetricTypeId.ts"
+import ObjectiveInterface from "@/module/Objective/Domain/ObjectiveInterface.ts"
+import getObjectiveByMetricTypeId from "@/module/Objective/Domain/getObjectiveByMetricTypeId.ts"
 
 export interface MetricTypeListComponentPropsInterface {
   metricTypes: MetricTypeInterface[]
   updateMetricType: (metricType: MetricTypeInterface) => void
   removeMetricType: (metricType: MetricTypeInterface) => void
   openModal: (metricType: MetricTypeInterface) => void
-  goalObjectives: GoalObjectiveInterface[]
+  objectives: ObjectiveInterface[]
 }
 
 export function MetricTypeTableComponent(
@@ -34,9 +34,9 @@ export function MetricTypeTableComponent(
                 removeHandler={props.removeMetricType}
                 metricType={metricType}
                 openModal={props.openModal}
-                goalObjectives={getObjectiveByMetricTypeId(
+                objectives={getObjectiveByMetricTypeId(
                   metricType.id,
-                  props.goalObjectives
+                  props.objectives
                 )}
               />
             ))}

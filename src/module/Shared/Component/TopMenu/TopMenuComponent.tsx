@@ -21,7 +21,7 @@ import { useDayStore } from "@/module/Day/Application/DayStore.ts"
 import { BiChevronRight } from "react-icons/bi"
 import { FiArrowDownRight } from "react-icons/fi"
 import { IoLogoVue } from "react-icons/io5"
-import { useGoalMetricStore } from "@/module/GoalMetric/Application/GoalMetricStore.ts"
+import { useMetricStore } from "@/module/Metric/Application/MetricStore.ts"
 
 function showWorkInProgress() {
   alert("work in progress")
@@ -31,10 +31,10 @@ export default function TopMenuComponent() {
   const { isOpen } = useDisclosure()
   const metricTypesStore = useMetricTypeStore()
   const dayStore = useDayStore()
-  const goalMetricStore = useGoalMetricStore()
+  const metricStore = useMetricStore()
 
   const makeFakeData = () => {
-    createMockData(dayStore, goalMetricStore, metricTypesStore)
+    createMockData(dayStore, metricStore, metricTypesStore)
   }
 
   return (
