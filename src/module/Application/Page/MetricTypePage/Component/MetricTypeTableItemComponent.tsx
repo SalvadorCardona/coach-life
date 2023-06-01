@@ -1,9 +1,11 @@
 import MetricTypeInterface from "@/module/MetricType/Domain/MetricTypeInterface.ts"
 import { Td, Tr, Icon } from "@chakra-ui/react"
 import { ButtonComponent } from "@/module/Shared/Component/Form/ButtonComponent.tsx"
-import { IoIosAdd, RxCross2 } from "react-icons/all"
+
 import { LightTextComponent } from "@/module/Shared/Component/Typography/LightTextComponent.tsx"
 import GoalObjectiveInterface from "@/module/GoalObjective/Domain/GoalObjectiveInterface.ts"
+import { IoIosAdd } from "react-icons/io"
+import { RxCross2 } from "react-icons/rx"
 
 export interface MetricTypeComponentPropsInterface {
   metricType: MetricTypeInterface

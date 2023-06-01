@@ -5,17 +5,19 @@ import {
   getRouteByPath,
   NavigationItemInterface,
 } from "@/module/Application/routes.tsx"
-import { RxHamburgerMenu } from "react-icons/all"
+
 import { Box, Button, Flex, Icon, useColorModeValue, Text } from "@chakra-ui/react"
 
 import { Link as RouterLink, useLocation } from "react-router-dom"
+import { RxHamburgerMenu } from "react-icons/rx"
+import isMobile from "@/module/Shared/Infratructure/isMobile.ts"
 
 export interface NavigationComponentPropsInterface {
   open?: boolean
 }
 
 export function NavigationComponent(props: NavigationComponentPropsInterface) {
-  const [open, setOpen] = useState<boolean>(props.open ?? true)
+  const [open, setOpen] = useState<boolean>(props?.open ? props.open : !isMobile())
   const currentRoute = getRouteByPath(useLocation().pathname)
 
   const selectedStyle = {

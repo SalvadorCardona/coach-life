@@ -17,9 +17,11 @@ import createDaysOfMonth from "@/module/Day/Domain/createDaysOfMonth.ts"
 import { useGoalMetricStore } from "@/module/GoalMetric/Application/GoalMetricStore.ts"
 import { formatDateWithoutDay } from "@/module/Shared/Application/Date/formatDateWithoutDay.ts"
 import { ButtonComponent } from "@/module/Shared/Component/Form/ButtonComponent.tsx"
-import { BiChevronLeft, IoIosAdd, BiChevronRight } from "react-icons/all"
+
 import { useState } from "react"
 import { ModalMetricTypeFormComponent } from "@/module/MetricType/Component/ModalMetricTypeFormComponent.tsx"
+import { BiChevronLeft, BiChevronRight } from "react-icons/bi"
+import { IoIosAdd } from "react-icons/io"
 
 export function DaysPage() {
   const dayStore = useDayStore()

@@ -1,8 +1,9 @@
 import GoalObjectiveInterface from "@/module/GoalObjective/Domain/GoalObjectiveInterface.ts"
 import { Tr, Td } from "@chakra-ui/react"
 import { ButtonComponent } from "@/module/Shared/Component/Form/ButtonComponent.tsx"
-import { RxCross2 } from "react-icons/all"
+
 import MetricTypeInterface from "@/module/MetricType/Domain/MetricTypeInterface.ts"
+import { RxCross2 } from "react-icons/rx"
 
 export interface GoalObjectiveItemComponentPropsInterface {
   goalObjective: GoalObjectiveInterface

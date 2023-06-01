@@ -1,10 +1,11 @@
 import MetricTypeInterface from "@/module/MetricType/Domain/MetricTypeInterface.ts"
 import { useEffect, useRef } from "react"
-import { Chart, ChartConfiguration } from "chart.js"
+import Chart from "chart.js/auto"
 import { WrapperComponent } from "@/module/Shared/Component/WrapperComponent.tsx"
 import { SubTitleComponent } from "@/module/Shared/Component/Typography/SubTitleComponent.tsx"
 import DayInterface from "@/module/Day/Domain/DayInterface.ts"
 import { formatDate } from "@/module/Shared/Application/Date/formatDate.ts"
+import { ChartConfiguration } from "chart.js"
 
 export interface StatisticItemComponentPropsInterface {
   metricType: MetricTypeInterface
@@ -42,6 +43,17 @@ export function StatisticItemComponent(props: StatisticItemComponentPropsInterfa
     const config: ChartConfiguration = {
       type: "line",
       data: data,
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            display: false,
+          },
+          title: {
+            display: false,
+          },
+        },
+      },
     }
 
     const myChart = new Chart(ref.current, config)

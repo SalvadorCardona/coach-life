@@ -1,17 +1,20 @@
 import { HomeNavigationComponent } from "@/module/Application/Page/Home/Component/HomeNavigationComponent.tsx"
 import { SubTitleComponent } from "@/module/Shared/Component/Typography/SubTitleComponent.tsx"
-import { SeparatorComponent } from "@/module/Shared/Component/SeparatorComponent.tsx"
 import { GlobalStatisticComponent } from "@/module/Shared/Component/Stat/GlobalStatisticComponent.tsx"
 import { useDayStore } from "@/module/Day/Application/DayStore.ts"
 import { useMetricTypeStore } from "@/module/MetricType/Application/MetricTypeStore.ts"
 import createDaysOfMonth from "@/module/Day/Domain/createDaysOfMonth.ts"
 import { useGoalMetricStore } from "@/module/GoalMetric/Application/GoalMetricStore.ts"
 import { formatDateWithoutDay } from "@/module/Shared/Application/Date/formatDateWithoutDay.ts"
-import { Text } from "@chakra-ui/react"
+import { Grid, GridItem, Text } from "@chakra-ui/react"
+import { DayTableComponent } from "@/module/Application/Page/DayPage/Component/DayTableComponent.tsx"
+import createDay from "@/module/Day/Domain/createDay.ts"
+import serializerDate from "@/module/Shared/Application/Date/serializerDate.ts"
 export function HomePage() {
   const dayStore = useDayStore()
-  const metricTypeStore = useMetricTypeStore()
+  const metricTypesStore = useMetricTypeStore()
   const currentDate = new Date()
+  const currentDateSerialized = serializerDate(currentDate)
   const goalMetricStore = useGoalMetricStore()
 
   const days = createDaysOfMonth({
@@ -19,22 +22,40 @@ export function HomePage() {
     year: currentDate.getFullYear(),
     days: dayStore.items,
     goalMetrics: goalMetricStore.items,
-    metricTypes: metricTypeStore.items,
+    metricTypes: metricTypesStore.items,
   }).reverse()
 
   return (
     <>
       <HomeNavigationComponent />
-      <SeparatorComponent orientation="horizontal" my={5} />
-      <SubTitleComponent>
-        <Text as="span" textTransform={"uppercase"}>
-          {formatDateWithoutDay(currentDate)} statistics
-        </Text>
-      </SubTitleComponent>
-      <GlobalStatisticComponent
-        days={days}
-        metricTypes={metricTypeStore.items}
-      ></GlobalStatisticComponent>
+      <Grid templateColumns={["repeat(1, 1fr)", "repeat(2, 1fr)"]} gap={6} mt={5}>
+        <GridItem>
+          <SubTitleComponent>
+            <Text as="span" textTransform={"uppercase"}>
+              {formatDateWithoutDay(currentDate)} statistics
+            </Text>
+          </SubTitleComponent>
+          <GlobalStatisticComponent
+            days={days}
+            metricTypes={metricTypesStore.items}
+          ></GlobalStatisticComponent>
+        </GridItem>
+        <GridItem>
+          <SubTitleComponent>
+            <Text as="span" textTransform={"uppercase"}>
+              Your Days Metrics
+            </Text>
+          </SubTitleComponent>
+          <DayTableComponent
+            metricTypes={metricTypesStore.items}
+            day={
+              dayStore.getDayByDate(currentDateSerialized) ??
+              createDay({ createdDate: currentDateSerialized })
+            }
+            onUpdateDay={dayStore.updateDay}
+          />
+        </GridItem>
+      </Grid>
     </>
   )
 }

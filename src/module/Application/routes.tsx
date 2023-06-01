@@ -2,19 +2,16 @@ import { IndexRouteObject } from "react-router-dom"
 import { DayPage } from "@/module/Application/Page/DayPage/DayPage.tsx"
 import { StatisticPage } from "@/module/Application/Page/StaticticPage/StatisticPage.tsx"
 import { ComponentType } from "react"
-import {
-  BiObjectsVerticalBottom,
-  BsCalendarDay,
-  FiHome,
-  FiTrendingUp,
-  GiTargetArrows,
-} from "react-icons/all"
 import { LayoutComponent } from "@/module/Application/Component/LayoutComponent.tsx"
 import { NonIndexRouteObject } from "react-router/dist/lib/context"
 import { MetricTypePage } from "@/module/Application/Page/MetricTypePage/MetricTypePage.tsx"
 import { GoalObjectivePage } from "@/module/Application/Page/GoalObjectivePage/GoalObjectivePage.tsx"
 import { DaysPage } from "@/module/Application/Page/DaysPage/DaysPage.tsx"
 import { HomePage } from "@/module/Application/Page/Home/HomePage.tsx"
+import { FiHome, FiTrendingUp } from "react-icons/fi"
+import { BiObjectsVerticalBottom } from "react-icons/bi"
+import { GiTargetArrows } from "react-icons/gi"
+import { BsCalendarDay } from "react-icons/bs"
 
 export enum RoutesEnum {
   HOME = "home",

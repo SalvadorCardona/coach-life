@@ -1,4 +1,4 @@
-import calculateObjective from "@/module/GoalObjective/Domain/calculateObjective.ts"
+import calculateObjective from "@/module/GoalObjective/Domain/calculate/calculateObjective.ts"
 import { GoalObjectiveTypeEnum } from "@/module/GoalObjective/Domain/GoalObjectiveTypeEnum.ts"
 
 test("calculateObjective: With zero", () => {

@@ -12,7 +12,7 @@ import { formatDate } from "@/module/Shared/Application/Date/formatDate.ts"
 import updateById from "@/module/Shared/Application/Id/updateById.ts"
 import createGoalMetric from "@/module/GoalMetric/Domain/createGoalMetric.ts"
 import { useGoalObjectiveStore } from "@/module/GoalObjective/Application/GoalObjectiveStore.ts"
-import calculateDayObjective from "@/module/GoalObjective/Domain/calculateDayObjective.ts"
+import calculateDayObjective from "@/module/GoalObjective/Domain/calculate/calculateDayObjective.ts"
 import ratioTOPercentage from "@/module/Shared/Application/Math/ratioTOPercentage.ts"
 
 export interface DayItemTableComponentPropsInterface {

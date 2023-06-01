@@ -2,7 +2,7 @@ import DayInterface from "@/module/Day/Domain/DayInterface.ts"
 import GoalObjectiveInterface from "@/module/GoalObjective/Domain/GoalObjectiveInterface.ts"
 import { Ratio } from "@/module/Shared/Application/Math/calculateRatio.ts"
 
-import calculateObjective from "@/module/GoalObjective/Domain/calculateObjective.ts"
+import calculateObjective from "@/module/GoalObjective/Domain/calculate/calculateObjective.ts"
 
 export default function calculateDayObjective(
   day: DayInterface,

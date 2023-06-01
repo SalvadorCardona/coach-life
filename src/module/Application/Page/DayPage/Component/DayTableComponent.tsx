@@ -4,7 +4,6 @@ import { DayTableItemComponent } from "@/module/Application/Page/DayPage/Compone
 import createGoalMetricList from "@/module/GoalMetric/Domain/createGoalMetricList.ts"
 import updateById from "@/module/Shared/Application/Id/updateById.ts"
 import GoalMetricInterface from "@/module/GoalMetric/Domain/GoalMetricInterface.ts"
-import { TitleComponent } from "@/module/Shared/Component/Typography/TitleComponent.tsx"
 import { Table, TableContainer, Tbody, Th, Thead, Tr } from "@chakra-ui/react"
 
 export interface DayComponentPropsInterface {
@@ -21,7 +20,6 @@ export function DayTableComponent(props: DayComponentPropsInterface) {
 
   return (
     <>
-      <TitleComponent>Your data goal</TitleComponent>
       <TableContainer>
         <Table variant="simple">
           <Thead>

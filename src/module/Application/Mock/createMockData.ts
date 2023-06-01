@@ -1,5 +1,4 @@
 import { DayState } from "@/module/Day/Application/DayStore.ts"
-import { GoalObjectiveState } from "@/module/GoalObjective/Application/GoalObjectiveStore.ts"
 import { MetricTypeState } from "@/module/MetricType/Application/MetricTypeStore.ts"
 import createDaysOfMonth from "@/module/Day/Domain/createDaysOfMonth.ts"
 import { GoalMetricState } from "@/module/GoalMetric/Application/GoalMetricStore.ts"
@@ -7,7 +6,7 @@ import { GoalMetricState } from "@/module/GoalMetric/Application/GoalMetricStore
 export function createMockData(
   dayStore: DayState,
   goalMetricStore: GoalMetricState,
-  metricTypeState: MetricTypeState
+  metricTypeStore: MetricTypeState
 ): void {
   const currentDate = new Date()
 
@@ -16,13 +15,15 @@ export function createMockData(
     year: currentDate.getFullYear(),
     days: dayStore.items,
     goalMetrics: goalMetricStore.items,
-    metricTypes: metricTypeState.items,
+    metricTypes: metricTypeStore.items,
   }).reverse()
 
   days.forEach((day) => {
     day.goalMetrics.forEach((metric) => {
-      metric.value = Math.floor(Math.random() * 11)
+      metric.value = Math.floor(Math.random() * 5)
     })
     dayStore.updateDay(day)
   })
+
+  window.location.reload()
 }

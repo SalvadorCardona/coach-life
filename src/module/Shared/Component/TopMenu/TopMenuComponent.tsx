@@ -15,16 +15,16 @@ import {
   useBreakpointValue,
   useDisclosure,
 } from "@chakra-ui/react"
-import {
-  RxCross2,
-  BiChevronRight,
-  FiArrowDownRight,
-  FaHamburger,
-  IoLogoVue,
-} from "react-icons/all"
+
 import { createMockData } from "@/module/Application/Mock/createMockData.ts"
 import { useMetricTypeStore } from "@/module/MetricType/Application/MetricTypeStore.ts"
 import { useDayStore } from "@/module/Day/Application/DayStore.ts"
+import { BiChevronRight } from "react-icons/bi"
+import { FiArrowDownRight } from "react-icons/fi"
+import { FaHamburger } from "react-icons/fa"
+import { RxCross2 } from "react-icons/rx"
+import { IoLogoVue } from "react-icons/io5"
+import { useGoalMetricStore } from "@/module/GoalMetric/Application/GoalMetricStore.ts"
 
 function showWorkInProgress() {
   alert("work in progress")
@@ -34,9 +34,10 @@ export default function TopMenuComponent() {
   const { isOpen, onToggle } = useDisclosure()
   const metricTypesStore = useMetricTypeStore()
   const dayStore = useDayStore()
+  const goalMetricStore = useGoalMetricStore()
 
   const makeFakeData = () => {
-    createMockData(dayStore)
+    createMockData(dayStore, goalMetricStore, metricTypesStore)
   }
 
   return (

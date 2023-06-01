@@ -5,6 +5,7 @@ import { CalendarComponent } from "@/module/Calendar/Component/CalendarComponent
 import { DayTableComponent } from "@/module/Application/Page/DayPage/Component/DayTableComponent.tsx"
 import { Box } from "@chakra-ui/react"
 import createDay from "@/module/Day/Domain/createDay.ts"
+import { TitleComponent } from "@/module/Shared/Component/Typography/TitleComponent.tsx"
 
 export function DayPage() {
   const metricTypesStore = useMetricTypeStore()
@@ -18,6 +19,7 @@ export function DayPage() {
         onClick={calendarStore.update}
       />
       <Box mt={5}>
+        <TitleComponent>Your data goal</TitleComponent>
         <DayTableComponent
           metricTypes={metricTypesStore.items}
           day={

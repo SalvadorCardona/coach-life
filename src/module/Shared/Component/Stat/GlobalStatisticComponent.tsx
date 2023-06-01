@@ -1,9 +1,9 @@
 import DayInterface from "@/module/Day/Domain/DayInterface.ts"
 import { formatDate } from "@/module/Shared/Application/Date/formatDate.ts"
 import MetricTypeInterface from "@/module/MetricType/Domain/MetricTypeInterface.ts"
-import { ChartConfiguration, ChartDataset } from "chart.js/dist/types"
 import { useEffect, useRef } from "react"
-import { Chart } from "chart.js"
+import { ChartConfiguration, ChartDataset } from "chart.js"
+import Chart from "chart.js/auto"
 import getMetricsByMetricTypeId from "@/module/GoalMetric/Domain/getMetricsByMetricTypeId.ts"
 import { useTheme } from "@chakra-ui/react"
 
@@ -12,13 +12,19 @@ export interface GlobalStatisticComponentPropsInterface {
   metricTypes: MetricTypeInterface[]
 }
 
-function createDataSet(label: string, values: number[]): ChartDataset {
+function createDataSet(
+  label: string,
+  values: number[],
+  colors: string[]
+): ChartDataset {
+  const color = colors[Math.floor(Math.random() * colors.length)]
+
   return {
     label: label,
     data: values,
     fill: true,
-    backgroundColor: "rgba(75,192,192,1)",
-    borderColor: "rgba(75,192,192,1)",
+    backgroundColor: "transparent",
+    borderColor: color,
   }
 }
 
@@ -31,15 +37,15 @@ export function GlobalStatisticComponent(
 
   let datasets: ChartDataset[] = []
 
-  const theme = useTheme()
+  const themeColors = useTheme().colors
+  const colors: string[] = []
 
-  days.forEach((day) => {
-    datasets = metricTypes.map((metricType) => {
-      const metrics = getMetricsByMetricTypeId(day.goalMetrics, metricType.id).map(
-        (metric) => metric?.value ?? 0
-      )
-      return createDataSet(metricType.name, metrics)
-    })
+  Object.keys(themeColors).forEach((color) => {
+    if (["black", "transparent", "blackAlpha", "white"].includes(color)) return
+    const currentColor = themeColors[color]["400"]
+    if (currentColor) {
+      colors.push(currentColor)
+    }
   })
 
   datasets = metricTypes.map((metricType) => {
@@ -50,7 +56,7 @@ export function GlobalStatisticComponent(
       })
     })
 
-    return createDataSet(metricType.name, values)
+    return createDataSet(metricType.name, values, colors)
   })
 
   const config: ChartConfiguration = {
@@ -63,10 +69,11 @@ export function GlobalStatisticComponent(
       responsive: true,
       plugins: {
         legend: {
-          position: "top",
+          position: "right",
+          display: true,
         },
         title: {
-          display: true,
+          display: false,
           text: "Chart.js Line Chart",
         },
       },
