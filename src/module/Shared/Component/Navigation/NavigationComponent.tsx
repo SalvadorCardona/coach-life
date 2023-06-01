@@ -1,13 +1,10 @@
 import { useState } from "react"
-
 import {
   getMenuRoutes,
   getRouteByPath,
   NavigationItemInterface,
 } from "@/module/Application/routes.tsx"
-
 import { Box, Button, Flex, Icon, useColorModeValue, Text } from "@chakra-ui/react"
-
 import { Link as RouterLink, useLocation } from "react-router-dom"
 import { RxHamburgerMenu } from "react-icons/rx"
 import isMobile from "@/module/Shared/Infratructure/isMobile.ts"

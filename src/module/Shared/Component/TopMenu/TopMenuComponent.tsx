@@ -2,7 +2,6 @@ import {
   Box,
   Flex,
   Text,
-  IconButton,
   Button,
   Stack,
   Collapse,
@@ -21,8 +20,6 @@ import { useMetricTypeStore } from "@/module/MetricType/Application/MetricTypeSt
 import { useDayStore } from "@/module/Day/Application/DayStore.ts"
 import { BiChevronRight } from "react-icons/bi"
 import { FiArrowDownRight } from "react-icons/fi"
-import { FaHamburger } from "react-icons/fa"
-import { RxCross2 } from "react-icons/rx"
 import { IoLogoVue } from "react-icons/io5"
 import { useGoalMetricStore } from "@/module/GoalMetric/Application/GoalMetricStore.ts"
 
@@ -31,7 +28,7 @@ function showWorkInProgress() {
 }
 
 export default function TopMenuComponent() {
-  const { isOpen, onToggle } = useDisclosure()
+  const { isOpen } = useDisclosure()
   const metricTypesStore = useMetricTypeStore()
   const dayStore = useDayStore()
   const goalMetricStore = useGoalMetricStore()
@@ -57,14 +54,7 @@ export default function TopMenuComponent() {
           flex={{ base: 1, md: "auto" }}
           ml={{ base: -2 }}
           display={{ base: "flex", md: "none" }}
-        >
-          <IconButton
-            onClick={onToggle}
-            icon={isOpen ? <RxCross2 w={3} h={3} /> : <FaHamburger w={5} h={5} />}
-            variant={"ghost"}
-            aria-label={"Toggle Navigation"}
-          />
-        </Flex>
+        ></Flex>
         <Flex flex={{ base: 1 }} justify={{ base: "center", md: "start" }}>
           <Text
             textAlign={useBreakpointValue({ base: "center", md: "left" })}

@@ -32,6 +32,7 @@ export const useDayStore = create<DayState>((set, getState) => ({
 
     updateById(day, days)
     set({ items: days })
+
     persistDays(days)
   },
   getDayByDate: (date: DateString) => {

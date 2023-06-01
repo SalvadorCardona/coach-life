@@ -27,7 +27,7 @@ export function MetricTypeTableItemComponent(
           </LightTextComponent>
 
           {props.goalObjectives.map((goalObjective) => (
-            <LightTextComponent fontSize={"xs"} ml={5}>
+            <LightTextComponent fontSize={"xs"} ml={5} key={goalObjective.id}>
               • {goalObjective.name}
             </LightTextComponent>
           ))}

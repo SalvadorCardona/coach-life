@@ -11,7 +11,7 @@ export function StatisticPage() {
     <Flex>
       {metricTypeStore.items.map((metricType) => {
         return (
-          <Box mr={5}>
+          <Box mr={5} key={metricType.id}>
             <StatisticItemComponent metricType={metricType} days={dayStore.items} />
           </Box>
         )

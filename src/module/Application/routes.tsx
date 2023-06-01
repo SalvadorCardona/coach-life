@@ -12,6 +12,8 @@ import { FiHome, FiTrendingUp } from "react-icons/fi"
 import { BiObjectsVerticalBottom } from "react-icons/bi"
 import { GiTargetArrows } from "react-icons/gi"
 import { BsCalendarDay } from "react-icons/bs"
+import { TodoPage } from "@/module/Application/Page/TodoPage/TodoPage.tsx"
+import { FcTodoList } from "react-icons/fc"
 
 export enum RoutesEnum {
   HOME = "home",
@@ -20,6 +22,7 @@ export enum RoutesEnum {
   GOAL_OBJECTIVE = "goal-objective",
   DAYS = "days",
   DAY = "day",
+  TODO = "todo",
 }
 
 export interface NavigationItemInterface extends NonIndexRouteObject {
@@ -85,6 +88,15 @@ export const childrenRoutes: NavigationItemInterface[] = [
     name: "Statistic",
     title: "Your statistic",
     subTitle: "Show yours statistics",
+  },
+  {
+    path: "/todo",
+    element: <TodoPage />,
+    id: RoutesEnum.TODO,
+    icon: FcTodoList,
+    name: "Todo Page",
+    title: "Your todo list",
+    subTitle: "Show yours todos",
   },
 ]
 

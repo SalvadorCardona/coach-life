@@ -3,12 +3,17 @@ import { getMenuRoutes } from "@/module/Application/routes.tsx"
 import { Link as RouterLink } from "react-router-dom"
 import { WrapperComponent } from "@/module/Shared/Component/WrapperComponent.tsx"
 import { SeparatorComponent } from "@/module/Shared/Component/SeparatorComponent.tsx"
+import isMobile from "@/module/Shared/Infratructure/isMobile.ts"
 
 export function HomeNavigationComponent() {
   const routes = getMenuRoutes().filter((route) => route.path !== "/")
   return (
     <>
-      <Grid templateColumns={["repeat(2, 1fr)", "repeat(4, 1fr)"]} gap={6}>
+      <Grid
+        templateColumns={["repeat(2, 1fr)", "repeat(4, 1fr)"]}
+        gap={6}
+        hidden={isMobile()}
+      >
         {routes.map((route) => {
           return (
             <GridItem key={route.name}>
