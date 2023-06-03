@@ -58,8 +58,8 @@ export const childrenRoutes: NavigationItemInterface[] = [
     element: <MetricTypePage />,
     id: RoutesEnum.METRIC_TYPE,
     icon: BiObjectsVerticalBottom,
-    name: "Goal Metric Type",
-    title: "Your goals types",
+    name: "Metric Type",
+    title: "Your metrics types",
     subTitle: "Show yours metric type",
   },
   {

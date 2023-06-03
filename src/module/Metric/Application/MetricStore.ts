@@ -12,12 +12,13 @@ import getItemById from "@/module/Shared/Application/Id/getItemById.ts"
 
 export interface MetricState {
   items: MetricInterface[]
-  updateGoalMetric: (metric: MetricInterface) => void
+  updateMetric: (metric: MetricInterface) => void
+  updateAll: (items: MetricInterface[]) => void
 }
 
 export const useMetricStore = create<MetricState>((set, getState) => ({
   items: restoreMetric(),
-  updateGoalMetric: (metric: MetricInterface) => {
+  updateMetric: (metric: MetricInterface) => {
     const metrics = getState().items
 
     if (!getItemById(metric.id, metrics)) {
@@ -27,5 +28,9 @@ export const useMetricStore = create<MetricState>((set, getState) => ({
     updateById(metric, metrics)
     set({ items: metrics })
     persistMetric(metrics)
+  },
+  updateAll: (items: MetricInterface[]) => {
+    set({ items })
+    persistMetric(items)
   },
 }))

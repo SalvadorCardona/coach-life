@@ -17,7 +17,6 @@ interface ArgsInterface {
 }
 export default function createDaysOfMonth(args: ArgsInterface): DayInterface[] {
   const daysOfMonth = getDaysInMonth(args.year, args.month)
-
   return daysOfMonth.map((date) => {
     return (
       getDayByDate(serializerDate(date), args.days) ??

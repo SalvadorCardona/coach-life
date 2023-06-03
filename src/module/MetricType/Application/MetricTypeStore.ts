@@ -25,6 +25,7 @@ export const useMetricTypeStore = create<MetricTypeState>((set, getState) => ({
   updateMetricType: (metricType: MetricTypeInterface) => {
     const metricTypes = getState().items
     const metricTypeToUpdate = getItemById(metricType.id, metricTypes)
+
     metricTypeToUpdate
       ? updateById(metricType, metricTypes)
       : metricTypes.push(metricType)

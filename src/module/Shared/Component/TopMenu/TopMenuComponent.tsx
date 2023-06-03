@@ -14,14 +14,10 @@ import {
   useBreakpointValue,
   useDisclosure,
 } from "@chakra-ui/react"
-
 import { createMockData } from "@/module/Application/Mock/createMockData.ts"
-import { useMetricTypeStore } from "@/module/MetricType/Application/MetricTypeStore.ts"
-import { useDayStore } from "@/module/Day/Application/DayStore.ts"
 import { BiChevronRight } from "react-icons/bi"
 import { FiArrowDownRight } from "react-icons/fi"
 import { IoLogoVue } from "react-icons/io5"
-import { useMetricStore } from "@/module/Metric/Application/MetricStore.ts"
 
 function showWorkInProgress() {
   alert("work in progress")
@@ -29,12 +25,9 @@ function showWorkInProgress() {
 
 export default function TopMenuComponent() {
   const { isOpen } = useDisclosure()
-  const metricTypesStore = useMetricTypeStore()
-  const dayStore = useDayStore()
-  const metricStore = useMetricStore()
 
   const makeFakeData = () => {
-    createMockData(dayStore, metricStore, metricTypesStore)
+    createMockData()
   }
 
   return (
@@ -80,7 +73,6 @@ export default function TopMenuComponent() {
             fontSize={"xs"}
             fontWeight={400}
             variant={"link"}
-            href={"#"}
             colorScheme="gray"
             onClick={() => makeFakeData()}
           >

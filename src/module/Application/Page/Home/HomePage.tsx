@@ -1,4 +1,3 @@
-import { HomeNavigationComponent } from "@/module/Application/Page/Home/Component/HomeNavigationComponent.tsx"
 import { SubTitleComponent } from "@/module/Shared/Component/Typography/SubTitleComponent.tsx"
 import { GlobalStatisticComponent } from "@/module/Shared/Component/Stat/GlobalStatisticComponent.tsx"
 import { useDayStore } from "@/module/Day/Application/DayStore.ts"
@@ -10,12 +9,16 @@ import { Grid, GridItem, Text } from "@chakra-ui/react"
 import { DayTableComponent } from "@/module/Application/Page/DayPage/Component/DayTableComponent.tsx"
 import createDay from "@/module/Day/Domain/createDay.ts"
 import serializerDate from "@/module/Shared/Application/Date/serializerDate.ts"
+import { TodoComponent } from "@/module/Todo/Component/TodoComponent.tsx"
+import { useObjectiveStore } from "@/module/Objective/Application/ObjectiveStore.ts"
+import { SeparatorComponent } from "@/module/Shared/Component/SeparatorComponent.tsx"
 export function HomePage() {
   const dayStore = useDayStore()
   const metricTypesStore = useMetricTypeStore()
   const currentDate = new Date()
   const currentDateSerialized = serializerDate(currentDate)
   const metricStore = useMetricStore()
+  const objectiveStore = useObjectiveStore()
 
   const days = createDaysOfMonth({
     month: currentDate.getMonth(),
@@ -27,7 +30,8 @@ export function HomePage() {
 
   return (
     <>
-      <HomeNavigationComponent />
+      <SeparatorComponent></SeparatorComponent>
+      {/*<HomeNavigationComponent />*/}
       <Grid templateColumns={["repeat(1, 1fr)", "repeat(2, 1fr)"]} gap={6} mt={5}>
         <GridItem>
           <SubTitleComponent>
@@ -53,9 +57,16 @@ export function HomePage() {
               createDay({ createdDate: currentDateSerialized })
             }
             onUpdateDay={dayStore.updateDay}
+            objectives={objectiveStore.items}
           />
         </GridItem>
       </Grid>
+      <SubTitleComponent>
+        <Text as="span" textTransform={"uppercase"}>
+          Your Todo List
+        </Text>
+      </SubTitleComponent>
+      <TodoComponent></TodoComponent>
     </>
   )
 }

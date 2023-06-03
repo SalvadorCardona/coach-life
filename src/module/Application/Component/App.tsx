@@ -1,6 +1,8 @@
 import { RouterProvider, createHashRouter } from "react-router-dom"
 import { routes } from "@/module/Application/routes.tsx"
 import { extendTheme, ChakraProvider } from "@chakra-ui/react"
+import { useApplicationStore } from "@/module/Application/Store/ApplicationStore.ts"
+import { createMockData } from "@/module/Application/Mock/createMockData.ts"
 
 const router = createHashRouter(routes)
 
@@ -14,6 +16,15 @@ const colors = {
 const theme = extendTheme({ colors })
 
 function App() {
+  const parameterStore = useApplicationStore()
+  const parameter = parameterStore.parameter
+
+  if (parameter.isFirstTime) {
+    parameter.isFirstTime = false
+    parameterStore.updateParameter(parameter)
+    createMockData()
+  }
+
   return (
     <>
       <ChakraProvider theme={theme}>

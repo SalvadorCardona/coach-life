@@ -1,17 +1,20 @@
 import MetricInterface from "@/module/Metric/Domain/MetricInterface.ts"
 import { ChangeEvent, useState } from "react"
-import MetricTypeMetricEnum from "@/module/MetricType/Domain/MetricTypeMetricEnum.ts"
+import UnitEnum from "@/module/MetricType/Domain/UnitEnum.ts"
 import { Flex, Input, Td, Text, Tr } from "@chakra-ui/react"
 import { ButtonComponent } from "@/module/Shared/Component/Form/ButtonComponent.tsx"
+import ObjectiveInterface from "@/module/Objective/Domain/ObjectiveInterface.ts"
+import { LightTextComponent } from "@/module/Shared/Component/Typography/LightTextComponent.tsx"
 
 export interface GoalMetricComponentPropsInterface {
   metric: MetricInterface
   onUpdate: (metric: MetricInterface) => void
+  objectives: ObjectiveInterface[]
 }
 
 export function DayTableItemComponent(props: GoalMetricComponentPropsInterface) {
   const [metric, setGoalMetric] = useState<MetricInterface>(props.metric)
-  metric?.value ? metric.value : 0
+  metric?.value !== null ? metric.value : 0
 
   const increment = () => {
     metric.value++
@@ -31,14 +34,23 @@ export function DayTableItemComponent(props: GoalMetricComponentPropsInterface) 
     props.onUpdate(metric)
   }
 
-  const metricType =
-    metric.metricType?.metric === MetricTypeMetricEnum.QUANTITY ? "Qty" : "Hours"
+  const metricType = metric.metricType?.unit === UnitEnum.QUANTITY ? "Qty" : "Hours"
 
   return (
     <>
       <Tr>
-        <Td>{props.metric.metricType?.name}</Td>
-        <Td>{metricType}</Td>
+        <Td>
+          {props.metric.metricType?.name}{" "}
+          <LightTextComponent fontSize="xs" as={"p"}>
+            Number of objective: {props.objectives.length}
+          </LightTextComponent>
+          {props.objectives.map((objective) => (
+            <LightTextComponent fontSize={"xs"} ml={5} key={objective.id}>
+              • {objective.name}
+            </LightTextComponent>
+          ))}
+        </Td>
+        {/*<Td>{metricType}</Td>*/}
         <Td>
           <Flex alignItems={"center"}>
             <Input

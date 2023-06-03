@@ -11,6 +11,8 @@ export default function createMetricList(
       (metric) => metric.metricType?.id === metricType.id
     )
 
-    return metric ?? createMetric({ metricType: metricType })
+    return (
+      metric ?? createMetric({ metricType: metricType, metricTypeId: metricType.id })
+    )
   })
 }

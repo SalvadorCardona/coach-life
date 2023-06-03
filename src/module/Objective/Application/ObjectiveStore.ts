@@ -12,9 +12,7 @@ export interface ObjectiveState {
   items: ObjectiveInterface[]
   updateAll: (objectives: ObjectiveInterface[]) => void
   updateObjective: (objective: ObjectiveInterface) => void
-  getObjectiveById: (
-    id: ObjectiveInterface["id"]
-  ) => ObjectiveInterface | undefined
+  getObjectiveById: (id: ObjectiveInterface["id"]) => ObjectiveInterface | undefined
   removeObjectiveById: (id: ObjectiveInterface["id"]) => void
 }
 
@@ -22,6 +20,7 @@ export const useObjectiveStore = create<ObjectiveState>((set, getState) => ({
   items: restoreObjectType(),
   updateAll: (objectives: ObjectiveInterface[]) => {
     set({ items: objectives })
+    persistObjectType(objectives)
   },
   updateObjective: (objective: ObjectiveInterface) => {
     const objectives = getState().items

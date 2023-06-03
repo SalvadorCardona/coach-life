@@ -8,7 +8,7 @@ import createObjective from "@/module/Objective/Domain/createObjective.ts"
 import MetricTypeInterface from "@/module/MetricType/Domain/MetricTypeInterface.ts"
 import formDataToObject from "@/module/Shared/Application/Form/formDataToObject.ts"
 import { TimePeriodEnum } from "@/module/Shared/Application/Date/TimePeriodEnum.ts"
-import { GoalObjectiveTypeEnum } from "@/module/Objective/Domain/GoalObjectiveTypeEnum.ts"
+import { ObjectiveTypeEnum } from "@/module/Objective/Domain/ObjectiveTypeEnum.ts"
 
 interface GoalObjectiveFormComponentPropsInterface {
   addGoalObjective: (objective: ObjectiveInterface) => void
@@ -99,7 +99,7 @@ export function ObjectiveFormComponent(
           <FormControl mt={5}>
             <FormLabel>By type day :</FormLabel>
             <Select name={"type"}>
-              {Object.values(GoalObjectiveTypeEnum).map((value) => {
+              {Object.values(ObjectiveTypeEnum).map((value) => {
                 return (
                   <option key={value} value={value}>
                     {value}

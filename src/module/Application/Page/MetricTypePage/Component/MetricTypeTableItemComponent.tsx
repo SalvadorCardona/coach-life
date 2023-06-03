@@ -41,8 +41,8 @@ export function MetricTypeTableItemComponent(
             Add a objective
           </ButtonComponent>
         </Td>
-        <Td>{props.metricType.metric}</Td>
-        <Td>{props.metricType.defaultValue}</Td>
+        <Td>{props.metricType.unit}</Td>
+        {/*<Td>{props.metricType.defaultValue}</Td>*/}
         <Td>
           <ButtonComponent
             {...{

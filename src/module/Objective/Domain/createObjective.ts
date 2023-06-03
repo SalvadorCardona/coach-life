@@ -1,19 +1,10 @@
 import ObjectiveInterface from "@/module/Objective/Domain/ObjectiveInterface.ts"
 import { createUniqId } from "@/module/Shared/Application/Id/createUniqId.ts"
 import { TimePeriodEnum } from "@/module/Shared/Application/Date/TimePeriodEnum.ts"
-import { GoalObjectiveTypeEnum } from "@/module/Objective/Domain/GoalObjectiveTypeEnum.ts"
-import MetricTypeInterface from "@/module/MetricType/Domain/MetricTypeInterface.ts"
-
-interface CreateGoalObjectiveInterface {
-  byTypeTime?: TimePeriodEnum
-  value?: number
-  name?: string
-  metricTypeId?: MetricTypeInterface["id"]
-  type?: GoalObjectiveTypeEnum
-}
+import { ObjectiveTypeEnum } from "@/module/Objective/Domain/ObjectiveTypeEnum.ts"
 
 export default function createObjective(
-  args: CreateGoalObjectiveInterface = {}
+  args: Partial<ObjectiveInterface> = {}
 ): ObjectiveInterface {
   return {
     ...{
@@ -22,7 +13,7 @@ export default function createObjective(
       name: "",
       byTypeTime: TimePeriodEnum.DAY,
       metricTypeId: "",
-      type: GoalObjectiveTypeEnum.TO_EXCEED,
+      type: ObjectiveTypeEnum.TO_EXCEED,
     },
     ...args,
   }

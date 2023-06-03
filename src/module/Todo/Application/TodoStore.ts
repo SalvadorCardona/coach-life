@@ -7,15 +7,23 @@ import {
   restoreTodo,
 } from "@/module/Todo/Infratructure/TodoRepository.ts"
 import getItemById from "@/module/Shared/Application/Id/getItemById.ts"
+import removeById from "@/module/Shared/Application/Id/removeById.ts"
 
-interface TodoStore {
+export interface TodoState {
   items: TodoInterface[]
   updateItem: (todo: TodoInterface) => void
+  updateAll: (items: TodoInterface[]) => void
+  removeItem: (item: TodoInterface["id"]) => void
 }
 
-export const useTodoStore = create<TodoStore>((set, getState) => ({
+export const useTodoStore = create<TodoState>((set, getState) => ({
   items: restoreTodo(),
-
+  removeItem: (id: TodoInterface["id"]) => {
+    const items = getState().items
+    removeById(id, items)
+    set({ items: items })
+    persistTodo(items)
+  },
   updateItem: (todo: TodoInterface) => {
     const items = getState().items
 
@@ -26,6 +34,10 @@ export const useTodoStore = create<TodoStore>((set, getState) => ({
     updateById(todo, items)
     set({ items: items })
 
+    persistTodo(items)
+  },
+  updateAll: (items: TodoInterface[]) => {
+    set({ items })
     persistTodo(items)
   },
 }))

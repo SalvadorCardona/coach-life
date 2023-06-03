@@ -1,4 +1,4 @@
-import { GoalObjectiveTypeEnum } from "@/module/Objective/Domain/GoalObjectiveTypeEnum.ts"
+import { ObjectiveTypeEnum } from "@/module/Objective/Domain/ObjectiveTypeEnum.ts"
 import { TimePeriodEnum } from "@/module/Shared/Application/Date/TimePeriodEnum.ts"
 import MetricTypeInterface from "@/module/MetricType/Domain/MetricTypeInterface.ts"
 
@@ -8,5 +8,5 @@ export default interface ObjectiveInterface {
   value: number
   metricTypeId: MetricTypeInterface["id"]
   name: string
-  type: GoalObjectiveTypeEnum
+  type: ObjectiveTypeEnum
 }

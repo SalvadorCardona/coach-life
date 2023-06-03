@@ -1,4 +1,4 @@
-import MetricTypeMetricEnum from "@/module/MetricType/Domain/MetricTypeMetricEnum.ts"
+import UnitEnum from "@/module/MetricType/Domain/UnitEnum.ts"
 import ObjectiveInterface from "@/module/Objective/Domain/ObjectiveInterface.ts"
 import MetricInterface from "@/module/Metric/Domain/MetricInterface.ts"
 
@@ -6,7 +6,10 @@ export default interface MetricTypeInterface {
   id: string
   name: string
   defaultValue: number
-  metric: MetricTypeMetricEnum
+  unit: UnitEnum
+}
+
+export interface ReadMetricTypeInterface extends MetricTypeInterface {
   objectives?: ObjectiveInterface[]
   metrics?: MetricInterface[]
 }

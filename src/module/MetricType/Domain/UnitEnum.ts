@@ -1,7 +1,7 @@
-enum MetricTypeMetricEnum {
+enum UnitEnum {
   QUANTITY = "QUANTITY",
   HOUR = "HOUR",
   BOOLEAN = "BOOLEAN",
 }
 
-export default MetricTypeMetricEnum
+export default UnitEnum

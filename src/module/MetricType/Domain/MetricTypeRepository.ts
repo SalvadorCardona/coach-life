@@ -1,7 +1,7 @@
 import MetricTypeInterface from "@/module/MetricType/Domain/MetricTypeInterface.ts"
 import { restore, update } from "@/module/Shared/Infratructure/repository.ts"
 
-const name = "type"
+const name = "metric-type-type"
 
 export function persistMetricTypes(metricTypes: MetricTypeInterface[]): void {
   update(name, metricTypes)

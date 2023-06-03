@@ -1,8 +1,6 @@
 import TodoInterface from "@/module/Todo/Domain/TodoInterface.ts"
-import { SubTitleComponent } from "@/module/Shared/Component/Typography/SubTitleComponent.tsx"
-import { FormControl, FormLabel, Input, Select, Textarea } from "@chakra-ui/react"
+import { FormControl, Input, Select, Textarea } from "@chakra-ui/react"
 import { WrapperComponent } from "@/module/Shared/Component/WrapperComponent.tsx"
-
 import TodoStateEnum from "@/module/Todo/Domain/TodoStateEnum.ts"
 import { useRef } from "react"
 import formDataToObject from "@/module/Shared/Application/Form/formDataToObject.ts"
@@ -47,7 +45,7 @@ export function TodoFormComponent(props: TodoFormComponentPropsInterface) {
           />
         </FormControl>
         <FormControl mt={1}>
-          <Select name={"state"} value={props.todo.state}>
+          <Select name={"state"} defaultValue={props.todo.state}>
             {Object.values(TodoStateEnum).map((value) => {
               return (
                 <option key={value} value={value}>

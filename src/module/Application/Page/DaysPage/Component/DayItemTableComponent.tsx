@@ -14,6 +14,7 @@ import createMetric from "@/module/Metric/Domain/createMetric.ts"
 import { useObjectiveStore } from "@/module/Objective/Application/ObjectiveStore.ts"
 import calculateDayObjective from "@/module/Objective/Domain/calculate/calculateDayObjective.ts"
 import ratioTOPercentage from "@/module/Shared/Application/Math/ratioTOPercentage.ts"
+import getMetricByMetricTypeId from "@/module/Metric/Domain/getMetricByMetricTypeId.ts"
 
 export interface DayItemTableComponentPropsInterface {
   metricTypes: MetricTypeInterface[]
@@ -24,16 +25,8 @@ export interface DayItemTableComponentPropsInterface {
 export function DayItemTableComponent(props: DayItemTableComponentPropsInterface) {
   const objectives = useObjectiveStore().items
   const ratio = ratioTOPercentage(calculateDayObjective(props.day, objectives))
-  const getGoalMetric = (
-    day: DayInterface,
-    metricType: MetricTypeInterface
-  ): MetricInterface | undefined => {
-    return day.metrics.find((metric) => {
-      return metric.metricType?.id === metricType.id
-    })
-  }
 
-  const updateGoalMetric = (
+  const updateMetric = (
     value: string,
     day: DayInterface,
     metric: MetricInterface
@@ -49,8 +42,9 @@ export function DayItemTableComponent(props: DayItemTableComponentPropsInterface
       <Td>{formatDate(props.day.createdDate)}</Td>
       {props.metricTypes.map((metricType) => {
         const metric =
-          getGoalMetric(props.day, metricType) ??
+          getMetricByMetricTypeId(props.day.metrics, metricType.id) ??
           createMetric({ metricType: metricType })
+
         return (
           <Td key={metricType.id}>
             <Input
@@ -60,7 +54,7 @@ export function DayItemTableComponent(props: DayItemTableComponentPropsInterface
               value={metric.value ?? ""}
               placeholder={metricType.defaultValue.toString()}
               onChange={(event) =>
-                updateGoalMetric(event.target.value, props.day, metric)
+                updateMetric(event.target.value, props.day, metric)
               }
             />
           </Td>

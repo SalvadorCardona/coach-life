@@ -4,8 +4,9 @@ import MetricTypeInterface from "@/module/MetricType/Domain/MetricTypeInterface.
 import { useEffect, useRef } from "react"
 import { ChartConfiguration, ChartDataset } from "chart.js"
 import Chart from "chart.js/auto"
-import getMetricsByMetricTypeId from "@/module/Metric/Domain/getMetricsByMetricTypeId.ts"
+import getMetricListByMetricTypeId from "@/module/Metric/Domain/getMetricListByMetricTypeId.ts"
 import { useTheme } from "@chakra-ui/react"
+import generateRandomNumber from "@/module/Shared/Application/Math/generateRandomNumber.ts"
 
 export interface GlobalStatisticComponentPropsInterface {
   days: DayInterface[]
@@ -15,10 +16,8 @@ export interface GlobalStatisticComponentPropsInterface {
 function createDataSet(
   label: string,
   values: number[],
-  colors: string[]
+  color: string
 ): ChartDataset {
-  const color = colors[Math.floor(Math.random() * colors.length)]
-
   return {
     label: label,
     data: values,
@@ -41,22 +40,27 @@ export function GlobalStatisticComponent(
   const colors: string[] = []
 
   Object.keys(themeColors).forEach((color) => {
-    if (["black", "transparent", "blackAlpha", "white"].includes(color)) return
+    if (
+      ["black", "transparent", "blackAlpha", "white", "whiteAlpha", "gray"].includes(
+        color
+      )
+    )
+      return
     const currentColor = themeColors[color]["400"]
     if (currentColor) {
       colors.push(currentColor)
     }
   })
 
-  datasets = metricTypes.map((metricType) => {
+  datasets = metricTypes.map((metricType, index) => {
     const values: number[] = []
     days.forEach((day) => {
-      getMetricsByMetricTypeId(day.metrics, metricType.id).forEach((metric) => {
+      getMetricListByMetricTypeId(day.metrics, metricType.id).forEach((metric) => {
         values.push(metric?.value ?? 0)
       })
     })
 
-    return createDataSet(metricType.name, values, colors)
+    return createDataSet(metricType.name, values, colors, colors[index])
   })
 
   const config: ChartConfiguration = {

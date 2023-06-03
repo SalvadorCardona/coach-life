@@ -21,9 +21,9 @@ export function MetricTypeTableComponent(
         <Table variant="simple">
           <Thead>
             <Tr>
-              <Th>Goal name</Th>
-              <Th>Metric type</Th>
-              <Th>Default Value</Th>
+              <Th>name</Th>
+              <Th>Metric unity</Th>
+              {/*<Th>Default Value</Th>*/}
               <Th>Actions</Th>
             </Tr>
           </Thead>

@@ -14,7 +14,9 @@ export default function calculateDayObjective(
 
   day.metrics.forEach((metric) => {
     const metricType = metric.metricType
-    if (metric.value === null || metricType?.id) return
+
+    if (metric.value === null || !metricType?.id) return
+
     const metricValue = metric.value ?? 1
     const objectivesCurrent = getObjectiveByMetricTypeId(
       metricType?.id as string,
@@ -28,6 +30,7 @@ export default function calculateDayObjective(
       ratio += calculateObjective(objective.value, metricValue, objective.type)
     })
   })
+
   if (!ratio && !calculated) return 0
 
   return (ratio / calculated) as Ratio

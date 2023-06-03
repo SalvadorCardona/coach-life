@@ -2,7 +2,7 @@ import { FormEvent, useState } from "react"
 import MetricTypeInterface from "@/module/MetricType/Domain/MetricTypeInterface.ts"
 import { createMetricType } from "@/module/MetricType/Domain/createMetricType.ts"
 import { SubTitleComponent } from "@/module/Shared/Component/Typography/SubTitleComponent.tsx"
-import MetricTypeMetricEnum from "@/module/MetricType/Domain/MetricTypeMetricEnum.ts"
+import UnitEnum from "@/module/MetricType/Domain/UnitEnum.ts"
 import { FormControl, FormLabel, Input, Select } from "@chakra-ui/react"
 import { ButtonComponent } from "@/module/Shared/Component/Form/ButtonComponent.tsx"
 import { WrapperComponent } from "@/module/Shared/Component/WrapperComponent.tsx"
@@ -51,20 +51,20 @@ export function MetricTypeFormComponent(
             name={"name"}
           />
         </FormControl>
-        <FormControl mt={5}>
-          <FormLabel>Default value :</FormLabel>
-          <Input
-            type="number"
-            defaultValue={newMetricType.defaultValue}
-            placeholder={"Your defaults value..."}
-            name={"defaultValue"}
-          />
-        </FormControl>
+        {/*<FormControl mt={5}>*/}
+        {/*  <FormLabel>Default value :</FormLabel>*/}
+        {/*  <Input*/}
+        {/*    type="number"*/}
+        {/*    defaultValue={newMetricType.defaultValue}*/}
+        {/*    placeholder={"Your defaults value..."}*/}
+        {/*    name={"defaultValue"}*/}
+        {/*  />*/}
+        {/*</FormControl>*/}
 
         <FormControl mt={5}>
           <FormLabel>Metrics :</FormLabel>
           <Select name={"metric"}>
-            {Object.values(MetricTypeMetricEnum).map((value) => {
+            {Object.values(UnitEnum).map((value) => {
               return (
                 <option key={value} value={value}>
                   {value}

@@ -2,7 +2,7 @@ import MetricTypeInterface from "@/module/MetricType/Domain/MetricTypeInterface.
 import { useEffect, useRef } from "react"
 import Chart from "chart.js/auto"
 import { WrapperComponent } from "@/module/Shared/Component/WrapperComponent.tsx"
-import { SubTitleComponent } from "@/module/Shared/Component/Typography/SubTitleComponent.tsx"
+import { Text } from "@chakra-ui/react"
 import DayInterface from "@/module/Day/Domain/DayInterface.ts"
 import { formatDate } from "@/module/Shared/Application/Date/formatDate.ts"
 import { ChartConfiguration } from "chart.js"
@@ -65,7 +65,7 @@ export function StatisticItemComponent(props: StatisticItemComponentPropsInterfa
 
   return (
     <WrapperComponent>
-      <SubTitleComponent>{props.metricType.name}</SubTitleComponent>
+      <Text>{props.metricType.name}</Text>
       <canvas ref={ref}></canvas>
     </WrapperComponent>
   )
