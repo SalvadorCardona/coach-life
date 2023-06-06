@@ -16,6 +16,9 @@ import { persistMetricTypes } from "@/module/MetricType/Domain/MetricTypeReposit
 import { persistTodo } from "@/module/Todo/Infratructure/TodoRepository.ts"
 import generateRandomNumber from "@/module/Shared/Application/Math/generateRandomNumber.ts"
 import { ReadMetricTypeInterface } from "@/module/Day/Domain/DayRead.ts"
+import normalizer from "@/module/Shared/Application/Object/normalizer.ts"
+import createDay from "@/module/Day/Domain/createDay.ts"
+import createMetric from "@/module/Metric/Domain/createMetric.ts"
 
 const mockMetricTypes: Partial<ReadMetricTypeInterface[]> = [
   {
@@ -123,22 +126,24 @@ export function createMockData(): void {
     days: [],
     metrics: [],
     metricTypes: metricTypes,
+    objectives: objectives,
   }).forEach((item) => days.push(item))
   const lastValue: Record<string, number> = {}
   days.forEach((day) => {
-    day.metrics.forEach((metric) => {
+    day.metrics.forEach((metric, index) => {
       if (!Object.hasOwn(lastValue, metric.metricTypeId)) {
         lastValue[metric.metricTypeId] = generateRandomNumber(0, 10)
       }
       const min = lastValue[metric.metricTypeId] < 5 ? 1 : -5
       lastValue[metric.metricTypeId] += generateRandomNumber(min, 5)
       metric.value = lastValue[metric.metricTypeId]
+      day.metrics[index] = normalizer(metric, createMetric())
     })
   })
 
   const todos: TodoInterface[] = totoList.map((item) => createTodo(item))
 
-  persistDays(days)
+  persistDays(days.map((day) => normalizer(day, createDay())))
   persistObjectType(objectives)
   persistMetricTypes(metricTypes)
   persistTodo(todos)
