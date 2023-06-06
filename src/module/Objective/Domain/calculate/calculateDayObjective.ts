@@ -4,21 +4,27 @@ import { Ratio } from "@/module/Shared/Application/Math/calculateRatio.ts"
 
 import calculateObjective from "@/module/Objective/Domain/calculate/calculateObjective.ts"
 import getObjectiveByMetricTypeId from "@/module/Objective/Domain/getObjectiveByMetricTypeId.ts"
+import MetricTypeInterface from "@/module/MetricType/Domain/MetricTypeInterface.ts"
+import getItemById from "@/module/Shared/Application/Id/getItemById.ts"
 
 export default function calculateDayObjective(
   day: DayInterface,
-  objectives: ObjectiveInterface[]
+  objectives: ObjectiveInterface[],
+  metricTypes: MetricTypeInterface[]
 ): Ratio {
   let ratio = 0
   let calculated = 0
 
   day.metrics.forEach((metric) => {
-    const metricType = metric.metricType
-    const metricValue = metric.value ?? 1
-    const objectivesCurrent = getObjectiveByMetricTypeId(
-      metricType?.id as string,
-      objectives
+    if (!metric.metricTypeId) return
+    const metricType = getItemById<MetricTypeInterface>(
+      metric.metricTypeId,
+      metricTypes
     )
+    if (!metricType) return
+
+    const metricValue = metric.value ?? 1
+    const objectivesCurrent = getObjectiveByMetricTypeId(metricType.id, objectives)
 
     if (metric.value === null || !metricType?.id) return
     if (!objectivesCurrent.length) return

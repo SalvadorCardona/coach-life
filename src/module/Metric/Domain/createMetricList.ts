@@ -8,11 +8,9 @@ export default function createMetricList(
 ): MetricInterface[] {
   return metricTypes.map((metricType) => {
     const metric: MetricInterface | undefined = metrics.find(
-      (metric) => metric.metricType?.id === metricType.id
+      (metric) => metric.metricTypeId === metricType.id
     )
 
-    return (
-      metric ?? createMetric({ metricType: metricType, metricTypeId: metricType.id })
-    )
+    return metric ?? createMetric({ metricTypeId: metricType.id })
   })
 }

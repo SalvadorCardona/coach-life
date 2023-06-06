@@ -19,7 +19,7 @@ export function StatisticItemComponent(props: StatisticItemComponentPropsInterfa
 
   const metricValueList = props.days.map((day) => {
     const metric = day.metrics.find((metric) => {
-      return metric.metricType?.id === props.metricType.id
+      return metric.metricTypeId === props.metricType.id
     })
 
     return metric ? metric.value : 0

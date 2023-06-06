@@ -22,19 +22,26 @@ import { useState } from "react"
 import { ModalMetricTypeFormComponent } from "@/module/MetricType/Component/ModalMetricTypeFormComponent.tsx"
 import { BiChevronLeft, BiChevronRight } from "react-icons/bi"
 import { IoIosAdd } from "react-icons/io"
+import MetricInterface from "@/module/Metric/Domain/MetricInterface.ts"
+import DayInterface from "@/module/Day/Domain/DayInterface.ts"
+import { useObjectiveStore } from "@/module/Objective/Application/ObjectiveStore.ts"
 
 export function DaysPage() {
   const dayStore = useDayStore()
   const metricTypeStore = useMetricTypeStore()
   const metricStore = useMetricStore()
+  const objectiveStore = useObjectiveStore()
+
   const [currentDate, currentDateSetter] = useState<Date>(new Date())
   const { isOpen, onOpen, onClose } = useDisclosure()
+
   const days = createDaysOfMonth({
     month: currentDate.getMonth(),
     year: currentDate.getFullYear(),
     days: dayStore.items,
     metrics: metricStore.items,
     metricTypes: metricTypeStore.items,
+    objectives: objectiveStore.items,
   }).reverse()
 
   const changeDateHandler = (direction: -1 | 1) => {
@@ -43,8 +50,8 @@ export function DaysPage() {
     currentDateSetter(newDate)
   }
 
-  const openModal = () => {
-    onOpen()
+  const updateHandler = (day: DayInterface, metric: MetricInterface) => {
+    dayStore.updateMetric(day.id, metric)
   }
 
   return (
@@ -83,7 +90,7 @@ export function DaysPage() {
                   mt={2}
                   size="xs"
                   leftIcon={<Icon as={IoIosAdd} color={"white"} />}
-                  onClick={openModal}
+                  onClick={() => onOpen()}
                 >
                   Add a metric type
                 </ButtonComponent>
@@ -97,7 +104,7 @@ export function DaysPage() {
                   key={day.id}
                   day={day}
                   metricTypes={metricTypeStore.items}
-                  updateDay={dayStore.updateDay}
+                  onUpdate={(metric) => updateHandler(day, metric)}
                 />
               )
             })}

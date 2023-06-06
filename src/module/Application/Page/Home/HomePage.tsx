@@ -13,6 +13,7 @@ import { TodoComponent } from "@/module/Todo/Component/TodoComponent.tsx"
 import { useObjectiveStore } from "@/module/Objective/Application/ObjectiveStore.ts"
 import { SeparatorComponent } from "@/module/Shared/Component/SeparatorComponent.tsx"
 import { createDayRead } from "@/module/Day/Domain/DayRead.ts"
+import { getDayByDate } from "@/module/Day/Domain/getDayByDate.ts"
 export function HomePage() {
   const dayStore = useDayStore()
   const metricTypesStore = useMetricTypeStore()
@@ -27,15 +28,17 @@ export function HomePage() {
     days: dayStore.items,
     metrics: metricStore.items,
     metricTypes: metricTypesStore.items,
+    objectives: objectiveStore.items,
   }).reverse()
 
   const dayCompleted = createDayRead({
-    day: dayStore.items[0],
+    day:
+      getDayByDate(currentDateSerialized, days) ??
+      createDay({ createdDate: currentDateSerialized }),
     objectives: objectiveStore.items,
     metricTypes: metricTypesStore.items,
   })
 
-  console.log(dayCompleted)
   return (
     <>
       <SeparatorComponent></SeparatorComponent>
@@ -60,11 +63,8 @@ export function HomePage() {
           </SubTitleComponent>
           <DayTableComponent
             metricTypes={metricTypesStore.items}
-            day={
-              dayStore.getDayByDate(currentDateSerialized) ??
-              createDay({ createdDate: currentDateSerialized })
-            }
-            onUpdateDay={dayStore.updateDay}
+            day={dayCompleted}
+            updateMetric={dayStore.updateMetric}
             objectives={objectiveStore.items}
           />
         </GridItem>

@@ -3,7 +3,7 @@ import { createUniqId } from "@/module/Shared/Application/Id/createUniqId.ts"
 import serializerDate from "@/module/Shared/Application/Date/serializerDate"
 
 export default function createMetric(
-  args: Partial<MetricInterface>
+  args: Partial<MetricInterface> = {}
 ): MetricInterface {
   // const defaultValue = args.metricType?.defaultValue ?? 0
 
@@ -11,7 +11,6 @@ export default function createMetric(
     ...{
       id: createUniqId(),
       createdDate: serializerDate(new Date()),
-      metricType: null,
       value: null,
       dayId: null,
       metricTypeId: null,

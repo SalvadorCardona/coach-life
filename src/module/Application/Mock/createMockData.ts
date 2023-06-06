@@ -1,7 +1,5 @@
 import createDaysOfMonth from "@/module/Day/Domain/createDaysOfMonth.ts"
-import MetricTypeInterface, {
-  ReadMetricTypeInterface,
-} from "@/module/MetricType/Domain/MetricTypeInterface.ts"
+import MetricTypeInterface from "@/module/MetricType/Domain/MetricTypeInterface.ts"
 import UnitEnum from "@/module/MetricType/Domain/UnitEnum.ts"
 import { ObjectiveTypeEnum } from "@/module/Objective/Domain/ObjectiveTypeEnum.ts"
 import { createMetricType } from "@/module/MetricType/Domain/createMetricType.ts"
@@ -17,6 +15,7 @@ import { persistObjectType } from "@/module/Objective/Infratructure/ObjectiveRep
 import { persistMetricTypes } from "@/module/MetricType/Domain/MetricTypeRepository.ts"
 import { persistTodo } from "@/module/Todo/Infratructure/TodoRepository.ts"
 import generateRandomNumber from "@/module/Shared/Application/Math/generateRandomNumber.ts"
+import { ReadMetricTypeInterface } from "@/module/Day/Domain/DayRead.ts"
 
 const mockMetricTypes: Partial<ReadMetricTypeInterface[]> = [
   {
