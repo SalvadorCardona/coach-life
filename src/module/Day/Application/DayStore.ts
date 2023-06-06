@@ -9,12 +9,17 @@ import { DateString } from "@/module/Shared/Application/Date/DateStringType.ts"
 
 import addTo from "@/module/Shared/Application/List/addTo.ts"
 import { getDayByDate } from "@/module/Day/Domain/getDayByDate.ts"
+import { createDayRead, DayReadInterface } from "@/module/Day/Domain/DayRead.ts"
+import getItemById from "@/module/Shared/Application/Id/getItemById.ts"
+import { restoreObjectType } from "@/module/Objective/Infratructure/ObjectiveRepository.ts"
+import { restoreMetricTypes } from "@/module/MetricType/Domain/MetricTypeRepository.ts"
 
 export interface DayState {
   items: DayInterface[]
   updateAll: (days: DayInterface[]) => void
   updateDay: (day: DayInterface) => void
   getDayByDate: (date: DateString) => DayInterface | undefined
+  getDayReadById: (dayId: DayInterface["id"]) => DayReadInterface
 }
 
 export const useDayStore = create<DayState>((set, getState) => ({
@@ -37,5 +42,14 @@ export const useDayStore = create<DayState>((set, getState) => ({
   },
   getDayByDate: (date: DateString) => {
     return getDayByDate(date, getState().items)
+  },
+  getDayReadById: (dayId) => {
+    const day = getItemById(dayId, getState().items) as DayInterface
+
+    return createDayRead({
+      day: day,
+      objectives: restoreObjectType(),
+      metricTypes: restoreMetricTypes(),
+    })
   },
 }))

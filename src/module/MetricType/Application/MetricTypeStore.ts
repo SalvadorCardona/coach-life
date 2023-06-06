@@ -1,7 +1,7 @@
 import { create } from "zustand"
 import MetricTypeInterface from "@/module/MetricType/Domain/MetricTypeInterface.ts"
 import {
-  getMetricTypes,
+  restoreMetricTypes,
   persistMetricTypes,
 } from "@/module/MetricType/Domain/MetricTypeRepository.ts"
 import getItemById from "@/module/Shared/Application/Id/getItemById.ts"
@@ -17,7 +17,7 @@ export interface MetricTypeState {
 }
 
 export const useMetricTypeStore = create<MetricTypeState>((set, getState) => ({
-  items: getMetricTypes(),
+  items: restoreMetricTypes(),
   updateAll: (metricTypes: MetricTypeInterface[]) => {
     set({ items: metricTypes })
     persistMetricTypes(metricTypes)

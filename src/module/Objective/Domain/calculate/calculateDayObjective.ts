@@ -14,15 +14,13 @@ export default function calculateDayObjective(
 
   day.metrics.forEach((metric) => {
     const metricType = metric.metricType
-
-    if (metric.value === null || !metricType?.id) return
-
     const metricValue = metric.value ?? 1
     const objectivesCurrent = getObjectiveByMetricTypeId(
       metricType?.id as string,
       objectives
     )
 
+    if (metric.value === null || !metricType?.id) return
     if (!objectivesCurrent.length) return
 
     calculated++

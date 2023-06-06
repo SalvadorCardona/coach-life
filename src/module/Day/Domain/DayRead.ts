@@ -5,6 +5,8 @@ import ObjectiveInterface from "@/module/Objective/Domain/ObjectiveInterface.ts"
 import MetricTypeInterface from "@/module/MetricType/Domain/MetricTypeInterface.ts"
 import getObjectiveByMetricTypeId from "@/module/Objective/Domain/getObjectiveByMetricTypeId.ts"
 import getItemById from "@/module/Shared/Application/Id/getItemById.ts"
+import calculateDayObjective from "@/module/Objective/Domain/calculate/calculateDayObjective.ts"
+import calculateMetricsObjective from "@/module/Objective/Domain/calculate/calculateMetricsObjective.ts"
 
 export interface DayReadInterface extends DayInterface {
   score: Ratio
@@ -20,9 +22,17 @@ export function createMetricRead(
   metric: MetricInterface,
   metricTypes: MetricTypeRead[]
 ): MetricRead {
+  const currentMetric = getItemById(
+    metric.metricTypeId as string,
+    metricTypes
+  ) as MetricTypeRead
+
   return {
-    score: 0,
-    metricType: getItemById(metric.metricTypeId as string, metricTypes),
+    ...metric,
+    ...{
+      score: calculateMetricsObjective(metric, currentMetric.objectives),
+      metricType: currentMetric,
+    },
   }
 }
 
@@ -79,6 +89,7 @@ export function createDayRead(args: CreateDayReadParams): DayReadInterface {
       metrics: args.day.metrics.map((metric) =>
         createMetricRead(metric, metricTypeRead)
       ),
+      score: calculateDayObjective(args.day, args.objectives),
     },
   }
 

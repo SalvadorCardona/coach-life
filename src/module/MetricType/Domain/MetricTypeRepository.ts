@@ -7,6 +7,6 @@ export function persistMetricTypes(metricTypes: MetricTypeInterface[]): void {
   update(name, metricTypes)
 }
 
-export function getMetricTypes(): MetricTypeInterface[] {
+export function restoreMetricTypes(): MetricTypeInterface[] {
   return restore<MetricTypeInterface[]>(name) ?? []
 }

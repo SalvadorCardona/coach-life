@@ -17,7 +17,6 @@ export function ModalMetricTypeFormComponent(
       <ModalContent>
         <MetricTypeFormComponent
           onAdd={() => {
-            console.log("here")
             props.onClose()
           }}
           updateMetricType={props.updateMetricType}

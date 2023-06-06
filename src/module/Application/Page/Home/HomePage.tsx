@@ -12,6 +12,7 @@ import serializerDate from "@/module/Shared/Application/Date/serializerDate.ts"
 import { TodoComponent } from "@/module/Todo/Component/TodoComponent.tsx"
 import { useObjectiveStore } from "@/module/Objective/Application/ObjectiveStore.ts"
 import { SeparatorComponent } from "@/module/Shared/Component/SeparatorComponent.tsx"
+import { createDayRead } from "@/module/Day/Domain/DayRead.ts"
 export function HomePage() {
   const dayStore = useDayStore()
   const metricTypesStore = useMetricTypeStore()
@@ -28,6 +29,13 @@ export function HomePage() {
     metricTypes: metricTypesStore.items,
   }).reverse()
 
+  const dayCompleted = createDayRead({
+    day: dayStore.items[0],
+    objectives: objectiveStore.items,
+    metricTypes: metricTypesStore.items,
+  })
+
+  console.log(dayCompleted)
   return (
     <>
       <SeparatorComponent></SeparatorComponent>
