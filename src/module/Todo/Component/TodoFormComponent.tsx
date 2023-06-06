@@ -1,14 +1,16 @@
 import TodoInterface from "@/module/Todo/Domain/TodoInterface.ts"
-import { FormControl, Input, Select, Textarea } from "@chakra-ui/react"
+import { Flex, FormControl, Input, Select, Textarea } from "@chakra-ui/react"
 import { WrapperComponent } from "@/module/Shared/Component/WrapperComponent.tsx"
 import TodoStateEnum from "@/module/Todo/Domain/TodoStateEnum.ts"
 import { useRef } from "react"
 import formDataToObject from "@/module/Shared/Application/Form/formDataToObject.ts"
 import ObjectiveInterface from "@/module/Objective/Domain/ObjectiveInterface.ts"
+import { RemoveButtonComponent } from "@/module/Shared/Component/Form/RemoveButtonComponent.tsx"
 
 export interface TodoFormComponentPropsInterface {
   todo: TodoInterface
   onUpdate: (todo: TodoInterface) => void
+  removeItem: (item: TodoInterface["id"]) => void
 }
 
 export function TodoFormComponent(props: TodoFormComponentPropsInterface) {
@@ -26,6 +28,11 @@ export function TodoFormComponent(props: TodoFormComponentPropsInterface) {
 
   return (
     <WrapperComponent>
+      <Flex justifyContent={"flex-end"}>
+        <RemoveButtonComponent
+          onClick={() => props.removeItem(props.todo.id)}
+        ></RemoveButtonComponent>
+      </Flex>
       <form onChange={handleSubmit} ref={ref}>
         <FormControl mt={1}>
           <Input

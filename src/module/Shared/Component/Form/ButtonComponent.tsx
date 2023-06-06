@@ -4,7 +4,7 @@ type ButtonComponentPropsType = ButtonProps
 
 export function ButtonComponent(props: ButtonComponentPropsType) {
   return (
-    <Button {...props} colorScheme="blue">
+    <Button colorScheme="blue" {...props}>
       {props.children}
     </Button>
   )

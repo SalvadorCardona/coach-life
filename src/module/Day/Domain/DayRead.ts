@@ -21,17 +21,20 @@ export interface MetricReadInterface extends MetricInterface {
 export function createMetricRead(
   metric: MetricInterface,
   metricTypes: ReadMetricTypeInterface[]
-): MetricReadInterface {
-  const currentMetric = getItemById(
+): MetricReadInterface | undefined {
+  const currentMetricType = getItemById<ReadMetricTypeInterface>(
     metric.metricTypeId as string,
     metricTypes
-  ) as ReadMetricTypeInterface
+  )
+  if (!currentMetricType) {
+    return undefined
+  }
 
   return {
     ...metric,
     ...{
-      score: calculateMetricsObjective(metric, currentMetric.objectives),
-      metricType: currentMetric,
+      score: calculateMetricsObjective(metric, currentMetricType.objectives),
+      metricType: currentMetricType,
     },
   }
 }
@@ -80,19 +83,17 @@ interface CreateDayReadParams {
 }
 
 export function createDayRead(args: CreateDayReadParams): DayReadInterface {
-  const metricTypeRead: ReadMetricTypeInterface[] = args.metricTypes.map(
+  const metricTypeReads: ReadMetricTypeInterface[] = args.metricTypes.map(
     (metricType) => createMetricTypeRead(metricType, args.objectives)
   )
 
-  const dayRead: DayReadInterface = {
+  return {
     ...args.day,
     ...{
-      metrics: args.day.metrics.map((metric) =>
-        createMetricRead(metric, metricTypeRead)
-      ),
+      metrics: args.day.metrics
+        .map((metric) => createMetricRead(metric, metricTypeReads))
+        .filter((item) => item !== undefined) as MetricReadInterface[],
       score: calculateDayObjective(args.day, args.objectives, args.metricTypes),
     },
   }
-
-  return dayRead
 }

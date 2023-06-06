@@ -5,7 +5,8 @@ import { ButtonComponent } from "@/module/Shared/Component/Form/ButtonComponent.
 import { LightTextComponent } from "@/module/Shared/Component/Typography/LightTextComponent.tsx"
 import ObjectiveInterface from "@/module/Objective/Domain/ObjectiveInterface.ts"
 import { IoIosAdd } from "react-icons/io"
-import { RxCross2 } from "react-icons/rx"
+
+import { RemoveButtonComponent } from "@/module/Shared/Component/Form/RemoveButtonComponent.tsx"
 
 export interface MetricTypeComponentPropsInterface {
   metricType: MetricTypeInterface
@@ -44,14 +45,12 @@ export function MetricTypeTableItemComponent(
         <Td>{props.metricType.unit}</Td>
         {/*<Td>{props.metricType.defaultValue}</Td>*/}
         <Td>
-          <ButtonComponent
+          <RemoveButtonComponent
             {...{
               colorScheme: "red",
               onClick: () => props.removeHandler(props.metricType),
             }}
-          >
-            <RxCross2 />
-          </ButtonComponent>
+          ></RemoveButtonComponent>
         </Td>
       </Tr>
     </>
