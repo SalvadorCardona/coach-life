@@ -1,9 +1,7 @@
 import ObjectiveInterface from "@/module/Objective/Domain/ObjectiveInterface.ts"
 import { Tr, Td } from "@chakra-ui/react"
-import { ButtonComponent } from "@/module/Shared/Component/Form/ButtonComponent.tsx"
-
 import MetricTypeInterface from "@/module/MetricType/Domain/MetricTypeInterface.ts"
-import { RxCross2 } from "react-icons/rx"
+import { RemoveButtonComponent } from "@/module/Shared/Component/Form/RemoveButtonComponent.tsx"
 
 export interface GoalObjectiveItemComponentPropsInterface {
   objective: ObjectiveInterface
@@ -26,14 +24,12 @@ export function ObjectiveTableItemComponent({
         <Td>{objective.type}</Td>
         <Td>{objective.value}</Td>
         <Td>
-          <ButtonComponent
+          <RemoveButtonComponent
             {...{
               colorScheme: "red",
               onClick: () => removeGoalObjectiveById(objective.id),
             }}
-          >
-            <RxCross2 />
-          </ButtonComponent>
+          ></RemoveButtonComponent>
         </Td>
       </Tr>
     </>

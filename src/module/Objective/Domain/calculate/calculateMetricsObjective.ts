@@ -6,8 +6,10 @@ import calculateObjective from "@/module/Objective/Domain/calculate/calculateObj
 export default function calculateMetricsObjective(
   metric: MetricInterface,
   objectives: ObjectiveInterface[]
-): Ratio {
+): Ratio | null {
   let ratio = 0
+
+  if (objectives.length === 0) return null
 
   objectives.forEach((objective) => {
     ratio += calculateObjective(objective.value, metric.value ?? 0, objective.type)

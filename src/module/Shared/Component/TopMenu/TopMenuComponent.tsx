@@ -18,12 +18,16 @@ import { createMockData } from "@/module/Application/Mock/createMockData.ts"
 import { BiChevronRight } from "react-icons/bi"
 import { FiArrowDownRight } from "react-icons/fi"
 import { IoLogoVue } from "react-icons/io5"
+import { RxHamburgerMenu } from "react-icons/rx"
 
 function showWorkInProgress() {
   alert("work in progress")
 }
 
-export default function TopMenuComponent() {
+interface TopMenuProps {
+  onOpenMenu: () => void
+}
+export default function TopMenuComponent(props: TopMenuProps) {
   const { isOpen } = useDisclosure()
 
   const makeFakeData = () => {
@@ -32,6 +36,17 @@ export default function TopMenuComponent() {
 
   return (
     <Box>
+      <Button
+        position={"fixed"}
+        top={0}
+        left={0}
+        colorScheme={"gray"}
+        onClick={() => {
+          props.onOpenMenu()
+        }}
+      >
+        <RxHamburgerMenu />
+      </Button>
       <Flex
         bg={useColorModeValue("white", "gray.800")}
         color={useColorModeValue("gray.600", "white")}

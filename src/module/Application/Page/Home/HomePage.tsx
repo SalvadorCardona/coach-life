@@ -62,6 +62,7 @@ export function HomePage() {
             </Text>
           </SubTitleComponent>
           <DayTableComponent
+            updateMetricType={metricTypesStore.updateMetricType}
             metricTypes={metricTypesStore.items}
             day={dayCompleted}
             updateMetric={dayStore.updateMetric}

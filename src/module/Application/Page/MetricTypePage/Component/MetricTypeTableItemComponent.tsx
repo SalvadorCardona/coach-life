@@ -1,12 +1,11 @@
 import MetricTypeInterface from "@/module/MetricType/Domain/MetricTypeInterface.ts"
-import { Td, Tr, Icon } from "@chakra-ui/react"
-import { ButtonComponent } from "@/module/Shared/Component/Form/ButtonComponent.tsx"
+import { Td, Tr } from "@chakra-ui/react"
 
 import { LightTextComponent } from "@/module/Shared/Component/Typography/LightTextComponent.tsx"
 import ObjectiveInterface from "@/module/Objective/Domain/ObjectiveInterface.ts"
-import { IoIosAdd } from "react-icons/io"
 
 import { RemoveButtonComponent } from "@/module/Shared/Component/Form/RemoveButtonComponent.tsx"
+import { AddButtonComponent } from "@/module/Shared/Component/Form/AddButtonComponent.tsx"
 
 export interface MetricTypeComponentPropsInterface {
   metricType: MetricTypeInterface
@@ -32,15 +31,9 @@ export function MetricTypeTableItemComponent(
               • {objective.name}
             </LightTextComponent>
           ))}
-
-          <ButtonComponent
-            mt={2}
-            size="xs"
-            leftIcon={<Icon as={IoIosAdd} color={"white"} />}
-            onClick={() => props.openModal(props.metricType)}
-          >
+          <AddButtonComponent onClick={() => props.openModal(props.metricType)}>
             Add a objective
-          </ButtonComponent>
+          </AddButtonComponent>
         </Td>
         <Td>{props.metricType.unit}</Td>
         {/*<Td>{props.metricType.defaultValue}</Td>*/}

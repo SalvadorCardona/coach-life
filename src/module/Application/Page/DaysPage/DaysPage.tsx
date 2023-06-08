@@ -21,10 +21,11 @@ import { ButtonComponent } from "@/module/Shared/Component/Form/ButtonComponent.
 import { useState } from "react"
 import { ModalMetricTypeFormComponent } from "@/module/MetricType/Component/ModalMetricTypeFormComponent.tsx"
 import { BiChevronLeft, BiChevronRight } from "react-icons/bi"
-import { IoIosAdd } from "react-icons/io"
+
 import MetricInterface from "@/module/Metric/Domain/MetricInterface.ts"
 import DayInterface from "@/module/Day/Domain/DayInterface.ts"
 import { useObjectiveStore } from "@/module/Objective/Application/ObjectiveStore.ts"
+import { AddButtonComponent } from "@/module/Shared/Component/Form/AddButtonComponent.tsx"
 
 export function DaysPage() {
   const dayStore = useDayStore()
@@ -86,14 +87,9 @@ export function DaysPage() {
               })}
               <Th>Score</Th>
               <Th>
-                <ButtonComponent
-                  mt={2}
-                  size="xs"
-                  leftIcon={<Icon as={IoIosAdd} color={"white"} />}
-                  onClick={() => onOpen()}
-                >
+                <AddButtonComponent onClick={() => onOpen()}>
                   Add a metric type
-                </ButtonComponent>
+                </AddButtonComponent>
               </Th>
             </Tr>
           </Thead>

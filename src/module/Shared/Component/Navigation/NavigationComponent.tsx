@@ -1,20 +1,17 @@
-import { useState } from "react"
 import {
   getMenuRoutes,
   getRouteByPath,
   NavigationItemInterface,
 } from "@/module/Application/routes.tsx"
-import { Box, Button, Flex, Icon, useColorModeValue, Text } from "@chakra-ui/react"
+import { Box, Button, Flex, Icon, Text } from "@chakra-ui/react"
 import { Link as RouterLink, useLocation } from "react-router-dom"
-import { RxHamburgerMenu } from "react-icons/rx"
-import isMobile from "@/module/Shared/Infratructure/isMobile.ts"
 
 export interface NavigationComponentPropsInterface {
   open?: boolean
 }
 
 export function NavigationComponent(props: NavigationComponentPropsInterface) {
-  const [open, setOpen] = useState<boolean>(props?.open ? props.open : !isMobile())
+  // const [open, setOpen] = useState<boolean>(props?.open ? props.open : !isMobile())
   const currentRoute = getRouteByPath(useLocation().pathname)
 
   const selectedStyle = {
@@ -26,15 +23,14 @@ export function NavigationComponent(props: NavigationComponentPropsInterface) {
     return route.path === currentRoute?.path
   }
 
+  if (!props.open) return <></>
+
   return (
     <>
-      <Box minH="100vh" bg={useColorModeValue("gray.100", "gray.900")}>
-        <Button colorScheme={"gray"} onClick={() => setOpen(!open)}>
-          <RxHamburgerMenu />
-        </Button>
+      <Box minH="100vh" bg={"gray.100"}>
         <Flex h="20" alignItems="center" mx="8" justifyContent="space-between">
           <Text fontSize="2xl" fontFamily="monospace" fontWeight="bold">
-            {open ? "Disciplinus" : "D"}
+            Disciplinus
           </Text>
         </Flex>
 
@@ -54,11 +50,9 @@ export function NavigationComponent(props: NavigationComponentPropsInterface) {
                   color: "white",
                 }}
               >
-                {route.icon && (
-                  <Icon mr={open ? "4" : "0"} fontSize="16" as={route.icon} />
-                )}
+                {route.icon && <Icon mr="4" fontSize="16" as={route.icon} />}
 
-                {open ? route.name : ""}
+                {route.name}
               </Flex>
             </RouterLink>
           )

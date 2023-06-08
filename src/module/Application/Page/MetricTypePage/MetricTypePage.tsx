@@ -13,7 +13,7 @@ export function MetricTypePage() {
   const objectivesStore = useObjectiveStore()
   const [metricType, setMetricType] = useState<MetricTypeInterface | null>(null)
   const { isOpen, onOpen, onClose } = useDisclosure()
-  const metricModalDisclone = useDisclosure()
+  const metricModalDisclosure = useDisclosure()
   const addObjective = (metricType: MetricTypeInterface): void => {
     setMetricType(metricType)
     onOpen()
@@ -21,7 +21,7 @@ export function MetricTypePage() {
 
   return (
     <>
-      <AddButtonComponent onClick={metricModalDisclone.onOpen}>
+      <AddButtonComponent onClick={metricModalDisclosure.onOpen}>
         Add new metric type
       </AddButtonComponent>
       <Flex>
@@ -37,8 +37,8 @@ export function MetricTypePage() {
       </Flex>
       <ModalMetricTypeFormComponent
         updateMetricType={metricTypesStore.updateMetricType}
-        isOpen={metricModalDisclone.isOpen}
-        onClose={metricModalDisclone.onClose}
+        isOpen={metricModalDisclosure.isOpen}
+        onClose={metricModalDisclosure.onClose}
       ></ModalMetricTypeFormComponent>
       <ObjectiveFormModalComponent
         {...{

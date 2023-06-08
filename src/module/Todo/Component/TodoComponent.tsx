@@ -1,7 +1,7 @@
 import { useTodoStore } from "@/module/Todo/Application/TodoStore.ts"
 import createTodo from "@/module/Todo/Domain/createTodo.ts"
-import { Card, CardBody, Grid, GridItem, Icon, Text } from "@chakra-ui/react"
-import { IoIosAdd } from "react-icons/io"
+import { Card, CardBody, Grid, GridItem, Text } from "@chakra-ui/react"
+
 import TodoStateEnum from "@/module/Todo/Domain/TodoStateEnum.ts"
 import getTodoListByState from "@/module/Todo/Domain/getTodoListByState.ts"
 import { TodoFormComponent } from "@/module/Todo/Component/TodoFormComponent.tsx"
@@ -12,12 +12,7 @@ export function TodoComponent() {
   const todoStore = useTodoStore()
   return (
     <>
-      <AddButtonComponent
-        mt={2}
-        size="xs"
-        leftIcon={<Icon as={IoIosAdd} color={"white"} />}
-        onClick={() => todoStore.updateItem(createTodo())}
-      >
+      <AddButtonComponent onClick={() => todoStore.updateItem(createTodo())}>
         Add a todo
       </AddButtonComponent>
       <Grid templateColumns={["repeat(1, 1fr)", "repeat(3, 1fr)"]} gap={6} mt={5}>

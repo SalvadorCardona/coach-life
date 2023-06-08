@@ -43,7 +43,7 @@ export const useDayStore = create<DayState>((set, getState) => ({
   },
   updateDay: (day: DayInterface) => {
     const days = getState().items
-    day = normalizer(day, createDay())
+    day = normalizer<DayInterface>(day, createDay())
     if (!getDayByDate(day.createdDate, days)) {
       addTo(day, days)
     }

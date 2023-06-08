@@ -7,14 +7,16 @@ import getObjectiveByMetricTypeId from "@/module/Objective/Domain/getObjectiveBy
 import getItemById from "@/module/Shared/Application/Id/getItemById.ts"
 import calculateDayObjective from "@/module/Objective/Domain/calculate/calculateDayObjective.ts"
 import calculateMetricsObjective from "@/module/Objective/Domain/calculate/calculateMetricsObjective.ts"
+import getMetricByMetricTypeId from "@/module/Metric/Domain/getMetricByMetricTypeId.ts"
+import createMetric from "@/module/Metric/Domain/createMetric.ts"
 
 export interface DayReadInterface extends DayInterface {
-  score: Ratio
+  score: Ratio | null
   metrics: MetricReadInterface[]
 }
 
 export interface MetricReadInterface extends MetricInterface {
-  score: Ratio
+  score: Ratio | null
   metricType: ReadMetricTypeInterface
 }
 
@@ -86,13 +88,18 @@ export function createDayRead(args: CreateDayReadParams): DayReadInterface {
   const metricTypeReads: ReadMetricTypeInterface[] = args.metricTypes.map(
     (metricType) => createMetricTypeRead(metricType, args.objectives)
   )
+  const metrics: MetricReadInterface[] = []
+  args.metricTypes.forEach((metricType) => {
+    const metric =
+      getMetricByMetricTypeId(args.day.metrics, metricType.id) ??
+      createMetric({ metricTypeId: metricType.id, dayId: args.day.id })
+    metrics.push(<MetricReadInterface>createMetricRead(metric, metricTypeReads))
+  })
 
   return {
     ...args.day,
     ...{
-      metrics: args.day.metrics
-        .map((metric) => createMetricRead(metric, metricTypeReads))
-        .filter((item) => item !== undefined) as MetricReadInterface[],
+      metrics: metrics,
       score: calculateDayObjective(args.day, args.objectives, args.metricTypes),
     },
   }

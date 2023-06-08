@@ -6,6 +6,6 @@ export default function getMetricByMetricTypeId(
   metricTypeId: MetricTypeInterface["id"]
 ): MetricInterface | undefined {
   return metrics.find((metric) => {
-    return metric.metricType?.id === metricTypeId
+    return metric.metricTypeId === metricTypeId
   })
 }

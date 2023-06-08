@@ -1,9 +1,6 @@
 import { Text, TextProps } from "@chakra-ui/react"
-import { ReactNode } from "react"
 
-type LightTextComponentPropsType = { children: ReactNode } & TextProps
-
-export function LightTextComponent(props: LightTextComponentPropsType) {
+export function LightTextComponent(props: TextProps) {
   return (
     <>
       <Text {...props} color={"gray.400"}>

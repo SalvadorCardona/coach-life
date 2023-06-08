@@ -11,9 +11,11 @@ export default function calculateDayObjective(
   day: DayInterface,
   objectives: ObjectiveInterface[],
   metricTypes: MetricTypeInterface[]
-): Ratio {
+): Ratio | null {
   let ratio = 0
   let calculated = 0
+
+  if (objectives.length === 0) return null
 
   day.metrics.forEach((metric) => {
     if (!metric.metricTypeId) return

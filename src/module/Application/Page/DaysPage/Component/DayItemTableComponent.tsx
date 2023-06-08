@@ -2,7 +2,6 @@ import MetricTypeInterface from "@/module/MetricType/Domain/MetricTypeInterface.
 import MetricInterface from "@/module/Metric/Domain/MetricInterface.ts"
 import { Td, Tr } from "@chakra-ui/react"
 import { formatDate } from "@/module/Shared/Application/Date/formatDate.ts"
-import createMetric from "@/module/Metric/Domain/createMetric.ts"
 import getMetricByMetricTypeId from "@/module/Metric/Domain/getMetricByMetricTypeId.ts"
 import { CircularStatComponent } from "@/module/Shared/Component/CircularStatComponent.tsx"
 import { DayReadInterface } from "@/module/Day/Domain/DayRead.ts"
@@ -19,21 +18,19 @@ export function DayItemTableComponent(props: DayItemTableComponentPropsInterface
     <Tr>
       <Td>{formatDate(props.day.createdDate)}</Td>
       {props.metricTypes.map((metricType) => {
-        const metric =
-          getMetricByMetricTypeId(props.day.metrics, metricType.id) ??
-          createMetric({ metricTypeId: metricType.id })
-
         return (
           <Td key={metricType.id}>
             <MetricInputComponent
-              metric={metric}
+              metric={getMetricByMetricTypeId(props.day.metrics, metricType.id)}
               onUpdate={props.onUpdate}
             ></MetricInputComponent>
           </Td>
         )
       })}
       <Td>
-        <CircularStatComponent ratio={props.day.score}></CircularStatComponent>
+        {props.day.score !== null && (
+          <CircularStatComponent ratio={props.day.score}></CircularStatComponent>
+        )}
       </Td>
     </Tr>
   )

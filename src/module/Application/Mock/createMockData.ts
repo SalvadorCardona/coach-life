@@ -131,12 +131,14 @@ export function createMockData(): void {
   const lastValue: Record<string, number> = {}
   days.forEach((day) => {
     day.metrics.forEach((metric, index) => {
-      if (!Object.hasOwn(lastValue, metric.metricTypeId)) {
-        lastValue[metric.metricTypeId] = generateRandomNumber(0, 10)
+      const metricId = metric.metricTypeId
+      if (!metricId) return
+      if (!Object.hasOwn(lastValue, metricId)) {
+        lastValue[metricId] = generateRandomNumber(0, 10)
       }
-      const min = lastValue[metric.metricTypeId] < 5 ? 1 : -5
-      lastValue[metric.metricTypeId] += generateRandomNumber(min, 5)
-      metric.value = lastValue[metric.metricTypeId]
+      const min = lastValue[metricId] < 5 ? 1 : -5
+      lastValue[metricId] += generateRandomNumber(min, 5)
+      metric.value = lastValue[metricId]
       day.metrics[index] = normalizer(metric, createMetric())
     })
   })
